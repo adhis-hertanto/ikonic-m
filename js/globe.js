@@ -605,8 +605,8 @@ var PITCH_LIMIT_DEG = 30;
     var root = document.querySelector('[data-globe]');
     if (!root) return;
     Promise.all([
-      fetch('/data/globe-dots.json').then(function (r) { return r.json(); }),
-      fetch('/data/locations.json').then(function (r) { return r.json(); })
+      fetch('data/globe-dots.json').then(function (r) { return r.json(); }),
+      fetch('data/locations.json').then(function (r) { return r.json(); })
     ]).then(function (data) { createGlobe(root, data[0], data[1]); })
       .catch(function (error) { root.setAttribute('data-ready', 'error'); console.error('[globe]', error); });
   });
