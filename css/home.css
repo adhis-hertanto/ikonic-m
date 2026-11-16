@@ -14,8 +14,9 @@
   display: flex;
   /* Fills the viewport below the sticky nav, so nav + hero are exactly one screen and the carousel
      progress bars are visible without scrolling. No minimum height: a floor would push them below the fold. */
-  height: calc(100vh - var(--x-nav-height));
-  height: calc(100svh - var(--x-nav-height));
+  --hero-h: calc(100vh - var(--x-nav-height));
+  --hero-h: calc(100svh - var(--x-nav-height));
+  height: var(--hero-h);
   background: var(--deep-plum-950);
   color: var(--color-white);
   overflow: hidden;
@@ -39,10 +40,13 @@
 }
 .hero__img.is-active { opacity: 1; }
 .hero__tess-sand {
-  --shape-size: var(--shape-tess-hero-sand);
+  /* The coral point hangs from the top, the sand point rises from the bottom. They only touch on the
+     image edge when sand = hero height - coral, so the size follows the hero height at every viewport.
+     At the 720 design height this is exactly 336 (--shape-tess-hero-sand). */
+  --shape-size: max(var(--space-0), calc(var(--hero-h) - var(--shape-tess-hero-coral)));
   --shape-color: var(--brand-sand);
   bottom: var(--space-0);
-  right: calc(var(--shape-hero-holder-w) - var(--shape-tess-hero-sand));
+  right: calc(var(--shape-hero-holder-w) - var(--shape-size));
 }
 .hero__content {
   position: relative;
