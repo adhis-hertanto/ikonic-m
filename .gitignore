@@ -1,0 +1,11 @@
+# dependencies (dev-only globe data tooling)
+node_modules/
+
+# macOS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# local tooling output
+*.log

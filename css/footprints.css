@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Our retail footprints worldwide (Figma 270:134)
+   Left column + interactive dot-matrix globe. Values come from tokens.css.
+   ========================================================================== */
+
+.footprints {
+  /* Fills the viewport below the sticky nav (80). Never shorter than the 716 design height. */
+  --fp-h: max(calc(100vh - var(--x-nav-height)), var(--x-footprints-h));
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  height: var(--fp-h);
+  background: var(--color-white);
+  overflow: hidden;                 /* clips the globe at the right and bottom edges, as in Figma */
+}
+.footprints__content {
+  position: relative;
+  z-index: 1;
+  flex: 1 0 0;
+  min-width: var(--space-0);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;          /* text block centred vertically in the full-height section */
+  padding: var(--space-64) var(--space-64) var(--space-64) var(--layout-margin);
+  pointer-events: none;             /* lets the globe receive the pointer beside the column */
+}
+.footprints__top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-120);
+  width: var(--x-w-5col);
+  max-width: 100%;
+  pointer-events: auto;
+}
+.footprints__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--x-gap-48);             /* unbound in Figma (270:137) */
+  width: 100%;
+}
+.footprints__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+  width: 100%;
+}
+
+/* --- Globe -----------------------------------------------------------------
+   Square canvas anchored to the section's top and right edges, sized in --u.
+   Colours are handed to the canvas renderer through these custom properties. */
+.globe {
+  /* Scales with the section height, so the globe fills the full-height section the way the 716
+     design does: size = 893/716 of the height, top = 49/716 of the height. Its width is capped so
+     the left edge never passes 609 design px (547 + the 62 right offset), which keeps it clear of
+     the text column. At 1440 wide that cap is exactly 893u, the Figma size. */
+  --globe-size: min(calc(var(--fp-h) * 893 / 716), calc(100% - 547 * var(--u)));
+  --globe-disc: var(--color-white);
+  --globe-ocean: var(--ecru-50);
+  --globe-land: var(--ecru-200);
+  --globe-selected: var(--brand-sand);
+  --globe-hover: var(--ecru-400);           /* PLACEHOLDER hover tone */
+  --globe-location: var(--brand-coral-red);
+  position: absolute;
+  top: calc(var(--fp-h) * 49 / 716);
+  right: var(--shape-globe-right);
+  width: var(--globe-size);
+  aspect-ratio: 1;                  /* height follows width. A 100% cap in a height property would resolve against the section height. */
+}
+.globe__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: pan-y;              /* vertical swipes still scroll the page */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* --- Tooltip (Figma 270:158). Positioned by globe.js with a transform ------- */
+.globe-tooltip {
+  position: absolute;
+  left: var(--space-0);
+  top: var(--space-0);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--x-pin-min-w);
+  height: var(--x-pin-h);
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--x-pin-radius);
+  background: var(--x-pin-scrim);
+  -webkit-backdrop-filter: blur(var(--x-pin-blur));
+  backdrop-filter: blur(var(--x-pin-blur));
+  color: var(--color-white);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--x-tooltip-fade) linear;
+}
+.globe-tooltip.is-visible { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .globe-tooltip { transition: none; }
+}

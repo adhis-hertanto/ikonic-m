@@ -1,0 +1,215 @@
+/* ==========================================================================
+   IKONIC-M design tokens
+   Mirrors the Figma variables and text styles (file r9Un3hrHlQa0NWXIyrYT1u).
+   This is the ONLY file allowed to hold raw colour, size or font values.
+   ========================================================================== */
+
+/* --- Font ---------------------------------------------------------------- */
+@font-face {
+  font-family: "Mona Sans";
+  src: url("../fonts/MonaSans-Variable.woff2") format("woff2-variations"),
+       url("../fonts/MonaSans-Variable.woff2") format("woff2");
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* --- Responsive unit ---------------------------------------------------
+     --u is the scaling unit. 1440 is the design reference (--scale: 1).
+     Below 1280 the scale holds at 0.889 and the content column flexes.
+     --layout-margin is the only value that never scales. */
+  --scale: 0.889;
+  --u: calc(1px * var(--scale));
+
+  /* --- Colour (Figma variables) ----------------------------------------- */
+  --brand-coral-red: #ee2737;
+  --coral-red-500: #ee2737;
+  --brand-deep-plum: #36162a;
+  --deep-plum-950: #36162a;
+  --deep-plum-900: #4a1e3a;
+  --brand-sand: #b98e71;
+  --brand-ecru: #e6e2dc;
+  --ecru-50: #faf6f0;
+  --ecru-200: #d5d1cb;
+  --ecru-300: #bdbab4;
+  --ecru-400: #a29f9a;
+  --ecru-500: #888682;
+  --ecru-700: #5b5a57;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* --- Spacing (Figma variables, scaled) --------------------------------- */
+  --space-0: 0px;
+  --space-4: calc(4 * var(--u));
+  --space-8: calc(8 * var(--u));
+  --space-12: calc(12 * var(--u));
+  --space-16: calc(16 * var(--u));
+  --space-20: calc(20 * var(--u));
+  --space-24: calc(24 * var(--u));
+  --space-28: calc(28 * var(--u));
+  --space-32: calc(32 * var(--u));
+  --space-40: calc(40 * var(--u));
+  --space-64: calc(64 * var(--u));
+  --space-72: calc(72 * var(--u));
+  --space-80: calc(80 * var(--u));
+  --space-96: calc(96 * var(--u));
+  --space-120: calc(120 * var(--u));
+  --space-160: calc(160 * var(--u));
+
+  /* --- Layout (Figma variables) ------------------------------------------ */
+  --layout-margin: 64px;                       /* fixed at every width */
+  --layout-gutter: calc(32 * var(--u));
+  --layout-section-py: calc(120 * var(--u));
+  --layout-baseline: calc(4 * var(--u));
+  --layout-columns: 12;
+
+  /* --- Typography (Figma text styles "Desktop/...") ----------------------- */
+  --font-family: "Mona Sans", Arial, sans-serif;
+  --font-variation: "wdth" 100;
+  --font-features: "liga" 1;                   /* Figma keeps ligatures on tracked headings */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+
+  --text-display-xl-size: calc(88 * var(--u));
+  --text-display-xl-lh: calc(96 * var(--u));
+  --text-display-xl-ls: -0.02em;
+
+  --text-display-l-size: calc(72 * var(--u));
+  --text-display-l-lh: calc(80 * var(--u));
+  --text-display-l-ls: -0.02em;
+
+  --text-h1-size: calc(56 * var(--u));
+  --text-h1-lh: calc(64 * var(--u));
+  --text-h1-ls: -0.015em;
+
+  --text-h3-size: calc(36 * var(--u));
+  --text-h3-lh: calc(44 * var(--u));
+  --text-h3-ls: -0.01em;
+
+  --text-subline-l-size: calc(24 * var(--u));
+  --text-subline-l-lh: calc(34 * var(--u));
+
+  --text-subline-m-size: calc(20 * var(--u));
+  --text-subline-m-lh: calc(28 * var(--u));
+
+  --text-subline-s-size: calc(16 * var(--u));
+  --text-subline-s-lh: calc(24 * var(--u));
+
+  --text-body-l-size: calc(20 * var(--u));
+  --text-body-l-lh: calc(32 * var(--u));
+
+  --text-body-m-size: calc(16 * var(--u));
+  --text-body-m-lh: calc(26 * var(--u));
+
+  --text-body-s-size: calc(14 * var(--u));
+  --text-body-s-lh: calc(22 * var(--u));
+
+  --text-link-nav-size: calc(15 * var(--u));
+  --text-link-nav-lh: calc(22 * var(--u));
+
+  --text-button-size: calc(16 * var(--u));
+  --text-button-lh: calc(24 * var(--u));
+
+  /* ------------------------------------------------------------------------
+     NOT Figma variables.
+     Everything below is a fixed value read from a Figma node that is not
+     bound to a variable or text style. They live here so the component CSS
+     stays token-only, and so each one can be promoted to a real variable
+     (or corrected) in Figma. See the build report for the full list.
+     ------------------------------------------------------------------------ */
+
+  /* Type overrides found on nodes */
+  --x-text-nav-tagline-size: calc(13 * var(--u));     /* 268:132, styled as Subline/S but 13/16 */
+  --x-text-nav-tagline-lh: calc(16 * var(--u));
+  --x-text-stat-unit-size: calc(28 * var(--u));       /* 217:4193 unit run, 28/36, -0.5% */
+  --x-text-stat-unit-lh: calc(36 * var(--u));
+  --x-text-stat-unit-ls: -0.005em;
+
+  /* Baseline correction. Chrome floors negative half-leading, Figma rounds the
+     baseline to the nearest pixel, so H1, H3 and Display L sit 1px high in the
+     browser at the 1440 reference. Only applied where it was measured. */
+  --x-baseline-fix: 0px;
+
+  /* Component sizes */
+  --x-nav-height: calc(80 * var(--u));
+  --x-nav-logo-w: calc(136 * var(--u));
+  --x-nav-logo-h: calc(38 * var(--u));
+  --x-nav-divider-h: calc(14 * var(--u));
+  --x-nav-tagline-w: calc(72 * var(--u));
+  --x-button-h-l: calc(56 * var(--u));
+  --x-button-h-m: calc(48 * var(--u));
+  --x-icon: calc(24 * var(--u));
+  --x-icon-l: calc(32 * var(--u));
+  --x-eyebrow-dot: calc(8 * var(--u));
+  --x-rule: calc(2 * var(--u));                        /* accordion + tab underline */
+  --x-hairline: 1px;                                   /* input border, nav divider */
+  --x-progress-h: calc(4.78 * var(--u));               /* 217:4171 */
+  --x-gap-48: calc(48 * var(--u));                     /* 217:4245, hardcoded gap */
+  --x-pin-radius: calc(100 * var(--u));
+  --x-pin-blur: calc(4 * var(--u));
+  --x-pin-h: calc(53.25 * var(--u));                   /* 217:4266 */
+  --x-pin-min-w: calc(132 * var(--u));
+  --x-pin-scrim: rgb(0 0 0 / 0.4);                     /* 217:4266 */
+  --x-footer-logo-w: calc(282 * var(--u));
+  --x-footer-logo-h: calc(80 * var(--u));
+  --x-keppel-logo-w: calc(120 * var(--u));
+  --x-keppel-logo-h: calc(40 * var(--u));
+  --x-back-to-top-top: calc(226 * var(--u));           /* 217:4404 */
+
+  /* Fixed widths / heights (grid spans at 1440) */
+  --x-w-5col: calc(528 * var(--u));
+  --x-w-7col: calc(752 * var(--u));
+  --x-hero-h: calc(720 * var(--u));
+  --x-footprints-h: calc(716 * var(--u));
+  --x-contact-h: calc(504 * var(--u));
+  --x-contact-content-w: calc(848 * var(--u));
+  --x-contact-content-pl: calc(144 * var(--u));
+  --x-card-h: calc(504 * var(--u));
+  --x-card-text-h: calc(192 * var(--u));
+  --x-card-title-h: calc(102 * var(--u));              /* 3 lines of Subline L */
+
+  /* --- Graphic device (45 degree shapes) ---------------------------------
+     One value drives both axes of every cut, so the angle is always 45.
+     Figma paths are off by a fraction of a pixel (e.g. 164.167 x 164.305);
+     the chamfer here is the mean of dx and dy. */
+  --shape-hero-holder-w: calc(624 * var(--u));
+  --shape-tess-hero-sand: calc(336 * var(--u));
+  --shape-tess-hero-coral: calc(384 * var(--u));
+  --shape-tess-who: calc(120 * var(--u));
+  --shape-tess-updates: calc(512 * var(--u));
+  --shape-tess-contact: calc(80 * var(--u));
+  --shape-cascade-platform-w: calc(252 * var(--u));
+  --shape-cascade-platform-cut: calc(164.2 * var(--u));
+  --shape-cascade-footer-w: calc(848 * var(--u));
+  --shape-cascade-footer-cut: calc(142.6 * var(--u));
+  --shape-holder-platform-ratio: 640 / 372;
+  --shape-card-cut: calc(21.1 * var(--u));
+  --shape-card-text-cut: calc(64.2 * var(--u));
+  --shape-card-button: calc(64 * var(--u));
+  --shape-globe: calc(893 * var(--u));
+  --shape-globe-top: calc(49 * var(--u));
+  --shape-globe-right: calc(-62 * var(--u));
+  --globe-rotation-period: 120s;               /* one full turn */
+
+  /* --- Motion (prototype only, not in Figma) ----------------------------- */
+  --x-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --x-dur-fast: 180ms;
+  --x-dur: 320ms;
+  --x-dur-slow: 700ms;
+  --x-carousel-interval: 6000ms;
+  --x-tooltip-fade: 150ms;
+  --x-globe-damping: 160ms;                  /* ease time for globe drag, like OrbitControls dampingFactor 0.1 at 60fps */
+  --x-reveal-rise: calc(20 * var(--u));
+  --x-nudge: calc(4 * var(--u));
+  --x-focus-ring: calc(2 * var(--u));
+  --x-z-nav: 100;
+}
+
+/* --- Breakpoints (web only) ----------------------------------------------- */
+@media (min-width: 1440px) { :root { --scale: 1; } }
+@media (min-width: 1440px) and (max-width: 1679.98px) { :root { --x-baseline-fix: 1px; } }
+@media (min-width: 1680px) { :root { --scale: 1.167; } }
+@media (min-width: 1920px) { :root { --scale: 1.333; } }
+@media (min-width: 2560px) { :root { --scale: 1.778; } }

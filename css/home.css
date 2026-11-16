@@ -1,0 +1,279 @@
+/* ==========================================================================
+   Home page sections (Figma frame 217:4130)
+   ========================================================================== */
+
+/* One grid column and span helpers, resolved against the section content box */
+.section {
+  --col: calc((100% - 11 * var(--layout-gutter)) / 12);
+  --span-4: calc(4 * var(--col) + 3 * var(--layout-gutter));
+}
+
+/* --- Hero (217:4158) -------------------------------------------------------- */
+.hero {
+  position: relative;
+  display: flex;
+  height: var(--x-hero-h);
+  background: var(--deep-plum-950);
+  color: var(--color-white);
+  overflow: hidden;
+}
+.hero__holder {
+  position: absolute;
+  top: var(--space-0);
+  right: var(--space-0);
+  width: var(--shape-hero-holder-w);
+  height: 100%;
+  overflow: hidden;
+}
+.hero__img {
+  position: absolute;
+  inset: var(--space-0);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--x-dur-slow) var(--x-ease);
+}
+.hero__img.is-active { opacity: 1; }
+.hero__tess-sand {
+  --shape-size: var(--shape-tess-hero-sand);
+  --shape-color: var(--brand-sand);
+  bottom: var(--space-0);
+  right: calc(var(--shape-hero-holder-w) - var(--shape-tess-hero-sand));
+}
+.hero__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: calc(100% - var(--shape-hero-holder-w));
+  height: 100%;
+  padding: var(--space-64) var(--space-64) var(--space-64) var(--layout-margin);
+  background: var(--brand-deep-plum);
+}
+.hero__tess-coral {
+  --shape-size: var(--shape-tess-hero-coral);
+  --shape-color: var(--coral-red-500);
+  top: var(--space-0);
+  right: var(--space-0);
+}
+.hero__title,
+.hero__actions,
+.carousel__controls { position: relative; }
+.hero__title { width: 100%; }
+.hero__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-32);
+  width: 100%;
+}
+.hero__lede { width: var(--x-w-5col); max-width: 100%; }
+
+/* Carousel progress */
+.carousel__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  width: 100%;
+}
+.carousel__seg {
+  position: relative;
+  flex: 1 0 0;
+  height: var(--x-progress-h);
+  background: var(--ecru-300);
+}
+.carousel__seg::before {            /* larger hit area, no visual change */
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--space-12)) var(--space-0);
+}
+.carousel__fill {
+  position: absolute;
+  inset: var(--space-0);
+  background: var(--brand-coral-red);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.carousel__seg.is-active .carousel__fill {
+  animation: carousel-fill var(--x-carousel-interval) linear forwards;
+}
+.is-paused .carousel__seg.is-active .carousel__fill { animation-play-state: paused; }
+.is-static .carousel__seg.is-active .carousel__fill { animation: none; transform: scaleX(1); }
+.carousel__seg:hover { background: var(--ecru-200); }                      /* PLACEHOLDER */
+@keyframes carousel-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* --- Who we are + stats (217:4176) ------------------------------------------ */
+.who {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-96);
+  padding-top: var(--space-96);
+  padding-bottom: var(--space-160);
+  background: var(--color-white);
+}
+.who__intro {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--layout-gutter);
+}
+.who__heading,
+.who__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+  min-width: var(--space-0);
+}
+.who__heading { gap: var(--space-8); }
+.who__body {
+  gap: var(--space-24);
+  padding-top: var(--space-40);
+}
+.stats {
+  display: flex;
+  align-items: center;
+  gap: var(--layout-gutter);
+}
+.who__tess {
+  --shape-size: var(--shape-tess-who);
+  --shape-color: var(--brand-deep-plum);
+  right: var(--space-0);
+  bottom: calc(-1 * var(--space-32));
+}
+
+/* --- One platform (217:4202) ------------------------------------------------ */
+.platform {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-72);
+  padding-top: var(--layout-section-py);
+  padding-bottom: var(--layout-section-py);
+  background: var(--brand-deep-plum);
+  color: var(--color-white);
+}
+.platform__heading {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  width: var(--x-w-7col);
+  max-width: 100%;
+}
+.platform__solutions {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--layout-columns), minmax(0, 1fr));
+  column-gap: var(--layout-gutter);
+  align-items: start;
+}
+.platform__solutions .accordion { grid-column: 1 / span 5; }
+.platform__panel { grid-column: 7 / span 6; }
+.platform__holder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--shape-holder-platform-ratio);
+  overflow: hidden;
+}
+.platform__holder img {
+  position: absolute;
+  inset: var(--space-0);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--x-dur-slow) var(--x-ease);
+}
+.platform__holder img.is-active { opacity: 1; }
+
+/* Retail footprints: see footprints.css */
+
+/* --- Our updates (217:4268) -------------------------------------------------- */
+.updates {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-72);
+  padding-top: var(--layout-section-py);
+  padding-bottom: var(--layout-section-py);
+  background: var(--brand-sand);
+}
+.updates__tess {
+  --shape-size: var(--shape-tess-updates);
+  --shape-color: var(--brand-coral-red);
+  left: var(--space-0);
+  bottom: var(--space-0);
+}
+.updates__header {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.updates__title { color: var(--ecru-50); }
+.updates__aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-24);
+  width: var(--span-4);
+  color: var(--color-white);
+}
+.cards {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-32);
+}
+.cards > li {
+  flex: 1 0 0;
+  min-width: var(--space-0);
+}
+
+/* --- Contact CTA (217:4316) -------------------------------------------------- */
+.contact {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  min-height: var(--x-contact-h);
+}
+.contact__media {
+  position: relative;
+  flex: 1 0 0;
+  min-width: var(--space-0);
+  overflow: hidden;
+}
+.contact__media img {
+  position: absolute;
+  inset: var(--space-0);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.contact__tess {
+  --shape-size: var(--shape-tess-contact);
+  --shape-color: var(--brand-coral-red);
+  top: var(--space-0);
+  right: var(--space-0);
+}
+.contact__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-40);
+  flex: none;
+  width: var(--x-contact-content-w);
+  max-width: 100%;
+  padding: var(--space-120) var(--layout-margin) var(--space-120) var(--x-contact-content-pl);
+  background: var(--brand-coral-red);
+  color: var(--ecru-50);
+}
+.contact__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  width: 100%;
+}

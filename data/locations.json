@@ -1,0 +1,97 @@
+{
+  "note": "Placeholder locations. Replace name/lon/lat with real destinations and remove \"placeholder\". \"default\": true marks the pin shown when nothing is hovered.",
+  "locations": [
+    {
+      "id": "chengdu",
+      "country": "china",
+      "name": "Chengdu",
+      "lon": 103.753,
+      "lat": 30.946,
+      "placeholder": true,
+      "default": true
+    },
+    {
+      "id": "beijing",
+      "country": "china",
+      "name": "Beijing",
+      "lon": 117.106,
+      "lat": 40.524,
+      "placeholder": true
+    },
+    {
+      "id": "shanghai",
+      "country": "china",
+      "name": "Shanghai",
+      "lon": 120.891,
+      "lat": 31.442,
+      "placeholder": true
+    },
+    {
+      "id": "guangzhou",
+      "country": "china",
+      "name": "Guangzhou",
+      "lon": 112.269,
+      "lat": 23.033,
+      "placeholder": true
+    },
+    {
+      "id": "nanning",
+      "country": "china",
+      "name": "Nanning",
+      "lon": 105.727,
+      "lat": 21.827,
+      "placeholder": true
+    },
+    {
+      "id": "ho-chi-minh-city",
+      "country": "vietnam",
+      "name": "Ho Chi Minh City",
+      "lon": 106.998,
+      "lat": 11.103,
+      "placeholder": true,
+      "default": true
+    },
+    {
+      "id": "can-tho",
+      "country": "vietnam",
+      "name": "Can Tho",
+      "lon": 105.19,
+      "lat": 10.285,
+      "placeholder": true
+    },
+    {
+      "id": "orchard-road",
+      "country": "singapore",
+      "name": "Orchard Road",
+      "lon": 103.832,
+      "lat": 1.304,
+      "placeholder": true,
+      "default": true
+    },
+    {
+      "id": "jurong-east",
+      "country": "singapore",
+      "name": "Jurong East",
+      "lon": 103.742,
+      "lat": 1.333,
+      "placeholder": true
+    },
+    {
+      "id": "sydney",
+      "country": "australia",
+      "name": "Sydney",
+      "lon": 151.209,
+      "lat": -33.868,
+      "placeholder": true,
+      "default": true
+    },
+    {
+      "id": "melbourne",
+      "country": "australia",
+      "name": "Melbourne",
+      "lon": 144.963,
+      "lat": -37.814,
+      "placeholder": true
+    }
+  ]
+}
