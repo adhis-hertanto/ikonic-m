@@ -141,7 +141,6 @@
   flex-direction: column;
   gap: var(--space-24);
   padding: var(--space-24);
-  border: var(--x-hairline) solid var(--ecru-200);
   background: var(--ecru-50);
 }
 .fp-panel__head {
@@ -229,7 +228,6 @@
   gap: var(--space-0) var(--space-8);
   max-width: 100%;
   padding: var(--space-8) var(--space-16);
-  border: var(--x-hairline) solid var(--ecru-200);
   border-radius: calc(var(--x-fp-pill-h) / 2);
   background: var(--color-white);
   font-size: var(--text-body-s-size);
