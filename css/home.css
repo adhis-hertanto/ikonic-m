@@ -21,6 +21,12 @@
   color: var(--color-white);
   overflow: hidden;
 }
+/* --wipe is animated from 0 to 1 to slide a 45 degree mask across the incoming image */
+@property --wipe {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
 .hero__holder {
   position: absolute;
   top: var(--space-0);
@@ -28,6 +34,7 @@
   width: var(--shape-hero-holder-w);
   height: 100%;
   overflow: hidden;
+  container-type: size;             /* lets the mask use 100cqw / 100cqh, so its edge is 45 degrees at any hero height */
 }
 .hero__img {
   position: absolute;
@@ -35,10 +42,24 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
-  transition: opacity var(--x-dur-slow) var(--x-ease);
+  /* Edge runs top-left to bottom-right at exactly 45 degrees, parallel to the tessellation shapes.
+     At --wipe 0 the image is fully masked out, at 1 it is fully shown. */
+  --wipe: 0;
+  clip-path: polygon(
+    0 0,
+    calc(var(--wipe) * (100cqw + 100cqh) - 100cqh) 0,
+    calc(var(--wipe) * (100cqw + 100cqh)) 100%,
+    0 100%
+  );
 }
-.hero__img.is-active { opacity: 1; }
+/* The slide being replaced stays fully shown underneath until the new one has covered it */
+.hero__img.is-leaving { --wipe: 1; z-index: 1; }
+.hero__img.is-active {
+  --wipe: 1;
+  z-index: 2;
+  transition: --wipe var(--x-slide-wipe) var(--x-ease-inout);
+}
+.is-static .hero__img.is-active { transition: none; }
 .hero__tess-sand {
   /* The coral point hangs from the top, the sand point rises from the bottom. They only touch on the
      image edge when sand = hero height - coral, so the size follows the hero height at every viewport.

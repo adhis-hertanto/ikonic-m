@@ -1,4 +1,4 @@
-/* Hero carousel: 3 slides, progress segments, autoplay ~6s, pause on hover/focus.
+/* Hero carousel: 3 slides, progress segments, autoplay ~4s, pause on hover/focus.
    Timing is driven by the CSS fill animation (--x-carousel-interval), so pausing
    the animation pauses the carousel and they can never drift apart. */
 (function () {
@@ -21,7 +21,13 @@
       var next = (index + slides.length) % slides.length;
       if (next === current && !restart) return;
       current = next;
-      slides.forEach(function (slide, i) { slide.classList.toggle('is-active', i === current); });
+      // The new slide wipes in over the old one (45 degree mask, see .hero__img). The old one stays
+      // underneath as "is-leaving" until the next change, so it is never revealed half-masked.
+      slides.forEach(function (slide, i) {
+        var wasActive = slide.classList.contains('is-active');
+        slide.classList.toggle('is-leaving', i !== current && wasActive);
+        slide.classList.toggle('is-active', i === current);
+      });
       segs.forEach(function (seg, i) {
         var active = i === current;
         seg.classList.remove('is-active');
