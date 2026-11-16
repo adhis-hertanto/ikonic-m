@@ -1,4 +1,4 @@
-/* Hero carousel: 3 slides, progress segments, autoplay ~4s, pause on hover/focus.
+/* Hero carousel: 3 slides, progress segments, autoplay ~4s, pause on keyboard focus (not on hover).
    Timing is driven by the CSS fill animation (--x-carousel-interval), so pausing
    the animation pauses the carousel and they can never drift apart. */
 (function () {
@@ -56,15 +56,12 @@
     });
 
     function setPaused(paused) { root.classList.toggle('is-paused', paused); }
-    root.addEventListener('mouseenter', function () { setPaused(true); });
-    root.addEventListener('mouseleave', function () { setPaused(false); });
-    // Keyboard focus pauses too; a mouse click on a segment must not leave it paused.
+    // Hovering the hero does not pause it: the carousel keeps playing under the cursor.
+    // Keyboard focus still pauses (so a keyboard user can read a slide); a mouse click on a segment must not leave it paused.
     root.addEventListener('focusin', function (event) {
       if (event.target.matches(':focus-visible')) setPaused(true);
     });
-    root.addEventListener('focusout', function () {
-      if (!root.matches(':hover')) setPaused(false);
-    });
+    root.addEventListener('focusout', function () { setPaused(false); });
     document.addEventListener('visibilitychange', function () { setPaused(document.hidden); });
 
     if (flags.snapshot) {
