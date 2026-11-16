@@ -26,9 +26,12 @@
   /* --- Colour (Figma variables) ----------------------------------------- */
   --brand-coral-red: #ee2737;
   --coral-red-500: #ee2737;
+  --coral-red-600: #d12230;                    /* PLACEHOLDER ramp step darker than 500: button hover */
   --brand-deep-plum: #36162a;
   --deep-plum-950: #36162a;
   --deep-plum-900: #4a1e3a;
+  --deep-plum-925: #401a32;                    /* PLACEHOLDER ramp step between 950 and 900: accordion hover */
+  --deep-plum-975: #26101d;                    /* PLACEHOLDER ramp step darker than 950: plum button hover */
   --brand-sand: #b98e71;
   --brand-ecru: #e6e2dc;
   --ecru-50: #faf6f0;

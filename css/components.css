@@ -125,7 +125,9 @@
   line-height: var(--text-button-lh);
   font-weight: var(--font-weight-medium);
   white-space: nowrap;
-  transition: transform var(--x-dur-fast) var(--x-ease);
+  transition:
+    transform var(--x-dur-fast) var(--x-ease),
+    background-color var(--x-dur-fast) var(--x-ease);
 }
 .btn--l {
   height: var(--x-button-h-l);
@@ -141,6 +143,10 @@
 .btn:hover .icon:not(.icon--up) { transform: translateX(var(--x-nudge)); }           /* PLACEHOLDER */
 .btn--icon:hover .icon--up { transform: rotate(-90deg) translateX(var(--x-nudge)); } /* PLACEHOLDER */
 .btn:active { transform: translateY(var(--x-hairline)); }                            /* PLACEHOLDER */
+/* Hover: one step darker on the palette ramp */
+.btn:hover { background: var(--coral-red-600); }
+.btn--plum:hover { background: var(--deep-plum-975); }
+.btn--icon:hover { background: var(--ecru-200); }
 
 /* --- Text link with arrow -------------------------------------------------- */
 .link {
@@ -257,8 +263,10 @@
 .accordion__item.is-open .accordion__name { color: var(--color-white); }
 .accordion__item.is-open .accordion__trigger .icon {
   transform: rotate(0deg);
-  color: var(--deep-plum-950);   /* as bound in Figma (217:4214). Flagged in report. */
+  color: var(--color-white);
 }
+/* Collapsed row hover: a step darker than the open row, still lighter than the section so it reads */
+.accordion__item:not(.is-open):hover { background: var(--deep-plum-925); }
 .accordion__trigger:hover .accordion__name { color: var(--color-white); }   /* PLACEHOLDER */
 /* Height animates through grid rows: no measured heights, no layout jump */
 .accordion__panel {
