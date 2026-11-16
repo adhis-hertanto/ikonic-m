@@ -133,7 +133,7 @@
     function showCountry(key) {
       if (!data || !panel) return;
       var meta = key && data.countries[key];
-      if (!meta) { country = null; panel.classList.remove('is-open'); return; }
+      if (!meta) { country = null; panel.classList.remove('is-open'); section.classList.remove('has-panel'); return; }
       var changed = key !== country;
       country = key;
       if (changed || !status) {
@@ -144,6 +144,7 @@
         setStatus(available.indexOf('Current') >= 0 ? 'Current' : available[0]);
       }
       panel.classList.add('is-open');
+      section.classList.add('has-panel');
     }
 
     if (panel) {
