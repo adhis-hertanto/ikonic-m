@@ -34,7 +34,8 @@
   width: var(--shape-hero-holder-w);
   height: 100%;
   overflow: hidden;
-  container-type: size;             /* lets the mask use 100cqw / 100cqh, so its edge is 45 degrees at any hero height */
+  isolation: isolate;               /* keeps the slide z-indexes inside the holder, so the sand triangle stays above the images */
+  container-type: size;            /* lets the mask use 100cqw / 100cqh, so its edge is 45 degrees at any hero height */
 }
 .hero__img {
   position: absolute;

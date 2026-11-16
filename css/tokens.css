@@ -212,8 +212,8 @@
   --x-dur: 320ms;
   --x-dur-slow: 700ms;
   --x-carousel-interval: 4000ms;            /* time each slide stays up */
-  --x-slide-wipe: 500ms;                    /* time the 45 degree wipe takes between slides */
-  --x-ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --x-slide-wipe: 1000ms;                   /* time the 45 degree wipe takes between slides */
+  --x-ease-inout: cubic-bezier(0.77, 0, 0.175, 1);   /* ease-in-out quart: gentle start, smooth settle */
   --x-tooltip-fade: 150ms;
   --x-globe-damping: 160ms;                  /* ease time for globe drag, like OrbitControls dampingFactor 0.1 at 60fps */
   --x-reveal-rise: calc(20 * var(--u));
