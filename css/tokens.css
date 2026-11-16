@@ -156,6 +156,8 @@
   --x-fp-flag-h: calc(24 * var(--u));
   --x-fp-badge: calc(24 * var(--u));
   --x-fp-pill-h: calc(40 * var(--u));
+  --x-text-fp-small-size: calc(12 * var(--u));         /* one step below Body/S, for chips and badges */
+  --x-text-fp-small-lh: calc(20 * var(--u));
   --x-footer-logo-w: calc(282 * var(--u));
   --x-footer-logo-h: calc(80 * var(--u));
   --x-keppel-logo-w: calc(120 * var(--u));
