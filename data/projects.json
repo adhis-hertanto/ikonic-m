@@ -1,0 +1,229 @@
+{
+  "note": "Single source of truth for the Globe section: tooltip counts, status tabs and project chips. Copy names exactly as the client wrote them. A project's status is Exited, Current or Planned; the tabs, counts and tooltip numbers are derived from this list, so adding a project needs no markup changes.",
+  "statuses": [
+    "Exited",
+    "Current",
+    "Planned"
+  ],
+  "countries": {
+    "china": {
+      "label": "China",
+      "flag": "assets/svg/flags/china.svg"
+    },
+    "singapore": {
+      "label": "Singapore",
+      "flag": "assets/svg/flags/singapore.svg"
+    },
+    "vietnam": {
+      "label": "Vietnam",
+      "flag": "assets/svg/flags/vietnam.svg"
+    },
+    "australia": {
+      "label": "Australia",
+      "flag": "assets/svg/flags/australia.svg"
+    },
+    "malaysia": {
+      "label": "Malaysia",
+      "flag": "assets/svg/flags/malaysia.svg"
+    },
+    "philippines": {
+      "label": "Philippines",
+      "flag": "assets/svg/flags/philippines.svg"
+    }
+  },
+  "projects": [
+    {
+      "name": "Bugis Junction",
+      "location": "Singapore",
+      "country": "singapore",
+      "status": "Exited"
+    },
+    {
+      "name": "KSC",
+      "location": "Singapore",
+      "country": "singapore",
+      "status": "Current"
+    },
+    {
+      "name": "Ocean Financial Centre",
+      "location": "Singapore",
+      "country": "singapore",
+      "status": "Current"
+    },
+    {
+      "name": "Marina Bay Financial Centre",
+      "location": "Singapore",
+      "country": "singapore",
+      "status": "Current"
+    },
+    {
+      "name": "i12 katong",
+      "location": "Singapore",
+      "country": "singapore",
+      "status": "Exited"
+    },
+    {
+      "name": "Wilkie Edge",
+      "location": "Singapore",
+      "country": "singapore",
+      "status": "Current"
+    },
+    {
+      "name": "Sutera Mall",
+      "location": "Johor Bahru",
+      "country": "malaysia",
+      "status": "Current"
+    },
+    {
+      "name": "Estella Place",
+      "location": "Ho Chi Minh City",
+      "country": "vietnam",
+      "status": "Current"
+    },
+    {
+      "name": "Saigon Centre",
+      "location": "Ho Chi Minh City",
+      "country": "vietnam",
+      "status": "Current"
+    },
+    {
+      "name": "Empire City",
+      "location": "Ho Chi Minh City",
+      "country": "vietnam",
+      "status": "Exited"
+    },
+    {
+      "name": "Hanoi Centre",
+      "location": "Hanoi",
+      "country": "vietnam",
+      "status": "Current"
+    },
+    {
+      "name": "Saigon Sports City",
+      "location": "Ho Chi Minh City",
+      "country": "vietnam",
+      "status": "Planned"
+    },
+    {
+      "name": "Palm City",
+      "location": "Ho Chi Minh City",
+      "country": "vietnam",
+      "status": "Exited"
+    },
+    {
+      "name": "Saigon Centre Phase 3",
+      "location": "Ho Chi Minh City",
+      "country": "vietnam",
+      "status": "Current"
+    },
+    {
+      "name": "Riveria Point Phase 2",
+      "location": "Ho Chi Minh City",
+      "country": "vietnam",
+      "status": "Planned"
+    },
+    {
+      "name": "TBS Land",
+      "location": "Ho Chi Minh City",
+      "country": "vietnam",
+      "status": "Current"
+    },
+    {
+      "name": "The Garden Mall",
+      "location": "Hanoi",
+      "country": "vietnam",
+      "status": "Current"
+    },
+    {
+      "name": "SMIFC",
+      "location": "Ho Chi Minh City",
+      "country": "vietnam",
+      "status": "Current"
+    },
+    {
+      "name": "T3 Mall",
+      "location": "Ho Chi Minh City",
+      "country": "vietnam",
+      "status": "Current"
+    },
+    {
+      "name": "Aether Square",
+      "location": "Beijing",
+      "country": "china",
+      "status": "Exited"
+    },
+    {
+      "name": "V-city",
+      "location": "Chengdu",
+      "country": "china",
+      "status": "Exited"
+    },
+    {
+      "name": "Lifehub @ Jingqiao",
+      "location": "Shanghai",
+      "country": "china",
+      "status": "Exited"
+    },
+    {
+      "name": "Park Avenue Central",
+      "location": "Shanghai",
+      "country": "china",
+      "status": "Current"
+    },
+    {
+      "name": "Park Avenue Heights",
+      "location": "Wuxi",
+      "country": "china",
+      "status": "Current"
+    },
+    {
+      "name": "Seasons City",
+      "location": "Tianjin",
+      "country": "china",
+      "status": "Current"
+    },
+    {
+      "name": "Bei Ke Jian",
+      "location": "Tianjin",
+      "country": "china",
+      "status": "Exited"
+    },
+    {
+      "name": "Westmin Plaza 西门口广场",
+      "location": "Guangzhou",
+      "country": "china",
+      "status": "Current"
+    },
+    {
+      "name": "Trinity Tower 吉汇大厦",
+      "location": "Shanghai",
+      "country": "china",
+      "status": "Current"
+    },
+    {
+      "name": "Keppel Greenland Being Fun 吉宝绿地缤纷城 (ex. K-plaza)",
+      "location": "Shanghai",
+      "country": "china",
+      "status": "Current",
+      "note": "Spelling copied from the client table. Confirm with the client before launch."
+    },
+    {
+      "name": "International Bund Gateway双狮汇",
+      "location": "Shanghai",
+      "country": "china",
+      "status": "Current"
+    },
+    {
+      "name": "SM-KL - The Podium",
+      "location": "Manila",
+      "country": "philippines",
+      "status": "Exited"
+    },
+    {
+      "name": "Top Ryde",
+      "location": "Sydney",
+      "country": "australia",
+      "status": "Current"
+    }
+  ]
+}

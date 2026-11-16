@@ -11,6 +11,10 @@
      Horizontal drag spins the globe around its own polar axis (changes lon).
      Vertical drag tilts it toward or away from the viewer (changes lat, clamped to +/- 30).
 
+   Tooltip
+     Appears while the pointer is over a country (not a pin) and shows "<Country> • <n> locations",
+     where n comes from data/projects.json. It follows the cursor. Touch has no hover: tap selects.
+
    Events (on the [data-globe] element)
      listens  footprints:select  { country }            -> select + ease to centre the country
      emits    globe:select       { country, source }    -> so the tabs can sync */
@@ -29,8 +33,7 @@
   var SIZE_B = 0.79;
   var MIN_HALF = 1.0;               // smaller dots are dropped (Figma minimum is 1.09)
   var LOCATION_SCALE = 1.41;        // red location dots relative to a grid dot
-  var TOOLTIP_OFFSET_X = 1.19;      // Figma pin centre sits 1.19px right of the dot centre
-  var TOOLTIP_GAP = 15.85;          // pill bottom edge above the dot centre (Figma 270:158)
+  var TOOLTIP_GAP = 20;             // pill bottom edge above the cursor, design px
 
   // How far the globe may tilt toward or away from the viewer. Matches onramper.com, which limits
 // its orbit to a polar angle of 60-120 degrees (+/-30 latitude). Every country home point sits
@@ -79,7 +82,7 @@ var PITCH_LIMIT_DEG = 30;
   function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
   function cssNumber(style, name, fallback) { var v = parseFloat(style.getPropertyValue(name)); return isNaN(v) ? fallback : v; }
 
-  function createGlobe(root, dotData, locationData) {
+  function createGlobe(root, dotData, locationData, projectData) {
     var canvas = root.querySelector('canvas');
     var ctx = canvas.getContext('2d');
     var section = root.closest('section') || root.parentElement;
@@ -129,8 +132,16 @@ var PITCH_LIMIT_DEG = 30;
     var rgb = { land: toRgb(colour.land), hover: toRgb(colour.hover), selected: toRgb(colour.selected) };
 
     var locations = locationData.locations.filter(function (l) { return countries[l.country]; }).map(function (l) {
-      return { id: l.id, name: l.name, country: l.country, isDefault: !!l.default, g: geoVector(l.lon, l.lat), x: 0, y: 0, half: 0, visible: false, depth: 0 };
+      return { id: l.id, name: l.name, country: l.country, g: geoVector(l.lon, l.lat), x: 0, y: 0, half: 0, visible: false, depth: 0 };
     });
+
+    // Location count per country = number of projects in data/projects.json, all statuses.
+    var projectCount = {};
+    projectData.projects.forEach(function (p) { projectCount[p.country] = (projectCount[p.country] || 0) + 1; });
+    function tooltipText(key) {
+      var n = projectCount[key] || 0;
+      return countries[key].label + ' \u2022 ' + n + (n === 1 ? ' location' : ' locations');
+    }
 
     /* --- State ------------------------------------------------------------------- */
     var lon = FIGMA_POSE.lon, lat = FIGMA_POSE.lat;   // view centre shown on screen, degrees
@@ -142,7 +153,8 @@ var PITCH_LIMIT_DEG = 30;
     var selected = root.getAttribute('data-country') || countryKeys[0];
     var selAlpha = {}, hoverAlpha = {};
     countryKeys.forEach(function (key) { selAlpha[key] = key === selected ? 1 : 0; hoverAlpha[key] = 0; });
-    var hoverCountry = null, hoverLocation = null, focusLocation = null, shownLocation = null;
+    var hoverCountry = null, hoverLocation = null, focusLocation = null, shownCountry = null;
+    var cursor = [0, 0];                              // pointer position inside the canvas, css px
     var drag = null, dragging = false;
     var resumeAt = 0, rampStart = 0;
     var cssSize = 0, unit = 1, scale = 1, dpr = 1;
@@ -286,29 +298,15 @@ var PITCH_LIMIT_DEG = 30;
       ctx.fillStyle = colour.disc; ctx.fillText(text, 16 * dpr, 25 * dpr);
     }
 
-    /* --- Tooltip: follows its location dot, stays inside the section ------------------ */
-    function currentLocation() {
-      if (dragging) return null;
-      var loc = hoverLocation || focusLocation;
-      if (loc) return loc.visible ? loc : null;
-      var fallback = null;
-      for (var i = 0; i < locations.length; i++) {
-        var l = locations[i];
-        if (l.country !== selected) continue;
-        if (l.isDefault) { fallback = l; break; }
-        fallback = fallback || l;
-      }
-      return fallback && fallback.visible && fallback.depth > 0.25 && !transition ? fallback : null;
-    }
+    /* --- Tooltip: follows the cursor while a country is hovered, stays inside the section --- */
     function positionTooltip() {
-      var loc = currentLocation();
-      if (!loc) { tooltip.classList.remove('is-visible'); shownLocation = null; return; }
-      if (loc !== shownLocation) { tooltipLabel.textContent = loc.name; shownLocation = loc; }
+      var key = dragging ? null : hoverCountry;
+      if (!key || !projectCount[key]) { tooltip.classList.remove('is-visible'); shownCountry = null; return; }
+      if (key !== shownCountry) { tooltipLabel.textContent = tooltipText(key); shownCountry = key; }
       var host = section.getBoundingClientRect(), box = canvas.getBoundingClientRect();
-      var gap = TOOLTIP_GAP * unit;
       var size = tooltip.getBoundingClientRect(), w = size.width, h = size.height, pad = 4 * unit;
-      var x = box.left - host.left + loc.x + TOOLTIP_OFFSET_X * unit;
-      var y = box.top - host.top + loc.y - gap;                       // bottom edge of the pill
+      var x = box.left - host.left + cursor[0];
+      var y = box.top - host.top + cursor[1] - TOOLTIP_GAP * unit;    // bottom edge of the pill
       x = clamp(x, w / 2 + pad, host.width - w / 2 - pad);
       y = clamp(y, h + pad, host.height - pad);
       tooltip.style.transform = 'translate(' + (x - w / 2).toFixed(2) + 'px,' + (y - h).toFixed(2) + 'px)';
@@ -317,7 +315,7 @@ var PITCH_LIMIT_DEG = 30;
 
     /* --- Animation loop ------------------------------------------------------------------ */
     function autoAllowed(now) {
-      return !frozen && !reduced && !dragging && !transition && !hoverLocation && !focusLocation && now >= resumeAt;
+      return !frozen && !reduced && !dragging && !transition && !hoverCountry && !focusLocation && now >= resumeAt;
     }
     function fading() {
       for (var i = 0; i < countryKeys.length; i++) {
@@ -370,7 +368,7 @@ var PITCH_LIMIT_DEG = 30;
     function active(now) {
       if (dirty || transition || dragging || velLon || velLat || fading() || settling()) return true;
       if (frozen || reduced) return false;
-      return !(hoverLocation || focusLocation);     // waiting to resume, or auto-rotating
+      return !(hoverCountry || focusLocation);      // waiting to resume, or auto-rotating
     }
     function frame(now) {
       raf = 0;
@@ -474,16 +472,17 @@ var PITCH_LIMIT_DEG = 30;
       var hit = insideDisc(hoverPending[0], hoverPending[1]) ? pick(hoverPending[0], hoverPending[1]) : null;
       var loc = hit && hit.location ? hit.location : null;
       var country = hit ? hit.country : null;
+      cursor = hoverPending;
       if (loc !== hoverLocation || country !== hoverCountry) {
-        if (hoverLocation && !loc) resumeSoon(300);
+        if (hoverCountry && !country) resumeSoon(300);
         hoverLocation = loc; hoverCountry = country;
         invalidate();
-      }
+      } else if (country) invalidate();          // keep the tooltip under the cursor
       canvas.style.cursor = hit ? 'pointer' : insideDisc(hoverPending[0], hoverPending[1]) ? 'grab' : '';
     }
     function clearHover() {
       hoverPending = null;
-      if (hoverLocation) resumeSoon(300);
+      if (hoverCountry) resumeSoon(300);
       if (hoverLocation || hoverCountry) { hoverLocation = null; hoverCountry = null; invalidate(); }
       if (!dragging) canvas.style.cursor = '';
     }
@@ -519,6 +518,7 @@ var PITCH_LIMIT_DEG = 30;
         invalidate();
         return;
       }
+      if (event.pointerType === 'touch') return;      // touch has no hover: tap selects
       hoverPending = local(event);
       if (!hoverRaf) hoverRaf = requestAnimationFrame(applyHover);
     });
@@ -582,7 +582,7 @@ var PITCH_LIMIT_DEG = 30;
         return {
           selected: selected, lon: lon, lat: lat, targetLon: tLon, targetLat: tLat, spin: lon, pitch: lat, dragging: dragging, inertia: velLon, transition: !!transition,
           running: !!raf, hoverCountry: hoverCountry, hoverLocation: hoverLocation && hoverLocation.id,
-          tooltip: shownLocation && shownLocation.id, view: view.slice(), cssSize: cssSize, backing: canvas.width,
+          tooltip: shownCountry && tooltipText(shownCountry), view: view.slice(), cssSize: cssSize, backing: canvas.width,
           locations: locations.map(function (l) { return { id: l.id, country: l.country, x: l.x, y: l.y, half: l.half, visible: l.visible }; })
         };
       },
@@ -606,8 +606,9 @@ var PITCH_LIMIT_DEG = 30;
     if (!root) return;
     Promise.all([
       fetch('data/globe-dots.json').then(function (r) { return r.json(); }),
-      fetch('data/locations.json').then(function (r) { return r.json(); })
-    ]).then(function (data) { createGlobe(root, data[0], data[1]); })
+      fetch('data/locations.json').then(function (r) { return r.json(); }),
+      fetch('data/projects.json').then(function (r) { return r.json(); })
+    ]).then(function (data) { createGlobe(root, data[0], data[1], data[2]); })
       .catch(function (error) { root.setAttribute('data-ready', 'error'); console.error('[globe]', error); });
   });
 })();

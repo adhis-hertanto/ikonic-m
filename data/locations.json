@@ -1,97 +1,89 @@
 {
-  "note": "Placeholder locations. Replace name/lon/lat with real destinations and remove \"placeholder\". \"default\": true marks the pin shown when nothing is hovered.",
+  "note": "One pin per city with a project in data/projects.json. Pins are visual only; hover and selection work on the country.",
   "locations": [
-    {
-      "id": "chengdu",
-      "country": "china",
-      "name": "Chengdu",
-      "lon": 103.753,
-      "lat": 30.946,
-      "placeholder": true,
-      "default": true
-    },
     {
       "id": "beijing",
       "country": "china",
       "name": "Beijing",
-      "lon": 117.106,
-      "lat": 40.524,
-      "placeholder": true
+      "lon": 116.407,
+      "lat": 39.904
+    },
+    {
+      "id": "chengdu",
+      "country": "china",
+      "name": "Chengdu",
+      "lon": 104.066,
+      "lat": 30.573
     },
     {
       "id": "shanghai",
       "country": "china",
       "name": "Shanghai",
-      "lon": 120.891,
-      "lat": 31.442,
-      "placeholder": true
+      "lon": 121.474,
+      "lat": 31.23
+    },
+    {
+      "id": "wuxi",
+      "country": "china",
+      "name": "Wuxi",
+      "lon": 120.312,
+      "lat": 31.491
+    },
+    {
+      "id": "tianjin",
+      "country": "china",
+      "name": "Tianjin",
+      "lon": 117.201,
+      "lat": 39.084
     },
     {
       "id": "guangzhou",
       "country": "china",
       "name": "Guangzhou",
-      "lon": 112.269,
-      "lat": 23.033,
-      "placeholder": true
-    },
-    {
-      "id": "nanning",
-      "country": "china",
-      "name": "Nanning",
-      "lon": 105.727,
-      "lat": 21.827,
-      "placeholder": true
+      "lon": 113.264,
+      "lat": 23.129
     },
     {
       "id": "ho-chi-minh-city",
       "country": "vietnam",
       "name": "Ho Chi Minh City",
-      "lon": 106.998,
-      "lat": 11.103,
-      "placeholder": true,
-      "default": true
+      "lon": 106.66,
+      "lat": 10.762
     },
     {
-      "id": "can-tho",
+      "id": "hanoi",
       "country": "vietnam",
-      "name": "Can Tho",
-      "lon": 105.19,
-      "lat": 10.285,
-      "placeholder": true
+      "name": "Hanoi",
+      "lon": 105.854,
+      "lat": 21.028
     },
     {
-      "id": "orchard-road",
+      "id": "singapore",
       "country": "singapore",
-      "name": "Orchard Road",
-      "lon": 103.832,
-      "lat": 1.304,
-      "placeholder": true,
-      "default": true
+      "name": "Singapore",
+      "lon": 103.82,
+      "lat": 1.35
     },
     {
-      "id": "jurong-east",
-      "country": "singapore",
-      "name": "Jurong East",
-      "lon": 103.742,
-      "lat": 1.333,
-      "placeholder": true
+      "id": "johor-bahru",
+      "country": "malaysia",
+      "name": "Johor Bahru",
+      "lon": 103.741,
+      "lat": 1.492
+    },
+    {
+      "id": "manila",
+      "country": "philippines",
+      "name": "Manila",
+      "lon": 120.984,
+      "lat": 14.599
     },
     {
       "id": "sydney",
       "country": "australia",
       "name": "Sydney",
       "lon": 151.209,
-      "lat": -33.868,
-      "placeholder": true,
-      "default": true
-    },
-    {
-      "id": "melbourne",
-      "country": "australia",
-      "name": "Melbourne",
-      "lon": 144.963,
-      "lat": -37.814,
-      "placeholder": true
+      "lat": -33.868
     }
   ]
 }

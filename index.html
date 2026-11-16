@@ -207,13 +207,31 @@
           <div class="footprints__intro" data-reveal>
             <div class="footprints__heading">
               <h2 class="t-h1" id="footprints-title">Our retail footprints worldwide</h2>
-              <p class="t-body-m">Our experience spans some of Asia's most recognised retail destinations across Singapore, Vietnam, China and Australia.</p>
+              <p class="t-body-m">Our experience spans some of Asia's most recognised retail destinations across Singapore, Vietnam, China, Malaysia, the Philippines and Australia.</p>
             </div>
             <div class="tabs" role="tablist" aria-label="Markets" data-tabs>
               <button class="tab is-active" type="button" role="tab" id="tab-china" aria-selected="true" aria-controls="footprints-globe" data-country="china">China</button>
               <button class="tab" type="button" role="tab" id="tab-singapore" aria-selected="false" aria-controls="footprints-globe" tabindex="-1" data-country="singapore">Singapore</button>
               <button class="tab" type="button" role="tab" id="tab-vietnam" aria-selected="false" aria-controls="footprints-globe" tabindex="-1" data-country="vietnam">Vietnam</button>
               <button class="tab" type="button" role="tab" id="tab-australia" aria-selected="false" aria-controls="footprints-globe" tabindex="-1" data-country="australia">Australia</button>
+              <button class="tab" type="button" role="tab" id="tab-malaysia" aria-selected="false" aria-controls="footprints-globe" tabindex="-1" data-country="malaysia">Malaysia</button>
+              <button class="tab" type="button" role="tab" id="tab-philippines" aria-selected="false" aria-controls="footprints-globe" tabindex="-1" data-country="philippines">Philippines</button>
+            </div>
+            <!-- Projects for the selected country. Filled by js/footprints.js from data/projects.json -->
+            <div class="fp-panel" data-fp-panel>
+              <div class="fp-panel__clip">
+                <div class="fp-panel__inner">
+                  <div class="fp-panel__head">
+                    <div class="fp-panel__country">
+                      <img class="fp-panel__flag" alt="" width="36" height="24" data-fp-flag>
+                      <h3 class="t-subline-l" data-fp-name></h3>
+                    </div>
+                    <div class="fp-status" role="tablist" aria-label="Project status" data-fp-status></div>
+                  </div>
+                  <hr class="fp-panel__rule">
+                  <ul class="fp-chips" role="tabpanel" aria-live="polite" data-fp-chips></ul>
+                </div>
+              </div>
             </div>
           </div>
           <a class="btn btn--l" href="our-works/" data-reveal>
@@ -223,7 +241,7 @@
         </div>
       </div>
       <div class="globe" id="footprints-globe" role="tabpanel" aria-labelledby="tab-china" data-globe data-country="china" data-shape="Globe / B / Ecru, halftone">
-        <canvas class="globe__canvas" role="img" aria-label="Dot-matrix globe of IKONIC-M retail locations in China, Singapore, Vietnam and Australia. Drag to rotate."></canvas>
+        <canvas class="globe__canvas" role="img" aria-label="Dot-matrix globe of IKONIC-M retail locations in China, Singapore, Vietnam, Malaysia, the Philippines and Australia. Drag to rotate."></canvas>
         <div class="visually-hidden">
           <h3>Locations in <span data-globe-locations-title>China</span></h3>
           <ul data-globe-locations></ul>

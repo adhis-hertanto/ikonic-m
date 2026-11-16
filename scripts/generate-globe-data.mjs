@@ -4,7 +4,7 @@
 // Output
 //   data/globe-dots.json  { meta, dots: [lat, lon, kind, lat, lon, kind, ...] }
 //                         kind is an index into meta.kinds (0 ocean, 1 land, 2+ interactive countries)
-//   data/locations.json   placeholder location list (only written if it does not exist, so
+//   data/locations.json   city pins (only written if it does not exist, so
 //                         real content is never overwritten)
 //
 // Lattice: Fibonacci (golden-angle) spiral about the geographic polar axis, which is what the
@@ -23,13 +23,15 @@ const topo = JSON.parse(readFileSync(require.resolve('world-atlas/countries-50m.
 
 const DOT_COUNT = 12500;
 const MIN_COUNTRY_DOTS = 5;
-const KINDS = ['ocean', 'land', 'china', 'singapore', 'vietnam', 'australia'];
+const KINDS = ['ocean', 'land', 'china', 'singapore', 'vietnam', 'australia', 'malaysia', 'philippines'];
 // ISO 3166-1 numeric ids in world-atlas
 const COUNTRIES = {
   china: { id: 156, label: 'China', home: [108, 18] },   // home = Figma default pose (centre lon, lat)
   singapore: { id: 702, label: 'Singapore', snap: [[103.82, 1.35]] },
   vietnam: { id: 704, label: 'Vietnam' },
   australia: { id: 36, label: 'Australia' },
+  malaysia: { id: 458, label: 'Malaysia', home: [109, 4] },        // centred so Peninsular and Borneo both show
+  philippines: { id: 608, label: 'Philippines', home: [122, 12.5] },
 };
 
 const features = feature(topo, topo.objects.countries).features.map((f) => ({ f, id: Number(f.id), bounds: geoBounds(f) }));
@@ -102,26 +104,27 @@ const meta = {
 };
 writeFileSync(join(root, 'data', 'globe-dots.json'), JSON.stringify({ meta, dots: flat }));
 
-// Coordinates for China and Vietnam are the Figma red dots (node 270:157) unprojected with the
-// default pose (centre 108E 18N, north up), so they land on the Figma positions. Names are the
-// nearest major city. Everything is placeholder content.
+// Location pins: one red dot per city that has a project in data/projects.json (the single source
+// of truth for the project list, counts and tables). Coordinates are city centres. The file is only
+// written if it does not exist, so hand edits are never overwritten.
 const locationsPath = join(root, 'data', 'locations.json');
 if (!existsSync(locationsPath)) {
-  const loc = (id, country, name, lon, lat, extra = {}) => ({ id, country, name, lon, lat, placeholder: true, ...extra });
+  const loc = (id, country, name, lon, lat) => ({ id, country, name, lon, lat });
   writeFileSync(locationsPath, JSON.stringify({
-    note: 'Placeholder locations. Replace name/lon/lat with real destinations and remove "placeholder". "default": true marks the pin shown when nothing is hovered.',
+    note: 'One pin per city with a project in data/projects.json. Pins are visual only; hover and selection work on the country.',
     locations: [
-      loc('chengdu', 'china', 'Chengdu', 103.753, 30.946, { default: true }),
-      loc('beijing', 'china', 'Beijing', 117.106, 40.524),
-      loc('shanghai', 'china', 'Shanghai', 120.891, 31.442),
-      loc('guangzhou', 'china', 'Guangzhou', 112.269, 23.033),
-      loc('nanning', 'china', 'Nanning', 105.727, 21.827),
-      loc('ho-chi-minh-city', 'vietnam', 'Ho Chi Minh City', 106.998, 11.103, { default: true }),
-      loc('can-tho', 'vietnam', 'Can Tho', 105.19, 10.285),
-      loc('orchard-road', 'singapore', 'Orchard Road', 103.832, 1.304, { default: true }),
-      loc('jurong-east', 'singapore', 'Jurong East', 103.742, 1.333),
-      loc('sydney', 'australia', 'Sydney', 151.209, -33.868, { default: true }),
-      loc('melbourne', 'australia', 'Melbourne', 144.963, -37.814),
+      loc('beijing', 'china', 'Beijing', 116.407, 39.904),
+      loc('chengdu', 'china', 'Chengdu', 104.066, 30.573),
+      loc('shanghai', 'china', 'Shanghai', 121.474, 31.230),
+      loc('wuxi', 'china', 'Wuxi', 120.312, 31.491),
+      loc('tianjin', 'china', 'Tianjin', 117.201, 39.084),
+      loc('guangzhou', 'china', 'Guangzhou', 113.264, 23.129),
+      loc('ho-chi-minh-city', 'vietnam', 'Ho Chi Minh City', 106.660, 10.762),
+      loc('hanoi', 'vietnam', 'Hanoi', 105.854, 21.028),
+      loc('singapore', 'singapore', 'Singapore', 103.820, 1.350),
+      loc('johor-bahru', 'malaysia', 'Johor Bahru', 103.741, 1.492),
+      loc('manila', 'philippines', 'Manila', 120.984, 14.599),
+      loc('sydney', 'australia', 'Sydney', 151.209, -33.868),
     ],
   }, null, 2) + '\n');
 }

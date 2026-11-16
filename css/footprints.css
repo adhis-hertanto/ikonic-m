@@ -9,9 +9,10 @@
   position: relative;
   display: flex;
   align-items: stretch;
-  height: var(--fp-h);
+  min-height: var(--fp-h);          /* grows if the project panel makes the column taller than the globe */
   background: var(--color-white);
   overflow: hidden;                 /* clips the globe at the right and bottom edges, as in Figma */
+  overflow: clip;                   /* same clip, but never programmatically scrollable, so focus cannot shift the content sideways */
 }
 .footprints__content {
   position: relative;
@@ -102,6 +103,144 @@
 }
 .globe-tooltip.is-visible { opacity: 1; }
 
+/* --- Project panel: flag + country, status tabs, divider, project chips -----
+   Sits between the market tabs and the "Explore our works" button. Height animates through grid
+   rows. While closed, a negative margin cancels the parent's flex gap so the button does not move. */
+.fp-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  width: 100%;
+  margin-top: calc(-1 * var(--x-gap-48));
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    grid-template-rows var(--x-dur) var(--x-ease),
+    margin-top var(--x-dur) var(--x-ease),
+    opacity var(--x-dur) var(--x-ease),
+    visibility 0s linear var(--x-dur);
+}
+.fp-panel.is-open {
+  grid-template-rows: 1fr;
+  margin-top: var(--space-0);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    grid-template-rows var(--x-dur) var(--x-ease),
+    margin-top var(--x-dur) var(--x-ease),
+    opacity var(--x-dur) var(--x-ease),
+    visibility 0s;
+}
+.fp-panel__clip {
+  min-height: var(--space-0);
+  overflow: hidden;
+  padding: var(--x-focus-ring);     /* room for focus outlines inside the clip */
+  margin: calc(-1 * var(--x-focus-ring));
+}
+.fp-panel__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  padding: var(--space-24);
+  border: var(--x-hairline) solid var(--ecru-200);
+  background: var(--ecru-50);
+}
+.fp-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-16);
+}
+.fp-panel__country {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  color: var(--deep-plum-950);
+}
+.fp-panel__flag {
+  display: block;
+  width: var(--x-fp-flag-w);
+  height: var(--x-fp-flag-h);
+  object-fit: cover;
+}
+.fp-panel__rule {
+  width: 100%;
+  height: var(--x-hairline);
+  margin: var(--space-0);
+  border: var(--space-0);
+  background: var(--ecru-200);
+}
+
+/* Status tabs: pill toggle with a count badge */
+.fp-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+.fp-status__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  height: var(--x-fp-pill-h);
+  padding: var(--space-0) var(--space-16) var(--space-0) var(--space-8);
+  border: var(--x-hairline) solid var(--ecru-300);
+  border-radius: var(--x-pin-radius);
+  font-size: var(--text-body-m-size);
+  line-height: var(--text-body-m-lh);
+  color: var(--deep-plum-950);
+  white-space: nowrap;
+  transition:
+    background-color var(--x-dur-fast) var(--x-ease),
+    color var(--x-dur-fast) var(--x-ease),
+    border-color var(--x-dur-fast) var(--x-ease);
+}
+.fp-status__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--x-fp-badge);
+  height: var(--x-fp-badge);
+  border-radius: var(--x-pin-radius);
+  background: var(--color-white);
+  color: var(--deep-plum-950);
+  font-size: var(--text-body-s-size);
+  line-height: var(--space-0);
+}
+.fp-status__tab:hover { border-color: var(--brand-coral-red); }                 /* PLACEHOLDER */
+.fp-status__tab.is-active {
+  background: var(--brand-deep-plum);
+  border-color: var(--brand-deep-plum);
+  color: var(--color-white);
+}
+
+/* Project chips: name and city. Not interactive. */
+.fp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  margin: var(--space-0);
+  padding: var(--space-0);
+  list-style: none;
+}
+.fp-chip {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-0) var(--space-8);
+  max-width: 100%;
+  padding: var(--space-8) var(--space-16);
+  border: var(--x-hairline) solid var(--ecru-200);
+  border-radius: calc(var(--x-fp-pill-h) / 2);
+  background: var(--color-white);
+  font-size: var(--text-body-s-size);
+  line-height: var(--text-body-s-lh);
+  color: var(--deep-plum-950);
+  overflow-wrap: anywhere;
+}
+.fp-chip__name::after { content: "\00b7"; margin-left: var(--space-8); color: var(--ecru-700); }   /* stays with the name when the city wraps */
+.fp-chip__loc { color: var(--ecru-700); }
+
 @media (prefers-reduced-motion: reduce) {
   .globe-tooltip { transition: none; }
+  .fp-panel, .fp-panel.is-open, .fp-status__tab { transition: none; }
 }
