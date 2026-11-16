@@ -12,8 +12,10 @@
 .hero {
   position: relative;
   display: flex;
-  /* Fills the viewport below the sticky nav, so nav + hero are exactly one screen. Never shorter than the 720 design height. */
-  height: max(calc(100vh - var(--x-nav-height)), var(--x-hero-h));
+  /* Fills the viewport below the sticky nav, so nav + hero are exactly one screen and the carousel
+     progress bars are visible without scrolling. No minimum height: a floor would push them below the fold. */
+  height: calc(100vh - var(--x-nav-height));
+  height: calc(100svh - var(--x-nav-height));
   background: var(--deep-plum-950);
   color: var(--color-white);
   overflow: hidden;
