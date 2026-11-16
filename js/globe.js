@@ -12,8 +12,9 @@
      Vertical drag tilts it toward or away from the viewer (changes lat, clamped to +/- 30).
 
    Tooltip
-     Appears while the pointer is over a country (not a pin) and shows "<Country> • <n> locations",
-     where n comes from data/projects.json. It follows the cursor. Touch has no hover: tap selects.
+     A label "<Country> • <n> locations" (n comes from data/projects.json) sits fixed on the centre
+     of the selected country. Hovering another country moves it there until the pointer leaves.
+     Touch has no hover: tap selects.
 
    Events (on the [data-globe] element)
      listens  footprints:select  { country }            -> select + ease to centre the country
@@ -33,7 +34,6 @@
   var SIZE_B = 0.79;
   var MIN_HALF = 1.0;               // smaller dots are dropped (Figma minimum is 1.09)
   var LOCATION_SCALE = 1.41;        // red location dots relative to a grid dot
-  var TOOLTIP_GAP = 20;             // pill bottom edge above the cursor, design px
 
   // How far the globe may tilt toward or away from the viewer. Matches onramper.com, which limits
 // its orbit to a polar angle of 60-120 degrees (+/-30 latitude). Every country home point sits
@@ -154,7 +154,6 @@ var PITCH_LIMIT_DEG = 30;
     var selAlpha = {}, hoverAlpha = {};
     countryKeys.forEach(function (key) { selAlpha[key] = key === selected ? 1 : 0; hoverAlpha[key] = 0; });
     var hoverCountry = null, hoverLocation = null, focusLocation = null, shownCountry = null;
-    var cursor = [0, 0];                              // pointer position inside the canvas, css px
     var drag = null, dragging = false;
     var resumeAt = 0, rampStart = 0;
     var cssSize = 0, unit = 1, scale = 1, dpr = 1;
@@ -298,18 +297,28 @@ var PITCH_LIMIT_DEG = 30;
       ctx.fillStyle = colour.disc; ctx.fillText(text, 16 * dpr, 25 * dpr);
     }
 
-    /* --- Tooltip: follows the cursor while a country is hovered, stays inside the section --- */
+    /* --- Country label: fixed on the centre of a country, not on the cursor ----------------
+       Shows the selected country, or the hovered one while the pointer is over another country.
+       The centre is the average screen position of the country's visible dots, so it follows the
+       globe as it turns and the label hides once the country rotates out of view. */
+    function countryCentre(key) {
+      var k = countries[key].kind, n = 0, ax = 0, ay = 0;
+      for (var i = 0; i < count; i++) {
+        if (kind[i] !== k || !sh[i]) continue;
+        ax += sx[i]; ay += sy[i]; n++;
+      }
+      return n ? [ax / n / dpr, ay / n / dpr] : null;      // css px inside the canvas
+    }
     function positionTooltip() {
-      var key = dragging ? null : hoverCountry;
-      if (!key || !projectCount[key]) { tooltip.classList.remove('is-visible'); shownCountry = null; return; }
+      var key = hoverCountry || selected;
+      var centre = key && projectCount[key] && !transition ? countryCentre(key) : null;
+      if (!centre) { tooltip.classList.remove('is-visible'); shownCountry = null; return; }
       if (key !== shownCountry) { tooltipLabel.textContent = tooltipText(key); shownCountry = key; }
       var host = section.getBoundingClientRect(), box = canvas.getBoundingClientRect();
       var size = tooltip.getBoundingClientRect(), w = size.width, h = size.height, pad = 4 * unit;
-      var x = box.left - host.left + cursor[0];
-      var y = box.top - host.top + cursor[1] - TOOLTIP_GAP * unit;    // bottom edge of the pill
-      x = clamp(x, w / 2 + pad, host.width - w / 2 - pad);
-      y = clamp(y, h + pad, host.height - pad);
-      tooltip.style.transform = 'translate(' + (x - w / 2).toFixed(2) + 'px,' + (y - h).toFixed(2) + 'px)';
+      var x = clamp(box.left - host.left + centre[0], w / 2 + pad, host.width - w / 2 - pad);
+      var y = clamp(box.top - host.top + centre[1], h / 2 + pad, host.height - h / 2 - pad);
+      tooltip.style.transform = 'translate(' + (x - w / 2).toFixed(2) + 'px,' + (y - h / 2).toFixed(2) + 'px)';
       tooltip.classList.add('is-visible');
     }
 
@@ -472,12 +481,11 @@ var PITCH_LIMIT_DEG = 30;
       var hit = insideDisc(hoverPending[0], hoverPending[1]) ? pick(hoverPending[0], hoverPending[1]) : null;
       var loc = hit && hit.location ? hit.location : null;
       var country = hit ? hit.country : null;
-      cursor = hoverPending;
       if (loc !== hoverLocation || country !== hoverCountry) {
         if (hoverCountry && !country) resumeSoon(300);
         hoverLocation = loc; hoverCountry = country;
         invalidate();
-      } else if (country) invalidate();          // keep the tooltip under the cursor
+      }
       canvas.style.cursor = hit ? 'pointer' : insideDisc(hoverPending[0], hoverPending[1]) ? 'grab' : '';
     }
     function clearHover() {

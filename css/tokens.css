@@ -158,8 +158,8 @@
   --x-pin-h: calc(53.25 * var(--u));                   /* 217:4266 */
   --x-pin-min-w: calc(132 * var(--u));
   --x-pin-scrim: rgb(0 0 0 / 0.4);                     /* 217:4266 */
-  --x-fp-flag-w: calc(36 * var(--u));                  /* footprints project panel, not in Figma yet */
-  --x-fp-flag-h: calc(24 * var(--u));
+  --x-fp-flag-w: calc(24 * var(--u));                  /* footprints project panel, not in Figma yet */
+  --x-fp-flag-h: calc(16 * var(--u));
   --x-fp-cta-gap: calc(60 * var(--u));                 /* card to CTA, half of the 120 used with no card */
   --x-fp-badge: calc(18 * var(--u));
   --x-fp-pill-h: calc(32 * var(--u));
