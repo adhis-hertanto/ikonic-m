@@ -181,7 +181,7 @@
   align-items: center;
   gap: var(--space-8);
   height: var(--x-fp-pill-h);
-  padding: var(--space-0) var(--space-16) var(--space-0) var(--space-8);
+  padding: var(--space-0) var(--space-12) var(--space-0) var(--space-8);
   border: var(--x-hairline) solid var(--ecru-300);
   border-radius: var(--x-pin-radius);
   font-size: var(--x-text-fp-small-size);
@@ -228,7 +228,7 @@
   gap: var(--space-0) var(--space-8);
   max-width: 100%;
   padding: var(--space-8) var(--space-16);
-  border-radius: calc(var(--x-fp-pill-h) / 2);
+  border-radius: var(--x-pin-radius);
   background: var(--color-white);
   font-size: var(--x-text-fp-small-size);
   line-height: var(--x-text-fp-small-lh);
