@@ -149,6 +149,8 @@
   --x-eyebrow-dot: calc(8 * var(--u));
   --x-rule: calc(2 * var(--u));                        /* accordion + tab underline */
   --x-hairline: 1px;                                   /* input border, nav divider */
+  --x-progress-track: rgb(255 255 255 / 0.2);          /* carousel track: white at 20% */
+  --x-progress-track-hover: rgb(255 255 255 / 0.35);   /* PLACEHOLDER hover */
   --x-progress-h: calc(4.78 * var(--u));               /* 217:4171 */
   --x-gap-48: calc(48 * var(--u));                     /* 217:4245, hardcoded gap */
   --x-pin-radius: calc(100 * var(--u));

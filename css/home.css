@@ -89,7 +89,7 @@
   position: relative;
   flex: 1 0 0;
   height: var(--x-progress-h);
-  background: var(--ecru-300);
+  background: var(--x-progress-track);
 }
 .carousel__seg::before {            /* larger hit area, no visual change */
   content: "";
@@ -108,7 +108,7 @@
 }
 .is-paused .carousel__seg.is-active .carousel__fill { animation-play-state: paused; }
 .is-static .carousel__seg.is-active .carousel__fill { animation: none; transform: scaleX(1); }
-.carousel__seg:hover { background: var(--ecru-200); }                      /* PLACEHOLDER */
+.carousel__seg:hover { background: var(--x-progress-track-hover); }         /* PLACEHOLDER */
 @keyframes carousel-fill {
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
