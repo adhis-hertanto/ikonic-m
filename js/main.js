@@ -34,7 +34,18 @@
           observer.unobserve(entry.target);
         });
     }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
-    items.forEach(function (el) { observer.observe(el); });
+    // Anything already on screen at load (the hero, including its progress bars near the bottom edge)
+    // reveals straight away, in reading order. The observer's bottom margin would otherwise hold it back until scroll.
+    var visibleNow = items.filter(function (el) { return el.getBoundingClientRect().top < window.innerHeight; })
+      .sort(function (a, b) {
+        var ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
+        return ra.top - rb.top || ra.left - rb.left;
+      });
+    visibleNow.forEach(function (el, i) {
+      el.style.setProperty('--reveal-delay', (i * STAGGER) + 'ms');
+      el.classList.add('is-revealed');
+    });
+    items.forEach(function (el) { if (visibleNow.indexOf(el) < 0) observer.observe(el); });
   }
 
   /* --- Snap auto-width labels up to a whole unit --------------------------
