@@ -12,7 +12,8 @@
 .hero {
   position: relative;
   display: flex;
-  height: var(--x-hero-h);
+  /* Fills the viewport below the sticky nav, so nav + hero are exactly one screen. Never shorter than the 720 design height. */
+  height: max(calc(100vh - var(--x-nav-height)), var(--x-hero-h));
   background: var(--deep-plum-950);
   color: var(--color-white);
   overflow: hidden;

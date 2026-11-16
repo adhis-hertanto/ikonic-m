@@ -40,6 +40,7 @@
   height: var(--x-nav-height);
   padding: var(--space-0) var(--layout-margin);
   background: var(--color-white);
+  box-shadow: var(--x-nav-shadow);
 }
 .nav__left {
   display: flex;

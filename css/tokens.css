@@ -134,6 +134,7 @@
 
   /* Component sizes */
   --x-nav-height: calc(80 * var(--u));
+  --x-nav-shadow: 0 calc(2 * var(--u)) calc(12 * var(--u)) rgb(0 0 0 / 0.08);   /* separates the nav from white sections */
   --x-nav-logo-w: calc(136 * var(--u));
   --x-nav-logo-h: calc(38 * var(--u));
   --x-nav-divider-h: calc(14 * var(--u));
