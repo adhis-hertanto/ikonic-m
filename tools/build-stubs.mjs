@@ -1,5 +1,6 @@
 // Generates the "page coming soon" stubs from the nav and footer in index.html,
-// so shared chrome is edited in one place. Run: node tools/build-stubs.mjs
+// and copies the same nav and footer into the built pages, so shared chrome is
+// edited in one place. Run: node tools/build-stubs.mjs
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -12,18 +13,36 @@ const down = (html) => html.replace(/(href|src)="(?![a-z]+:|#|data:)([^"]*)"/g, 
 const nav = down(between('<!-- NAV:START -->', '<!-- NAV:END -->'));
 const footer = down(between('<!-- FOOTER:START -->', '<!-- FOOTER:END -->'));
 
+// Marks the primary nav link for this page, so assistive tech announces where you are
+const current = (html, slug) => html.replace(
+  new RegExp(`(<a class="nav__link[^"]*" href="\\.\\./${slug}/")`), '$1 aria-current="page"');
+
 const pages = {
   'about': 'About',
-  'our-solutions': 'Our solutions',
-  'our-works': 'Our works',
+  'our-works': 'Places That Ignite',
   'news': 'News',
-  'contact': 'Contact',
+  'contact': "Let's Connect",
   'privacy-policy': 'Privacy Policy',
   'terms': 'Terms & conditions',
 };
 
+// Built pages: only the shared chrome between the markers is replaced
+const built = ['our-solutions'];
+for (const slug of built) {
+  const file = join(root, slug, 'index.html');
+  let html = readFileSync(file, 'utf8');
+  const swap = (a, b, chrome) => {
+    const start = html.indexOf(a), end = html.indexOf(b) + b.length;
+    html = html.slice(0, start) + chrome + html.slice(end);
+  };
+  swap('<!-- NAV:START -->', '<!-- NAV:END -->', current(nav, slug));
+  swap('<!-- FOOTER:START -->', '<!-- FOOTER:END -->', footer);
+  writeFileSync(file, html);
+  console.log('synced', `${slug}/index.html`);
+}
+
 for (const [slug, title] of Object.entries(pages)) {
-  const safe = title.replace(/&/g, '&amp;');
+  const safe = title.replace(/&/g, '&amp;').replace(/'/g, '&#39;');
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +60,7 @@ for (const [slug, title] of Object.entries(pages)) {
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  ${nav}
+  ${current(nav, slug)}
 
   <main id="main">
     <section class="stub">

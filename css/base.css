@@ -105,6 +105,12 @@ button {
   letter-spacing: var(--text-h3-ls);
   font-weight: var(--font-weight-regular);
 }
+.t-h4 {
+  font-size: var(--text-h4-size);
+  line-height: var(--text-h4-lh);
+  letter-spacing: var(--text-h4-ls);
+  font-weight: var(--font-weight-regular);
+}
 .t-display-l, .t-h1, .t-h3, .t-link {
   position: relative;
   top: var(--x-baseline-fix);

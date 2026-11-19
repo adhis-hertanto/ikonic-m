@@ -1,0 +1,380 @@
+/* ==========================================================================
+   Our Solutions page (Figma frame 250:273)
+   Values come from tokens.css only.
+   ========================================================================== */
+
+/* --- Hero (250:303) --------------------------------------------------------- */
+.sol-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: var(--x-sol-hero-h);
+  overflow: hidden;
+  background: var(--brand-deep-plum);
+  color: var(--color-white);
+}
+.sol-hero__img {
+  position: absolute;
+  inset: var(--space-0);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sol-hero::after {                   /* darkening gradient over the photo */
+  content: "";
+  position: absolute;
+  inset: var(--space-0);
+  background-image: var(--x-sol-hero-overlay);
+}
+.sol-hero__tess-sand,
+.sol-hero__tess-coral,
+.sol-hero__content { z-index: 1; }
+/* The two triangles meet on one point: sand bottom-left corner = coral top-right corner */
+.sol-hero__tess-sand {
+  --shape-size: var(--shape-tess-sol-sand);
+  --shape-color: var(--brand-sand);
+  top: var(--space-0);
+  right: var(--shape-tess-sol-sand-right);
+}
+.sol-hero__tess-coral {
+  --shape-size: var(--shape-tess-sol-coral);
+  --shape-color: var(--brand-coral-red);
+  bottom: var(--space-0);
+  right: var(--shape-tess-sol-coral-right);
+}
+.sol-hero__content {
+  position: relative;
+  width: var(--x-sol-hero-content-w);
+  max-width: 100%;
+  padding: var(--space-64) var(--space-64) var(--space-64) var(--layout-margin);
+}
+
+/* --- Everything you need to transform retail (250:307, scroll 342:293) -------
+   Default (no JS, reduced motion, snapshot): the intro, then six stacked
+   image + card blocks. js/solutions-scroll.js adds .is-pinned for the
+   pinned, scroll-driven sequence. */
+.sx {
+  position: relative;
+  background: var(--color-white);
+  color: var(--brand-deep-plum);
+}
+.sx__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-24);
+  padding: var(--layout-section-py) var(--layout-margin) var(--space-64);
+  text-align: center;
+}
+.sx__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  width: var(--x-sx-intro-w);
+  max-width: 100%;
+}
+.sx__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  width: var(--x-sx-intro-w);
+  max-width: 100%;
+}
+.sx__scene {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+}
+.sx__media {
+  position: absolute;
+  inset: var(--space-0);
+  overflow: hidden;
+}
+.sx__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Card: White, 64 angled cut TL, left 5 columns, anchored to the bottom (344:408) */
+.sx__card {
+  position: absolute;
+  left: var(--layout-margin);
+  bottom: var(--space-64);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-12);
+  width: var(--x-w-5col);
+  max-width: calc(100% - 2 * var(--layout-margin));
+  padding: var(--x-sx-card-pad-top) var(--space-40) var(--space-40);
+  background: var(--color-white);
+  color: var(--brand-deep-plum);
+  --cut: var(--shape-sx-card-cut);
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+}
+.sx__dots { display: none; }
+
+/* Pinned sequence */
+.sx.is-pinned .sx__stage {
+  position: sticky;
+  top: var(--space-0);
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+/* Intro centres in the space between the nav and the top of the resting image */
+.sx.is-pinned .sx__intro {
+  position: absolute;
+  top: var(--x-nav-height);
+  left: var(--space-0);
+  right: var(--space-0);
+  bottom: calc(var(--x-sx-img-h) - var(--x-sx-img-clip));
+  justify-content: center;
+  padding: var(--space-0) var(--layout-margin);
+}
+.sx.is-pinned .sx__intro .eyebrow,
+.sx.is-pinned .sx__intro .t-h1,
+.sx.is-pinned .sx__body {
+  opacity: 0;
+  transform: translateY(var(--x-sx-intro-rise));
+  transition:
+    opacity var(--x-sx-intro-dur) var(--x-ease),
+    transform var(--x-sx-intro-dur) var(--x-ease);
+}
+.sx.is-pinned .sx__intro.is-in .eyebrow,
+.sx.is-pinned .sx__intro.is-in .t-h1,
+.sx.is-pinned .sx__intro.is-in .sx__body {
+  opacity: 1;
+  transform: none;
+}
+/* Eyebrow, heading and body stagger by 80ms on the way in */
+.sx.is-pinned .sx__intro.is-in .t-h1 { transition-delay: 80ms; }
+.sx.is-pinned .sx__intro.is-in .sx__body { transition-delay: 160ms; }
+.sx.is-pinned .sx__intro.is-in.is-out .eyebrow,
+.sx.is-pinned .sx__intro.is-in.is-out .t-h1,
+.sx.is-pinned .sx__intro.is-in.is-out .sx__body {
+  opacity: 0;
+  transform: translateY(calc(-1 * var(--x-sx-intro-rise)));
+  transition-delay: 0ms;
+}
+.sx.is-pinned .sx__scenes {
+  position: absolute;
+  inset: var(--space-0);
+}
+.sx.is-pinned .sx__scene {
+  position: absolute;
+  inset: var(--space-0);
+  height: auto;
+  pointer-events: none;
+}
+/* Scene 1 image: JS drives its box and cut (640 x 400 at rest, full stage at the end) */
+.sx.is-pinned .sx__scene:first-child .sx__media {
+  inset: auto;
+  will-change: left, top, width, height, clip-path;
+}
+/* Scenes 2 to 6: full stage, revealed by a 45 degree mask JS drives */
+.sx.is-pinned .sx__scene:not(:first-child) .sx__media {
+  clip-path: polygon(0 0, 0 0, 0 0);
+  visibility: hidden;
+}
+.sx.is-pinned .sx__card {
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(var(--x-sx-card-rise));
+  transition:
+    opacity var(--x-sx-card-out) var(--x-ease),
+    transform var(--x-sx-card-out) var(--x-ease);
+}
+.sx.is-pinned .sx__card.is-active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition:
+    opacity var(--x-sx-card-in) var(--x-ease) var(--x-sx-card-delay),
+    transform var(--x-sx-card-in) var(--x-ease) var(--x-sx-card-delay);
+}
+/* Scene progress (344:378) */
+.sx.is-pinned .sx__dots {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  right: var(--layout-margin);
+  display: flex;
+  flex-direction: column;
+  gap: var(--x-sx-dot-gap);
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: opacity var(--x-sx-dots-dur) var(--x-ease);
+}
+.sx.is-pinned .sx__dots.is-visible { opacity: 1; }
+.sx__dot {
+  width: var(--x-sx-dot);
+  height: var(--x-sx-dot);
+  border-radius: 50%;
+  background: var(--x-sx-dot-track);
+  transition: background-color var(--x-dur-fast) var(--x-ease);
+}
+.sx__dot.is-active { background: var(--brand-coral-red); }
+
+/* Closing line (347:376): Deep Plum, matches the next section */
+.sx-closing {
+  padding: var(--layout-section-py) var(--layout-margin) var(--space-0);
+  background: var(--brand-deep-plum);
+  color: var(--brand-ecru);
+  text-align: center;
+}
+.sx-closing p {
+  width: var(--x-w-closing);
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+/* --- Split sections: intro left, cut image right (250:349, 250:390) --------- */
+.split {
+  display: grid;
+  grid-template-columns: repeat(var(--layout-columns), minmax(0, 1fr));
+  column-gap: var(--layout-gutter);
+  align-items: stretch;
+  padding-top: var(--layout-section-py);
+  padding-bottom: var(--layout-section-py);
+}
+.split--invest {
+  background: var(--brand-deep-plum);
+  color: var(--color-white);
+}
+.split--invest .eyebrow { color: var(--brand-sand); }
+.split--reaas {
+  background: var(--color-white);
+  color: var(--brand-deep-plum);
+}
+.split__intro {
+  position: relative;
+  z-index: 1;
+  grid-column: 1 / span 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-32);
+}
+.split__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+/* Image takes the height of the intro next to it */
+.split__holder {
+  position: relative;
+  z-index: 1;
+  grid-column: 7 / span 6;
+  overflow: hidden;
+  --cut: var(--shape-holder-cut);
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+}
+.split__holder img {
+  position: absolute;
+  inset: var(--space-0);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.split__tess {
+  --shape-size: var(--shape-tess-invest);
+  --shape-color: var(--deep-plum-900);
+  left: var(--space-0);
+  bottom: var(--space-0);
+}
+
+/* --- IKONIC (250:374): image bleeds left, Ecru content right ----------------- */
+.ikonic {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  min-height: var(--x-ikonic-h);
+}
+.ikonic__media {
+  position: relative;
+  flex: 1 0 0;
+  min-width: var(--space-0);
+  overflow: hidden;
+}
+.ikonic__media img {
+  position: absolute;
+  inset: var(--space-0);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ikonic__tess {
+  --shape-size: var(--shape-tess-ikonic);
+  --shape-color: var(--brand-ecru);
+  top: var(--space-0);
+  right: var(--space-0);
+}
+.ikonic__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-32);
+  flex: none;
+  width: var(--x-contact-content-w);
+  max-width: 100%;
+  padding: var(--space-64) var(--layout-margin) var(--space-64) var(--x-contact-content-pl);
+  background: var(--brand-ecru);
+  color: var(--brand-deep-plum);
+}
+.ikonic__heading,
+.ikonic__feature {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* --- See our solutions in action (250:431) ------------------------------------
+   The Ecru triangle is taller than the section, so it reaches up into the
+   section above. That section's content sits above it (z-index 1). */
+.action {
+  display: grid;
+  grid-template-columns: repeat(var(--layout-columns), minmax(0, 1fr));
+  column-gap: var(--layout-gutter);
+  align-items: start;
+  padding-top: var(--layout-section-py);
+  padding-bottom: var(--layout-section-py);
+  background: var(--color-white);
+  color: var(--brand-deep-plum);
+}
+.action__tess {
+  --shape-size: var(--shape-tess-action);
+  --shape-color: var(--brand-ecru);
+  left: var(--space-0);
+  bottom: var(--space-0);
+}
+.action__heading {
+  position: relative;
+  grid-column: 1 / span 5;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+.action__cards {
+  position: relative;
+  grid-column: 7 / span 6;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+.action-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  padding: var(--space-32);
+  background: var(--brand-coral-red);
+  color: var(--color-white);
+  transition: background-color var(--x-dur-fast) var(--x-ease);
+}
+.action-card:hover { background: var(--coral-red-600); }                              /* PLACEHOLDER */
+.action-card:hover .icon:not(.icon--download) { transform: translateX(var(--x-nudge)); } /* PLACEHOLDER */
+.action-card:hover .icon--download { transform: translateY(var(--x-nudge)); }            /* PLACEHOLDER */

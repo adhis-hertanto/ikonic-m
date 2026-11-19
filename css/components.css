@@ -20,6 +20,14 @@
   -webkit-mask-image: url("../assets/svg/icon-chevron.svg");
   mask-image: url("../assets/svg/icon-chevron.svg");
 }
+.icon--search {
+  -webkit-mask-image: url("../assets/svg/icon-search.svg");
+  mask-image: url("../assets/svg/icon-search.svg");
+}
+.icon--download {
+  -webkit-mask-image: url("../assets/svg/icon-download.svg");
+  mask-image: url("../assets/svg/icon-download.svg");
+}
 
 /* Labels whose width main.js snaps up to a whole unit, as Figma does for
    auto-width text. Keeps rows of labels from drifting by fractions of a pixel. */
@@ -87,6 +95,7 @@
   transition: color var(--x-dur-fast) var(--x-ease);
 }
 .nav__link--dropdown { gap: var(--space-4); }
+.nav__search { gap: var(--space-8); }
 .nav__actions .nav__link,
 .nav__lang > span {
   position: relative;
@@ -160,6 +169,12 @@
   white-space: nowrap;
 }
 .link:hover .icon { transform: translateX(var(--x-nudge)); }     /* PLACEHOLDER */
+/* Body M weight and leading, as on the Our Solutions page links (250:387, 340:283) */
+.link--body {
+  font-size: var(--text-body-m-size);
+  line-height: var(--text-body-m-lh);
+  font-weight: var(--font-weight-regular);
+}
 .link:active { opacity: 0.8; }                                   /* PLACEHOLDER */
 
 /* --- Eyebrow --------------------------------------------------------------- */
@@ -171,6 +186,11 @@
   line-height: var(--text-subline-s-lh);
   font-weight: var(--font-weight-medium);
   color: var(--deep-plum-950);
+}
+/* 13/16 eyebrow used on the Our Solutions page */
+.eyebrow--s {
+  font-size: var(--x-text-label-size);
+  line-height: var(--x-text-label-lh);
 }
 .eyebrow::before {
   content: "";
