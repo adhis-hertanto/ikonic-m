@@ -10,6 +10,8 @@
      so north stays up and the globe can never turn upside down.
      Horizontal drag spins the globe around its own polar axis (changes lon).
      Vertical drag tilts it toward or away from the viewer (changes lat, clamped to +/- 30).
+     Longitude is clamped to LON_MIN..LON_MAX so the view stays over APAC.
+     Auto-rotation ping-pongs between those two ends.
 
    Tooltip
      A label "<Country> • <n> locations" (n comes from data/projects.json) sits fixed on the centre
@@ -40,6 +42,12 @@
 // inside this range (China 18N, Vietnam 16.5N, Singapore 1.4N, Australia 25.8S), so each one can
 // always be centred, and the far pole never comes into view.
 var PITCH_LIMIT_DEG = 30;
+// Horizontal limits for the centre longitude. All locations are in APAC (103.7E to 151.2E), so
+// the view is kept between these bounds and can never be turned toward Africa, the Americas, etc.
+// Every country home point (103.8E to 134.3E) sits inside this range.
+var LON_MIN = 95, LON_MAX = 145;
+var EDGE_EASE_DEG = 12;           // auto-rotation slows down over this distance before each end
+var EDGE_MIN_SPEED = 0.12;        // fraction of full speed right at an end
   var DRAG_THRESHOLD = 3;           // css px before a press becomes a drag
   var HIT_DOT = 10;                 // design px
   var HIT_LOCATION = 12;
@@ -155,6 +163,7 @@ var PITCH_LIMIT_DEG = 30;
     countryKeys.forEach(function (key) { selAlpha[key] = key === selected ? 1 : 0; hoverAlpha[key] = 0; });
     var hoverCountry = null, hoverLocation = null, focusLocation = null, shownCountry = null;
     var drag = null, dragging = false;
+    var autoDir = 1;                                  // +1 sweeps east (centre lon decreases), -1 sweeps back west
     var resumeAt = 0, rampStart = 0;
     var cssSize = 0, unit = 1, scale = 1, dpr = 1;
     var visible = true, raf = 0, last = 0, dirty = true, debug = false;
@@ -164,15 +173,16 @@ var PITCH_LIMIT_DEG = 30;
     function composeView() { view = poseMatrix(lon, lat); }
     function wrap180(d) { return ((d + 540) % 360 + 360) % 360 - 180; }
     function clampLat(p) { return clamp(p, -PITCH_LIMIT_DEG, PITCH_LIMIT_DEG); }
+    function clampLon(l) { return clamp(l, LON_MIN, LON_MAX); }
     // Jump straight to a pose (transitions, reduced motion, tests)
     function setPose(newLon, newLat) {
-      lon = tLon = wrap180(newLon);
+      lon = tLon = clampLon(newLon);
       lat = tLat = clampLat(newLat);
       composeView();
     }
     // Set where the view should go; the displayed pose eases there
     function setTarget(newLon, newLat) {
-      tLon = wrap180(newLon);
+      tLon = clampLon(newLon);
       tLat = clampLat(newLat);
     }
 
@@ -345,6 +355,11 @@ var PITCH_LIMIT_DEG = 30;
           if (!rampStart || rampStart < resumeAt) rampStart = Math.max(resumeAt, now);
           var r = clamp((now - rampStart) / RAMP_MS, 0, 1);
           auto = autoSpeed * r * r * (3 - 2 * r);                 // eased acceleration, deg / s
+          // Sweep to one end, then back to the other. Slow down gently approaching each end.
+          if (tLon <= LON_MIN + 1e-6) autoDir = -1; else if (tLon >= LON_MAX - 1e-6) autoDir = 1;
+          var toEnd = autoDir > 0 ? tLon - LON_MIN : LON_MAX - tLon;
+          var ease = clamp(toEnd / EDGE_EASE_DEG, 0, 1);
+          auto *= autoDir * (EDGE_MIN_SPEED + (1 - EDGE_MIN_SPEED) * ease * ease * (3 - 2 * ease));
         } else { rampStart = 0; }
         if (velLon || velLat) {                                   // release coast, decays smoothly
           var decay = Math.exp(-dt / INERTIA_TAU);
@@ -353,7 +368,10 @@ var PITCH_LIMIT_DEG = 30;
           if (Math.abs(velLat) < 0.05) velLat = 0;
         }
         // Eastward is to the right on a north-up globe, so the centre longitude moves left (-).
-        setTarget(tLon - auto * dt + velLon * dt, tLat + velLat * dt);
+        var nLon = tLon - auto * dt + velLon * dt, nLat = tLat + velLat * dt;
+        if (nLon < LON_MIN || nLon > LON_MAX) velLon = 0;         // stop coasting into a wall
+        if (nLat < -PITCH_LIMIT_DEG || nLat > PITCH_LIMIT_DEG) velLat = 0;
+        setTarget(nLon, nLat);
       }
       if (!transition) {
         // Damping, like OrbitControls.enableDamping: the view eases toward the target, so drags
