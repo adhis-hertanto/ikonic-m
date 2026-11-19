@@ -130,7 +130,32 @@
     });
   }
 
+  /* --- Top nav: slides off on scroll down, back on scroll up --------------- */
+  function initNavHide() {
+    var nav = document.querySelector('[data-nav]');
+    if (!nav) return;
+    var lastY = window.pageYOffset;
+    var ticking = false;
+    var DELTA = 6;   // ignore jitter smaller than this
+
+    function update() {
+      ticking = false;
+      var y = Math.max(0, window.pageYOffset);
+      var dy = y - lastY;
+      if (y <= 0) nav.classList.remove('is-hidden');
+      else if (dy > DELTA && y > nav.offsetHeight) nav.classList.add('is-hidden');
+      else if (dy < -DELTA) nav.classList.remove('is-hidden');
+      if (Math.abs(dy) > DELTA || y <= 0) lastY = y;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    // Keyboard users tabbing into the nav always get it back
+    nav.addEventListener('focusin', function () { nav.classList.remove('is-hidden'); });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
+    initNavHide();
     initSnap();
     initReveal();
     initLanguage();

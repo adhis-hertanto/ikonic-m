@@ -232,7 +232,6 @@
   --x-sx-img-w: calc(640 * var(--u));                 /* Scene 1 image, 640 x 400 */
   --x-sx-img-h: calc(400 * var(--u));
   --x-sx-img-clip: calc(60 * var(--u));               /* part of the image below the viewport at rest */
-  --x-sx-img-rise: calc(120 * var(--u));              /* image rises from this much lower on enter */
   --shape-sx-img-cut: calc(96 * var(--u));
   --shape-sx-card-cut: calc(64 * var(--u));
   --x-sx-card-pad-top: calc(56 * var(--u));
@@ -242,6 +241,8 @@
   --x-sx-dot-gap: calc(14 * var(--u));
   --x-sx-dot-track: rgb(255 255 255);                 /* inactive dot: white */
   --x-sx-intro-dur: 600ms;
+  --x-sx-img-rise-delay: 600ms;                       /* image follows the copy */
+  --x-sx-img-rise-dur: 900ms;
   --x-sx-card-in: 500ms;
   --x-sx-card-delay: 300ms;
   --x-sx-card-out: 200ms;
@@ -261,6 +262,7 @@
   --x-nudge: calc(4 * var(--u));
   --x-focus-ring: calc(2 * var(--u));
   --x-z-nav: 100;
+  --x-nav-slide: 320ms;                      /* top nav slides off on scroll down, back on scroll up */
 }
 
 /* --- Breakpoints (web only) ----------------------------------------------- */

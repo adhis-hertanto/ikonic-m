@@ -52,7 +52,7 @@
 /* --- Everything you need to transform retail (250:307, scroll 342:293) -------
    Default (no JS, reduced motion, snapshot): the intro, then six stacked
    image + card blocks. js/solutions-scroll.js adds .is-pinned for the
-   pinned, scroll-driven sequence. */
+   pinned, scroll-driven sequence, and .is-in / .is-out for the intro. */
 .sx {
   position: relative;
   background: var(--color-white);
@@ -136,25 +136,25 @@
 }
 .sx.is-pinned .sx__intro .eyebrow,
 .sx.is-pinned .sx__intro .t-h1,
-.sx.is-pinned .sx__body {
+.sx.is-pinned .sx__intro .sx__body {
   opacity: 0;
   transform: translateY(var(--x-sx-intro-rise));
   transition:
     opacity var(--x-sx-intro-dur) var(--x-ease),
     transform var(--x-sx-intro-dur) var(--x-ease);
 }
-.sx.is-pinned .sx__intro.is-in .eyebrow,
-.sx.is-pinned .sx__intro.is-in .t-h1,
-.sx.is-pinned .sx__intro.is-in .sx__body {
+.sx.is-pinned.is-in .sx__intro .eyebrow,
+.sx.is-pinned.is-in .sx__intro .t-h1,
+.sx.is-pinned.is-in .sx__intro .sx__body {
   opacity: 1;
   transform: none;
 }
 /* Eyebrow, heading and body stagger by 80ms on the way in */
-.sx.is-pinned .sx__intro.is-in .t-h1 { transition-delay: 80ms; }
-.sx.is-pinned .sx__intro.is-in .sx__body { transition-delay: 160ms; }
-.sx.is-pinned .sx__intro.is-in.is-out .eyebrow,
-.sx.is-pinned .sx__intro.is-in.is-out .t-h1,
-.sx.is-pinned .sx__intro.is-in.is-out .sx__body {
+.sx.is-pinned.is-in .sx__intro .t-h1 { transition-delay: 80ms; }
+.sx.is-pinned.is-in .sx__intro .sx__body { transition-delay: 160ms; }
+.sx.is-pinned.is-in.is-out .sx__intro .eyebrow,
+.sx.is-pinned.is-in.is-out .sx__intro .t-h1,
+.sx.is-pinned.is-in.is-out .sx__intro .sx__body {
   opacity: 0;
   transform: translateY(calc(-1 * var(--x-sx-intro-rise)));
   transition-delay: 0ms;
@@ -169,10 +169,17 @@
   height: auto;
   pointer-events: none;
 }
-/* Scene 1 image: JS drives its box and cut (640 x 400 at rest, full stage at the end) */
+/* Scene 1 image: JS drives its box and cut (640 x 400 at rest, full stage at the end).
+   On arrival the stage is empty; once the copy is in, the image rises from below. */
 .sx.is-pinned .sx__scene:first-child .sx__media {
   inset: auto;
   will-change: left, top, width, height, clip-path;
+  transform: translateY(100%);
+  transition: transform var(--x-sx-img-rise-dur) var(--x-ease);
+}
+.sx.is-pinned.is-in .sx__scene:first-child .sx__media {
+  transform: none;
+  transition-delay: var(--x-sx-img-rise-delay);
 }
 /* Scenes 2 to 6: full stage, revealed by a 45 degree mask JS drives */
 .sx.is-pinned .sx__scene:not(:first-child) .sx__media {
@@ -217,19 +224,6 @@
   transition: background-color var(--x-dur-fast) var(--x-ease);
 }
 .sx__dot.is-active { background: var(--brand-coral-red); }
-
-/* Closing line (347:376): Deep Plum, matches the next section */
-.sx-closing {
-  padding: var(--layout-section-py) var(--layout-margin) var(--space-0);
-  background: var(--brand-deep-plum);
-  color: var(--brand-ecru);
-  text-align: center;
-}
-.sx-closing p {
-  width: var(--x-w-closing);
-  max-width: 100%;
-  margin-inline: auto;
-}
 
 /* --- Split sections: intro left, cut image right (250:349, 250:390) --------- */
 .split {

@@ -49,6 +49,14 @@
   padding: var(--space-0) var(--layout-margin);
   background: var(--color-white);
   box-shadow: var(--x-nav-shadow);
+  transition:
+    transform var(--x-nav-slide) var(--x-ease),
+    box-shadow var(--x-nav-slide) var(--x-ease);
+}
+/* Slides up off the screen while scrolling down, returns on scroll up */
+.nav.is-hidden {
+  transform: translateY(-100%);
+  box-shadow: none;
 }
 .nav__left {
   display: flex;
