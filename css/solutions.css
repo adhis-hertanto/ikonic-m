@@ -49,12 +49,14 @@
   padding: var(--space-64) var(--space-64) var(--space-64) var(--layout-margin);
 }
 
-/* --- Everything you need to transform retail (250:307, scroll 342:293) -------
-   Default (no JS, reduced motion, snapshot): the intro, then six stacked
-   image + card blocks. js/solutions-scroll.js adds .is-pinned for the
-   pinned, scroll-driven sequence, and .is-in / .is-out for the intro. */
+/* --- Everything you need to transform retail (250:307) ------------------------ */
 .sx {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-64);
+  padding-top: var(--layout-section-py);
+  padding-bottom: var(--space-160);
   background: var(--color-white);
   color: var(--brand-deep-plum);
 }
@@ -62,9 +64,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: var(--space-24);
-  padding: var(--layout-section-py) var(--layout-margin) var(--space-64);
+  width: var(--x-sx-intro-w);
+  max-width: 100%;
   text-align: center;
 }
 .sx__heading {
@@ -72,158 +74,189 @@
   flex-direction: column;
   align-items: center;
   gap: var(--space-8);
-  width: var(--x-sx-intro-w);
-  max-width: 100%;
 }
 .sx__body {
   display: flex;
   flex-direction: column;
   gap: var(--space-16);
-  width: var(--x-sx-intro-w);
-  max-width: 100%;
 }
-.sx__scene {
+
+/* --- Capabilities slider (353:285) -------------------------------------------
+   Without JS: the six slides stack as image + title blocks and the descriptions
+   follow. js/slider.js positions the slides on the stage and adds drag. */
+.slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--x-slider-gap);
+  width: 100%;
+}
+.slider__slides { display: flex; flex-direction: column; gap: var(--space-16); }
+.slider__slide {
   position: relative;
-  height: 100vh;
-  height: 100svh;
+  overflow: hidden;
+  width: var(--x-slider-active-w);
+  max-width: 100%;
+  height: var(--x-slider-active-h);
 }
-.sx__media {
+.slider__slide img {
   position: absolute;
   inset: var(--space-0);
-  overflow: hidden;
-}
-.sx__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  -webkit-user-drag: none;
+  user-select: none;
 }
-/* Card: White, 64 angled cut TL, left 5 columns, anchored to the bottom (344:408) */
-.sx__card {
-  position: absolute;
-  left: var(--layout-margin);
-  bottom: var(--space-64);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-12);
-  width: var(--x-w-5col);
-  max-width: calc(100% - 2 * var(--layout-margin));
-  padding: var(--x-sx-card-pad-top) var(--space-40) var(--space-40);
-  background: var(--color-white);
-  color: var(--brand-deep-plum);
-  --cut: var(--shape-sx-card-cut);
-  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
-}
-.sx__dots { display: none; }
-
-/* Pinned sequence */
-.sx.is-pinned .sx__stage {
-  position: sticky;
-  top: var(--space-0);
-  height: 100vh;
-  height: 100svh;
-  overflow: hidden;
-}
-/* Intro centres in the space between the nav and the top of the resting image */
-.sx.is-pinned .sx__intro {
-  position: absolute;
-  top: var(--x-nav-height);
-  left: var(--space-0);
-  right: var(--space-0);
-  bottom: calc(var(--x-sx-img-h) - var(--x-sx-img-clip));
-  justify-content: center;
-  padding: var(--space-0) var(--layout-margin);
-}
-.sx.is-pinned .sx__intro .eyebrow,
-.sx.is-pinned .sx__intro .t-h1,
-.sx.is-pinned .sx__intro .sx__body {
-  opacity: 0;
-  transform: translateY(var(--x-sx-intro-rise));
-  transition:
-    opacity var(--x-sx-intro-dur) var(--x-ease),
-    transform var(--x-sx-intro-dur) var(--x-ease);
-}
-.sx.is-pinned.is-in .sx__intro .eyebrow,
-.sx.is-pinned.is-in .sx__intro .t-h1,
-.sx.is-pinned.is-in .sx__intro .sx__body {
-  opacity: 1;
-  transform: none;
-}
-/* Eyebrow, heading and body stagger by 80ms on the way in */
-.sx.is-pinned.is-in .sx__intro .t-h1 { transition-delay: 80ms; }
-.sx.is-pinned.is-in .sx__intro .sx__body { transition-delay: 160ms; }
-.sx.is-pinned.is-in.is-out .sx__intro .eyebrow,
-.sx.is-pinned.is-in.is-out .sx__intro .t-h1,
-.sx.is-pinned.is-in.is-out .sx__intro .sx__body {
-  opacity: 0;
-  transform: translateY(calc(-1 * var(--x-sx-intro-rise)));
-  transition-delay: 0ms;
-}
-.sx.is-pinned .sx__scenes {
+.slider__scrim {
   position: absolute;
   inset: var(--space-0);
-}
-.sx.is-pinned .sx__scene {
-  position: absolute;
-  inset: var(--space-0);
-  height: auto;
+  background: var(--x-slider-scrim);
   pointer-events: none;
 }
-/* Scene 1 image: JS drives its box and cut (640 x 400 at rest, full stage at the end).
-   On arrival the stage is empty; once the copy is in, the image rises from below. */
-.sx.is-pinned .sx__scene:first-child .sx__media {
-  inset: auto;
-  will-change: left, top, width, height, clip-path;
-  transform: translateY(100%);
-  transition: transform var(--x-sx-img-rise-dur) var(--x-ease);
-}
-.sx.is-pinned.is-in .sx__scene:first-child .sx__media {
-  transform: none;
-  transition-delay: var(--x-sx-img-rise-delay);
-}
-/* Scenes 2 to 6: full stage, revealed by a 45 degree mask JS drives */
-.sx.is-pinned .sx__scene:not(:first-child) .sx__media {
-  clip-path: polygon(0 0, 0 0, 0 0);
-  visibility: hidden;
-}
-.sx.is-pinned .sx__card {
-  z-index: 1;
-  opacity: 0;
-  transform: translateY(var(--x-sx-card-rise));
-  transition:
-    opacity var(--x-sx-card-out) var(--x-ease),
-    transform var(--x-sx-card-out) var(--x-ease);
-}
-.sx.is-pinned .sx__card.is-active {
-  opacity: 1;
-  transform: none;
-  pointer-events: auto;
-  transition:
-    opacity var(--x-sx-card-in) var(--x-ease) var(--x-sx-card-delay),
-    transform var(--x-sx-card-in) var(--x-ease) var(--x-sx-card-delay);
-}
-/* Scene progress (344:378) */
-.sx.is-pinned .sx__dots {
+.slider__title {
   position: absolute;
-  z-index: 2;
-  top: 50%;
-  right: var(--layout-margin);
-  display: flex;
-  flex-direction: column;
-  gap: var(--x-sx-dot-gap);
-  opacity: 0;
-  transform: translateY(-50%);
-  transition: opacity var(--x-sx-dots-dur) var(--x-ease);
+  left: 50%;
+  bottom: var(--x-slider-title-bottom);
+  width: var(--x-slider-title-w);
+  max-width: 100%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: var(--color-white);
 }
-.sx.is-pinned .sx__dots.is-visible { opacity: 1; }
-.sx__dot {
-  width: var(--x-sx-dot);
-  height: var(--x-sx-dot);
-  border-radius: 50%;
-  background: var(--x-sx-dot-track);
+.slider__desc {
+  display: grid;
+  width: var(--x-slider-desc-w);
+  max-width: 100%;
+  min-height: var(--x-slider-desc-h);
+  text-align: center;
+}
+.slider__desc > p { grid-area: 1 / 1; }
+.slider__btn, .slider__dots { display: none; }
+
+.js .slider__stage {
+  position: relative;
+  width: 100%;
+  height: var(--x-slider-active-h);
+  overflow: hidden;
+  touch-action: pan-y;            /* vertical page scroll stays native, horizontal drags are ours */
+  user-select: none;
+  -webkit-user-select: none;
+}
+.js .slider__slides { display: block; }
+.js .slider__slide {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--x-slider-active-w);
+  height: var(--x-slider-active-h);
+  max-width: none;
+  will-change: left, width, height, clip-path;
+}
+.js .slider__slide:not(.is-near) { visibility: hidden; }
+.js .slider__desc > p {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--x-dur) var(--x-ease),
+    visibility 0s linear var(--x-dur);
+}
+.js .slider__desc > p.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--x-dur) var(--x-ease) 120ms, visibility 0s;
+}
+
+/* Prev / next: coral panel with a 45 degree cut, mirrored for prev */
+.js .slider__btn {
+  position: absolute;
+  z-index: 200;
+  top: var(--x-slider-btn-top);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--shape-card-button);
+  aspect-ratio: 1;
+  background: var(--brand-coral-red);
+  color: var(--color-white);
+  --cut: var(--shape-card-cut);
   transition: background-color var(--x-dur-fast) var(--x-ease);
 }
-.sx__dot.is-active { background: var(--brand-coral-red); }
+.js .slider__btn--next {
+  left: calc(50% + var(--x-slider-active-w) / 2 + var(--x-slider-btn-offset));
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
+}
+.js .slider__btn--prev {
+  left: calc(50% - var(--x-slider-active-w) / 2 - var(--x-slider-btn-offset) - var(--shape-card-button));
+  clip-path: polygon(0 0, 100% 0, 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+}
+.slider__btn--prev .icon { transform: rotate(180deg); }
+.slider__btn:hover { background: var(--coral-red-600); }                                         /* PLACEHOLDER */
+.slider__btn--next:hover .icon { transform: translateX(var(--x-nudge)); }                        /* PLACEHOLDER */
+.slider__btn--prev:hover .icon { transform: rotate(180deg) translateX(var(--x-nudge)); }         /* PLACEHOLDER */
+
+/* Pagination dots: active 12 coral, others 8 at 25% plum */
+.js .slider__dots {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+.slider__dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--x-dot-hit);
+  height: var(--x-dot-active);
+}
+.slider__dot::before {
+  content: "";
+  width: var(--x-dot);
+  height: var(--x-dot);
+  border-radius: 50%;
+  background: var(--x-dot-track);
+  transition:
+    width var(--x-dur-fast) var(--x-ease),
+    height var(--x-dur-fast) var(--x-ease),
+    background-color var(--x-dur-fast) var(--x-ease);
+}
+.slider__dot.is-active::before {
+  width: var(--x-dot-active);
+  height: var(--x-dot-active);
+  background: var(--brand-coral-red);
+}
+.slider__dot:not(.is-active):hover::before { background: var(--ecru-500); }                      /* PLACEHOLDER */
+
+/* "Drag" cursor: follows the pointer over the stage (fine pointers only, set up by js/slider.js) */
+.slider.has-cursor .slider__stage { cursor: none; }
+.slider.has-cursor .slider__btn { cursor: pointer; }
+.drag-cursor {
+  position: fixed;
+  z-index: calc(var(--x-z-nav) + 2);
+  top: var(--space-0);
+  left: var(--space-0);
+  width: var(--x-drag-size);
+  height: var(--x-drag-size);
+  margin: calc(var(--x-drag-size) / -2) 0 0 calc(var(--x-drag-size) / -2);
+  pointer-events: none;
+  will-change: transform;
+}
+.drag-cursor__dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--brand-coral-red);
+  color: var(--color-white);
+  opacity: 0;
+  transform: scale(0.4);
+  transition:
+    opacity var(--x-dur-fast) var(--x-ease),
+    transform var(--x-dur) var(--x-ease);
+}
+.drag-cursor.is-visible .drag-cursor__dot { opacity: 1; transform: scale(1); }
+.drag-cursor.is-dragging .drag-cursor__dot { transform: scale(0.85); }
 
 /* --- Split sections: intro left, cut image right (250:349, 250:390) --------- */
 .split {

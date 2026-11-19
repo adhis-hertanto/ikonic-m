@@ -225,28 +225,31 @@
   --shape-tess-ikonic: calc(220 * var(--u));          /* 255:168 */
   --shape-tess-action: calc(592 * var(--u));          /* 255:169 */
   --x-ikonic-h: calc(640 * var(--u));                 /* 250:374 */
-  --x-w-closing: calc(720 * var(--u));                /* 347:376 */
 
-  /* Scroll experience (342:293). Distances in --u, timings from the motion notes */
+  /* Capabilities slider (353:285) */
   --x-sx-intro-w: calc(800 * var(--u));               /* 250:308 */
-  --x-sx-img-w: calc(640 * var(--u));                 /* Scene 1 image, 640 x 400 */
-  --x-sx-img-h: calc(400 * var(--u));
-  --x-sx-img-clip: calc(60 * var(--u));               /* part of the image below the viewport at rest */
-  --shape-sx-img-cut: calc(96 * var(--u));
-  --shape-sx-card-cut: calc(64 * var(--u));
-  --x-sx-card-pad-top: calc(56 * var(--u));
-  --x-sx-card-rise: calc(32 * var(--u));
-  --x-sx-intro-rise: calc(24 * var(--u));
-  --x-sx-dot: calc(10 * var(--u));
-  --x-sx-dot-gap: calc(14 * var(--u));
-  --x-sx-dot-track: rgb(255 255 255);                 /* inactive dot: white */
-  --x-sx-intro-dur: 600ms;
-  --x-sx-img-rise-delay: 600ms;                       /* image follows the copy */
-  --x-sx-img-rise-dur: 900ms;
-  --x-sx-card-in: 500ms;
-  --x-sx-card-delay: 300ms;
-  --x-sx-card-out: 200ms;
-  --x-sx-dots-dur: 300ms;
+  --x-slider-gap: calc(32 * var(--u));
+  --x-slider-active-w: calc(640 * var(--u));
+  --x-slider-active-h: calc(442 * var(--u));
+  --x-slider-side-w: calc(296 * var(--u));
+  --x-slider-side-h: calc(204 * var(--u));
+  --x-slider-side-top: calc(119 * var(--u));
+  --shape-slider-active-cut: calc(96 * var(--u));
+  --shape-slider-side-cut: calc(56 * var(--u));
+  --x-slider-btn-offset: calc(40 * var(--u));         /* button sits this far outside the active image */
+  --x-slider-btn-top: calc(370 * var(--u));
+  --x-slider-title-bottom: calc(32 * var(--u));
+  --x-slider-title-w: calc(560 * var(--u));
+  --x-slider-desc-w: calc(640 * var(--u));
+  --x-slider-desc-h: calc(96 * var(--u));
+  --x-slider-scrim: linear-gradient(to bottom, rgb(54 22 42 / 0) 60%, rgb(54 22 42 / 0.85) 100%);
+  --x-dot: calc(8 * var(--u));
+  --x-dot-active: calc(12 * var(--u));
+  --x-dot-hit: calc(20 * var(--u));
+  --x-dot-track: rgb(54 22 42 / 0.25);
+  --x-slider-dur: 600ms;                              /* PLACEHOLDER settle time after a drag */
+  --x-drag-size: calc(80 * var(--u));                 /* PLACEHOLDER: "Drag" cursor, not in Figma */
+  --x-drag-ease: 0.2;
 
   /* --- Motion (prototype only, not in Figma) ----------------------------- */
   --x-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
