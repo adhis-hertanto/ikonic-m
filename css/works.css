@@ -337,3 +337,6 @@ html:not(.js) .works-type__more { grid-template-rows: 1fr; opacity: 1; }
   .works-type, .works-type__more { transition: none; }
 }
 .is-snapshot .works-type, .is-snapshot .works-type__more { transition: none !important; }
+
+/* Disabled "Read more" (i12 Katong is confidential, no detail page) */
+.works-card__link[aria-disabled="true"] { opacity: 0.5; cursor: default; }
