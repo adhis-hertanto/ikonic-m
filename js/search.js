@@ -130,8 +130,8 @@
   }
 
   function chipsHtml() {
-    return '<div class="sx__try"><p class="sx__label">Try searching for</p><div class="sx__chips">' +
-      CHIPS.map(function (c) { return '<button type="button" class="sx__chip" data-chip="' + esc(c) + '">' + esc(c) + '</button>'; }).join('') +
+    return '<div class="srch__try"><p class="srch__label">Try searching for</p><div class="srch__chips">' +
+      CHIPS.map(function (c) { return '<button type="button" class="srch__chip" data-chip="' + esc(c) + '">' + esc(c) + '</button>'; }).join('') +
       '</div></div>';
   }
 
@@ -151,21 +151,21 @@
     var tabs = [{ key: 'all', label: 'All (' + total + ')' }].concat(cats.order.map(function (c) {
       return { key: c, label: c + ' (' + cats.counts[c] + ')' };
     }));
-    var h = '<div class="sx__results">';
-    h += '<p class="sx__count">' + total + (total === 1 ? ' result for ' : ' results for ') +
+    var h = '<div class="srch__results">';
+    h += '<p class="srch__count">' + total + (total === 1 ? ' result for ' : ' results for ') +
       '<strong>“' + esc(model.query) + '”</strong></p>';
-    h += '<div class="sx__tabs" role="tablist" aria-label="Filter results">' + tabs.map(function (t) {
-      return '<button type="button" class="sx__tab" role="tab" data-tab="' + esc(t.key) + '" aria-selected="' +
+    h += '<div class="srch__tabs" role="tablist" aria-label="Filter results">' + tabs.map(function (t) {
+      return '<button type="button" class="srch__tab" role="tab" data-tab="' + esc(t.key) + '" aria-selected="' +
         (t.key === model.tab) + '" tabindex="' + (t.key === model.tab ? '0' : '-1') + '">' + esc(t.label) + '</button>';
     }).join('') + '</div>';
-    h += '<div class="sx__list">' + shown.map(function (e) {
+    h += '<div class="srch__list">' + shown.map(function (e) {
       var meta = e.category + (e.date ? ' · ' + fmtDate(e.date) : '');
-      return '<a class="sx__result" href="' + esc(urlFor(e)) + '"><span class="sx__result-text">' +
-        '<span class="sx__result-meta">' + esc(meta) + '</span>' +
-        '<span class="sx__result-title">' + esc(e.title) + '</span></span>' + ICON_ARROW + '</a>';
+      return '<a class="srch__result" href="' + esc(urlFor(e)) + '"><span class="srch__result-text">' +
+        '<span class="srch__result-meta">' + esc(meta) + '</span>' +
+        '<span class="srch__result-title">' + esc(e.title) + '</span></span>' + ICON_ARROW + '</a>';
     }).join('') + '</div>';
     if (visible.length > shown.length) {
-      h += '<button type="button" class="link sx__link" data-more><span>View all results</span>' + ICON_ARROW + '</button>';
+      h += '<button type="button" class="link srch__link" data-more><span>View all results</span>' + ICON_ARROW + '</button>';
     }
     return h + '</div>';
   }
@@ -181,37 +181,37 @@
 
     var h = '';
     if (m.state === 'idle') {
-      h = chipsHtml() + '<p class="sx__hint">Press Enter to search · Esc to close</p>';
+      h = chipsHtml() + '<p class="srch__hint">Press Enter to search · Esc to close</p>';
     } else if (m.state === 'typing') {
       if (m.suggestions.length) {
-        h = '<div class="sx__suggest" id="sx-suggest" role="listbox" aria-label="Suggestions">' + m.suggestions.map(function (e, i) {
-          return '<div class="sx__suggest-item' + (i === m.active ? ' is-active' : '') + '" role="option" id="sx-opt-' + i +
+        h = '<div class="srch__suggest" id="srch-suggest" role="listbox" aria-label="Suggestions">' + m.suggestions.map(function (e, i) {
+          return '<div class="srch__suggest-item' + (i === m.active ? ' is-active' : '') + '" role="option" id="srch-opt-' + i +
             '" data-idx="' + i + '" aria-selected="' + (i === m.active) + '">' +
-            '<span class="icon icon--search sx__suggest-icon" aria-hidden="true"></span>' +
-            '<span class="sx__suggest-text">' + highlight(e.title, m.query) + '</span>' +
-            '<span class="sx__suggest-cat">' + esc(e.category) + '</span></div>';
+            '<span class="icon icon--search srch__suggest-icon" aria-hidden="true"></span>' +
+            '<span class="srch__suggest-text">' + highlight(e.title, m.query) + '</span>' +
+            '<span class="srch__suggest-cat">' + esc(e.category) + '</span></div>';
         }).join('') + '</div>';
-        if (m.moved) input.setAttribute('aria-activedescendant', 'sx-opt-' + m.active);
+        if (m.moved) input.setAttribute('aria-activedescendant', 'srch-opt-' + m.active);
       }
-      h += '<p class="sx__hint">Press Enter to search · Esc to close</p>';
+      h += '<p class="srch__hint">Press Enter to search · Esc to close</p>';
     } else if (m.state === 'loading') {
-      h = '<div class="sx__results"><p class="sx__searching">Searching for “' + esc(m.query) + '”…</p>' +
-        '<div class="sx__skeleton" aria-hidden="true">' +
-        '<div class="sx__skel-row"><span class="sx__skel-meta"></span><span class="sx__skel-title"></span></div>'.repeat(4) +
+      h = '<div class="srch__results"><p class="srch__searching">Searching for “' + esc(m.query) + '”…</p>' +
+        '<div class="srch__skeleton" aria-hidden="true">' +
+        '<div class="srch__skel-row"><span class="srch__skel-meta"></span><span class="srch__skel-title"></span></div>'.repeat(4) +
         '</div></div>';
     } else if (m.state === 'results') {
       h = resultsHtml();
     } else if (m.state === 'none') {
-      h = '<div class="sx__message"><p class="sx__message-title">No results for “' + esc(m.query) + '”</p>' +
-        '<p class="sx__message-text">Check your spelling or try a more general term.</p></div>' +
+      h = '<div class="srch__message"><p class="srch__message-title">No results for “' + esc(m.query) + '”</p>' +
+        '<p class="srch__message-text">Check your spelling or try a more general term.</p></div>' +
         chipsHtml() +
-        '<div class="sx__contact"><p>Can’t find what you’re looking for?</p>' +
+        '<div class="srch__contact"><p>Can’t find what you’re looking for?</p>' +
         '<a class="btn" href="' + esc(BASE + 'contact/') + '"><span>Leave a request</span>' + ICON_ARROW + '</a></div>';
     } else if (m.state === 'error') {
-      h = '<div class="sx__message"><p class="sx__message-title">Something went wrong</p>' +
-        '<p class="sx__message-text">We couldn’t complete your search. Please try again in a moment.</p></div>' +
-        '<div class="sx__actions"><button type="button" class="btn" data-retry><span>Try again</span>' + ICON_ARROW + '</button>' +
-        '<a class="link sx__link" href="' + esc(BASE + 'contact/') + '"><span>Leave a request</span>' + ICON_ARROW + '</a></div>';
+      h = '<div class="srch__message"><p class="srch__message-title">Something went wrong</p>' +
+        '<p class="srch__message-text">We couldn’t complete your search. Please try again in a moment.</p></div>' +
+        '<div class="srch__actions"><button type="button" class="btn" data-retry><span>Try again</span>' + ICON_ARROW + '</button>' +
+        '<a class="link srch__link" href="' + esc(BASE + 'contact/') + '"><span>Leave a request</span>' + ICON_ARROW + '</a></div>';
     }
     bodyEl.innerHTML = h;
   }
@@ -298,9 +298,9 @@
     if (on) {
       var bar = window.innerWidth - html.clientWidth;
       if (bar > 0) document.body.style.paddingRight = bar + 'px';
-      html.classList.add('sx-open');
+      html.classList.add('srch-open');
     } else {
-      html.classList.remove('sx-open');
+      html.classList.remove('srch-open');
       document.body.style.paddingRight = '';
     }
   }
@@ -359,38 +359,38 @@
   /* --- Build + wire --------------------------------------------------------- */
   function build() {
     root = document.createElement('div');
-    root.className = 'sx';
+    root.className = 'srch';
     root.hidden = true;
     root.setAttribute('data-state', 'idle');
     root.innerHTML =
-      '<div class="sx__scrim" data-sx-close></div>' +
-      '<div class="sx__dialog" role="dialog" aria-modal="true" aria-labelledby="sx-title" tabindex="-1">' +
-        '<h2 class="sx__title" id="sx-title">What would you like to search for?</h2>' +
-        '<form class="sx__field" role="search" novalidate>' +
+      '<div class="srch__scrim" data-srch-close></div>' +
+      '<div class="srch__dialog" role="dialog" aria-modal="true" aria-labelledby="srch-title" tabindex="-1">' +
+        '<h2 class="srch__title" id="srch-title">What would you like to search for?</h2>' +
+        '<form class="srch__field" role="search" novalidate>' +
           '<span class="icon icon--search" aria-hidden="true"></span>' +
-          '<input class="sx__input" type="search" name="q" placeholder="Search projects, solutions and news" ' +
+          '<input class="srch__input" type="search" name="q" placeholder="Search projects, solutions and news" ' +
             'autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" role="combobox" ' +
-            'aria-autocomplete="list" aria-controls="sx-suggest" aria-expanded="false" aria-label="Search">' +
-          '<button type="button" class="sx__clear" aria-label="Clear search"><span class="icon icon--close" aria-hidden="true"></span></button>' +
-          '<button type="submit" class="sx__submit is-empty" aria-label="Search">' +
-            '<span class="icon" aria-hidden="true"></span><span class="sx__submit-stop" aria-hidden="true"></span></button>' +
+            'aria-autocomplete="list" aria-controls="srch-suggest" aria-expanded="false" aria-label="Search">' +
+          '<button type="button" class="srch__clear" aria-label="Clear search"><span class="icon icon--close" aria-hidden="true"></span></button>' +
+          '<button type="submit" class="srch__submit is-empty" aria-label="Search">' +
+            '<span class="icon" aria-hidden="true"></span><span class="srch__submit-stop" aria-hidden="true"></span></button>' +
         '</form>' +
-        '<div class="sx__body"></div>' +
-        '<button type="button" class="sx__close" aria-label="Close search" data-sx-close><span class="icon icon--close" aria-hidden="true"></span></button>' +
+        '<div class="srch__body"></div>' +
+        '<button type="button" class="srch__close" aria-label="Close search" data-srch-close><span class="icon icon--close" aria-hidden="true"></span></button>' +
         '<p class="visually-hidden" role="status" aria-live="polite"></p>' +
       '</div>';
     document.body.appendChild(root);
 
-    dialog = root.querySelector('.sx__dialog');
-    form = root.querySelector('.sx__field');
-    input = root.querySelector('.sx__input');
-    clearBtn = root.querySelector('.sx__clear');
-    submitBtn = root.querySelector('.sx__submit');
-    bodyEl = root.querySelector('.sx__body');
+    dialog = root.querySelector('.srch__dialog');
+    form = root.querySelector('.srch__field');
+    input = root.querySelector('.srch__input');
+    clearBtn = root.querySelector('.srch__clear');
+    submitBtn = root.querySelector('.srch__submit');
+    bodyEl = root.querySelector('.srch__body');
     statusEl = root.querySelector('[role="status"]');
 
     root.addEventListener('click', function (e) {
-      if (e.target.closest('[data-sx-close]')) close();
+      if (e.target.closest('[data-srch-close]')) close();
     });
     input.addEventListener('input', onInput);
     input.addEventListener('keydown', function (e) {
@@ -417,12 +417,12 @@
     });
 
     bodyEl.addEventListener('mousedown', function (e) {
-      if (e.target.closest('.sx__suggest-item')) e.preventDefault();   // keep focus in the field
+      if (e.target.closest('.srch__suggest-item')) e.preventDefault();   // keep focus in the field
     });
     bodyEl.addEventListener('click', function (e) {
       var chip = e.target.closest('[data-chip]');
       if (chip) { runSearch(chip.getAttribute('data-chip')); input.focus({ preventScroll: true }); return; }
-      var opt = e.target.closest('.sx__suggest-item');
+      var opt = e.target.closest('.srch__suggest-item');
       if (opt) { var s = model.suggestions[parseInt(opt.getAttribute('data-idx'), 10)]; if (s) runSearch(s.title); return; }
       var tab = e.target.closest('[data-tab]');
       if (tab) {
@@ -436,7 +436,7 @@
       if (e.target.closest('[data-more]')) {
         model.expanded = true;
         render();
-        var rows = bodyEl.querySelectorAll('.sx__result');
+        var rows = bodyEl.querySelectorAll('.srch__result');
         if (rows[PAGE_SIZE]) rows[PAGE_SIZE].focus({ preventScroll: true });
         return;
       }

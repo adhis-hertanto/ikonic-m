@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../css/tokens.css">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/search.css">
   <link rel="stylesheet" href="../css/legal.css">
   <script>document.documentElement.classList.add('js');</script>
   <script>try{if(sessionStorage.getItem('pt-arrive')){sessionStorage.removeItem('pt-arrive');document.documentElement.classList.add('pt-arriving')}}catch(e){}</script>
@@ -68,7 +69,7 @@
         <button class="nav__link" type="button" lang="vi" aria-pressed="false" data-lang="vi">VI</button>
       </div>
       <button class="nav__link nav__search" type="button" data-search>
-        <span class="icon icon--search" aria-hidden="true"></span>
+        <span class="icon icon--search-thin" aria-hidden="true"></span>
         <span>Search</span>
       </button>
     </div>
@@ -119,7 +120,7 @@
     <div class="footer__top">
       <div class="shape cascade cascade--footer" data-shape="Cascade L 848" aria-hidden="true"></div>
       <div class="footer__brand">
-        <img class="footer__logo" src="../assets/svg/logo-ikonic-m-footer.svg" alt="IKONIC-M" width="282" height="80">
+        <a class="footer__logo-link" href="../" aria-label="IKONIC-M home"><img class="footer__logo" src="../assets/svg/logo-ikonic-m-footer.svg" alt="IKONIC-M" width="282" height="80"></a>
         <p class="t-h3">Enriching places.<br>Enduring value.</p>
       </div>
       <div class="newsletter">
@@ -177,6 +178,7 @@
   <!-- FOOTER:END -->
 
   <script src="../js/main.js" defer></script>
+  <script src="../js/search.js" defer></script>
   <script src="../js/page-transition.js" defer></script>
 </body>
 </html>

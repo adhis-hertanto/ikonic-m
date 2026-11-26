@@ -176,6 +176,5 @@
     initLanguage();
     initNewsletter();
     initBackToTop();
-    // Search: intentionally opens nothing yet (unresolved, see report).
   });
 })();
