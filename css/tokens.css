@@ -273,6 +273,11 @@
   --x-reveal-rise: calc(20 * var(--u));
   --x-nudge: calc(4 * var(--u));
   --x-focus-ring: calc(2 * var(--u));
+  --x-z-consent: 200;                        /* cookie banner sits above the sticky nav */
+  --x-consent-scrim: rgb(0 0 0 / 0.7);       /* 217:4679 */
+  --x-consent-blur: calc(12 * var(--u));
+  --x-consent-text-w: calc(640 * var(--u));
+  --x-consent-hover: rgb(255 255 255 / 0.12); /* PLACEHOLDER hover on outline buttons */
   --x-z-nav: 100;
   --x-nav-slide: 320ms;                      /* top nav slides off on scroll down, back on scroll up */
 }

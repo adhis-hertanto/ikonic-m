@@ -113,57 +113,45 @@
 .footprints .tab.is-active,
 .footprints .tab.is-active:hover { color: var(--deep-plum-900); }
 
-/* --- Country chips: label, then a pill toggle per market with its project count */
+/* --- Market tabs (217:4249): text tabs with a 2px coral underline on the active one.
+   The project count stays in the markup for js/footprints.js but is not shown in V6. */
 .fp-markets {
   display: flex;
   flex-direction: column;
   gap: var(--space-12);
   width: 100%;
 }
-.fp-markets__label {
-  font-size: var(--x-text-fp-small-size);
-  line-height: var(--x-text-fp-small-lh);
-  color: var(--ecru-700);
-}
 .fp-markets__list {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-8);
+  gap: var(--space-0) var(--space-24);
 }
 .fp-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-8);
-  height: var(--x-fp-pill-h);
-  padding: var(--space-0) var(--space-12) var(--space-0) var(--space-8);
-  border: var(--x-hairline) solid var(--ecru-200);
-  border-radius: var(--x-pin-radius);
-  font-size: var(--x-text-fp-small-size);
-  line-height: var(--x-text-fp-small-lh);
+  position: relative;
+  padding-bottom: calc(var(--space-4) + var(--x-rule));
+  font-size: var(--text-body-m-size);
+  line-height: var(--text-body-m-lh);
   color: var(--deep-plum-950);
   white-space: nowrap;
-  transition:
-    background-color var(--x-dur-fast) var(--x-ease),
-    color var(--x-dur-fast) var(--x-ease),
-    border-color var(--x-dur-fast) var(--x-ease);
+  transition: color var(--x-dur-fast) var(--x-ease);
 }
-.fp-pill__badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: var(--x-fp-badge);
-  height: var(--x-fp-badge);
-  border-radius: var(--x-pin-radius);
-  background: var(--ecru-50);
-  color: var(--deep-plum-950);
-  line-height: var(--space-0);
+.fp-pill__badge { display: none; }
+.fp-pill::after {
+  content: "";
+  position: absolute;
+  left: var(--space-0);
+  right: var(--space-0);
+  bottom: var(--space-0);
+  height: var(--x-rule);
+  background: var(--brand-coral-red);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--x-dur) var(--x-ease);
 }
-.fp-pill:hover { background: var(--ecru-50); border-color: var(--brand-deep-plum); }
-.fp-pill.is-active {
-  background: var(--brand-deep-plum);
-  border-color: var(--brand-deep-plum);
-  color: var(--color-white);
-}
+.fp-pill:hover { color: var(--brand-coral-red); }                  /* PLACEHOLDER, as .tab */
+.fp-pill.is-active::after { transform: scaleX(1); }
+.fp-pill.is-active,
+.fp-pill.is-active:hover { color: var(--deep-plum-950); }
 
 /* --- Project panel: flag + country, status tabs, divider, project chips -----
    Sits between the market tabs and the "Explore our works" button. Height animates through grid

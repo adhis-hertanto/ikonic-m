@@ -31,14 +31,14 @@
       </div>
       <nav aria-label="Primary">
         <ul class="nav__main">
-          <li><a class="nav__link" href="about/">About</a></li>
+          <li><a class="nav__link" href="our-solutions/">Transformative Solutions</a></li>
           <li>
-            <a class="nav__link nav__link--dropdown" href="our-solutions/">
-              <span>Transformative Solutions</span>
+            <a class="nav__link nav__link--dropdown" href="our-works/">
+              <span>Distinctive Destinations</span>
               <span class="icon icon--chevron" aria-hidden="true"></span>
             </a>
           </li>
-          <li><a class="nav__link" href="our-works/">Places That Ignite</a></li>
+          <li><a class="nav__link" href="about/">Transform with us</a></li>
           <li><a class="nav__link" href="news/">News</a></li>
           <li><a class="nav__link" href="contact/">Let's Connect</a></li>
         </ul>
@@ -66,7 +66,7 @@
       <!-- Slide 1: split plum panel (403:273) -->
       <div class="hero__slide hero__slide--split is-active" data-slide role="group" aria-roledescription="slide" aria-label="1 of 3">
         <div class="hero__holder" data-shape="Holder / Hero image / Cut TL">
-          <img class="hero__img" src="assets/img/retail-atrium.jpg" alt="Glass-domed atrium of a multi-level retail destination" width="1440" height="1080">
+          <img class="hero__img" src="assets/img/home-hero-atrium.jpg" alt="Glass-domed atrium of a multi-level retail destination" width="1248" height="1440">
         </div>
         <div class="shape tess tess--bl hero__tess-sand" data-shape="Tessellation / Join 336" aria-hidden="true"></div>
         <div class="hero__content">
@@ -129,7 +129,6 @@
     <section class="section who" aria-labelledby="who-title">
       <div class="who__intro">
         <div class="who__heading" data-reveal>
-          <p class="eyebrow">Who we are</p>
           <h2 class="t-h1" id="who-title">Your future-primed<br>retail partner</h2>
         </div>
         <div class="who__body" data-reveal>
@@ -233,10 +232,10 @@
         </div>
         <div class="platform__panel" data-reveal>
           <div class="platform__holder" data-accordion-media data-shape="Holder / Image / Cut TL">
-            <img class="is-active" src="assets/img/retail-atrium.jpg" alt="Glass-domed atrium of a multi-level retail destination" width="1440" height="1080">
-            <!-- PLACEHOLDER images for items 2 and 3: Figma only defines one panel image. -->
-            <img src="assets/img/news-2.jpg" alt="" width="674" height="1007" loading="lazy">
-            <img src="assets/img/news-1.jpg" alt="" width="672" height="1007" loading="lazy">
+            <img class="is-active" src="assets/img/home-platform-oculus.jpg" alt="Looking up through the glass oculus of a retail atrium" width="1280" height="744">
+            <!-- PLACEHOLDER images for items 2 and 3: Figma only defines the panel image for item 1. -->
+            <img src="assets/img/dusk-destination.jpg" alt="" width="1920" height="1323" loading="lazy">
+            <img src="assets/img/mall-walkway.jpg" alt="" width="1040" height="585" loading="lazy">
           </div>
         </div>
       </div>
@@ -249,17 +248,15 @@
           <div class="footprints__intro" data-reveal>
             <div class="footprints__heading">
               <h2 class="t-h1" id="footprints-title">Our retail footprints worldwide</h2>
-              <p class="t-body-m">Our experience spans some of Asia's most recognised retail destinations across Singapore, Vietnam, China, Malaysia, the Philippines and Australia.</p>
+              <p class="t-body-m">Our experience spans some of Asia's most recognised retail destinations across Singapore, Vietnam, China and Australia.</p>
             </div>
             <div class="fp-markets">
-              <p class="fp-markets__label" id="fp-markets-label">Click on a country to view locations</p>
+              <p class="fp-markets__label visually-hidden" id="fp-markets-label">Click on a country to view locations</p>
               <div class="fp-markets__list" role="group" aria-labelledby="fp-markets-label" data-fp-markets>
                 <button class="fp-pill" type="button" id="market-china" aria-pressed="false" aria-controls="footprints-globe" data-country="china"><span class="fp-pill__badge" data-fp-count></span><span>China</span></button>
                 <button class="fp-pill" type="button" id="market-singapore" aria-pressed="false" aria-controls="footprints-globe" data-country="singapore"><span class="fp-pill__badge" data-fp-count></span><span>Singapore</span></button>
                 <button class="fp-pill" type="button" id="market-vietnam" aria-pressed="false" aria-controls="footprints-globe" data-country="vietnam"><span class="fp-pill__badge" data-fp-count></span><span>Vietnam</span></button>
                 <button class="fp-pill" type="button" id="market-australia" aria-pressed="false" aria-controls="footprints-globe" data-country="australia"><span class="fp-pill__badge" data-fp-count></span><span>Australia</span></button>
-                <button class="fp-pill" type="button" id="market-malaysia" aria-pressed="false" aria-controls="footprints-globe" data-country="malaysia"><span class="fp-pill__badge" data-fp-count></span><span>Malaysia</span></button>
-                <button class="fp-pill" type="button" id="market-philippines" aria-pressed="false" aria-controls="footprints-globe" data-country="philippines"><span class="fp-pill__badge" data-fp-count></span><span>Philippines</span></button>
               </div>
             </div>
             <!-- Projects for the selected country. Filled by js/footprints.js from data/projects.json -->
@@ -393,7 +390,7 @@
     <div class="footer__bottom">
       <div class="footer__legal">
         <div class="endorsement">
-          <p class="t-body-s">A retail arm of</p>
+          <p class="t-subline-s">A retail arm of</p>
           <a class="endorsement__logo" href="https://www.keppel.com" target="_blank" rel="noopener" aria-label="Keppel (opens in a new tab)">
             <img src="assets/svg/logo-keppel.svg" alt="Keppel" width="120" height="40">
           </a>
@@ -429,7 +426,44 @@
   </footer>
   <!-- FOOTER:END -->
 
+  <!-- CONSENT:START -->
+  <section class="consent" data-consent role="region" aria-labelledby="consent-title" aria-describedby="consent-desc" hidden>
+    <div class="consent__main">
+      <div class="consent__text">
+        <h2 class="t-subline-l" id="consent-title">Your privacy, your choice</h2>
+        <p class="t-body-s" id="consent-desc">We use cookies to keep this site running smoothly, understand how it's used and improve your experience. You can accept all cookies or choose which ones we use.</p>
+        <a class="consent__link t-body-s" href="privacy-policy/">Read our privacy policy</a>
+      </div>
+      <div class="consent__actions">
+        <button class="btn" type="button" data-consent-accept>Accept all</button>
+        <button class="btn btn--outline-light" type="button" aria-expanded="false" aria-controls="consent-prefs" data-consent-manage>Manage preferences</button>
+        <button class="btn btn--outline-light" type="button" data-consent-reject>Reject non-essential</button>
+      </div>
+    </div>
+    <fieldset class="consent__prefs" id="consent-prefs" data-consent-prefs hidden>
+      <legend class="visually-hidden">Cookie preferences</legend>
+      <label class="consent__pref">
+        <input type="checkbox" checked disabled>
+        <span class="consent__pref-title t-body-m">Essential</span>
+        <span class="consent__pref-desc t-body-s">Needed for the site to work. Always on.</span>
+      </label>
+      <label class="consent__pref">
+        <input type="checkbox" name="analytics" data-consent-category="analytics">
+        <span class="consent__pref-title t-body-m">Analytics</span>
+        <span class="consent__pref-desc t-body-s">Helps us understand how the site is used.</span>
+      </label>
+      <label class="consent__pref">
+        <input type="checkbox" name="marketing" data-consent-category="marketing">
+        <span class="consent__pref-title t-body-m">Marketing</span>
+        <span class="consent__pref-desc t-body-s">Lets us show relevant content and measure campaigns.</span>
+      </label>
+      <button class="btn consent__save" type="button" data-consent-save>Save preferences</button>
+    </fieldset>
+  </section>
+  <!-- CONSENT:END -->
+
   <script src="js/main.js" defer></script>
+  <script src="js/consent.js" defer></script>
   <script src="js/carousel.js" defer></script>
   <script src="js/accordion.js" defer></script>
   <script src="js/globe.js" defer></script>
