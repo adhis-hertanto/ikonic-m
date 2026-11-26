@@ -310,6 +310,12 @@
 .link:has(> .icon) > .icon {
   transition: transform var(--x-dur) var(--x-ease), opacity var(--x-dur) var(--x-ease);
 }
+/* Download buttons bring in a download icon instead of the arrow */
+.btn:has(> .icon.icon--download)::before,
+.link:has(> .icon.icon--download)::before {
+  -webkit-mask-image: url("../assets/svg/icon-download.svg");
+  mask-image: url("../assets/svg/icon-download.svg");
+}
 .btn:has(> .icon:not(.icon--up)):hover::before,
 .link:has(> .icon):hover::before,
 .btn:has(> .icon:not(.icon--up)):focus-visible::before,
