@@ -128,12 +128,12 @@ html.is-snapshot .srch__scrim, html.is-snapshot .srch__dialog { transition: none
   border-color: var(--brand-deep-plum);
   box-shadow: inset 0 0 0 var(--x-hairline) var(--brand-deep-plum);
 }
-/* Hover: 1px coral stroke. Clicked / focused: 2px coral stroke (overrides the plum) */
+/* Hover: 1px plum stroke. Clicked / focused: 2px plum stroke */
 .srch__field { transition: border-color var(--x-dur-fast) var(--x-ease), box-shadow var(--x-dur-fast) var(--x-ease); }
-.srch .srch__field:hover { border-color: var(--brand-coral-red); }
+.srch .srch__field:hover { border-color: var(--brand-deep-plum); }
 .srch .srch__field:focus-within {
-  border-color: var(--brand-coral-red);
-  box-shadow: inset 0 0 0 var(--x-hairline) var(--brand-coral-red);
+  border-color: var(--brand-deep-plum);
+  box-shadow: inset 0 0 0 var(--x-hairline) var(--brand-deep-plum);
 }
 .srch__input:focus, .srch__input:focus-visible { outline: none; }
 .srch__input {

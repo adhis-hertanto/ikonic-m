@@ -592,12 +592,13 @@
   transition: border-color var(--x-dur-fast) var(--x-ease);
 }
 .field::placeholder { color: var(--ecru-500); opacity: 1; }
-/* Hover: 1px coral stroke. Clicked / focused: 2px coral stroke (border plus an inset
-   hairline, so the text does not shift). */
-.field { transition: border-color var(--x-dur-fast) var(--x-ease), box-shadow var(--x-dur-fast) var(--x-ease); }
-.field:hover { border-color: var(--brand-coral-red); }
-.field:focus { outline: none; border-color: var(--brand-coral-red); box-shadow: inset 0 0 0 var(--x-hairline) var(--brand-coral-red); }
-.field[aria-invalid="true"] { border-color: var(--brand-coral-red); }      /* PLACEHOLDER */
+/* Hover: 1px stroke. Clicked / focused: 2px stroke (border plus an inset hairline,
+   so the text does not shift). Plum on light backgrounds; dark sections set
+   --field-stroke to sand. Coral is kept for errors only. */
+.field { --field-stroke: var(--brand-deep-plum); transition: border-color var(--x-dur-fast) var(--x-ease), box-shadow var(--x-dur-fast) var(--x-ease); }
+.field:hover { border-color: var(--field-stroke); }
+.field:focus { outline: none; border-color: var(--field-stroke); box-shadow: inset 0 0 0 var(--x-hairline) var(--field-stroke); }
+.field[aria-invalid="true"] { --field-stroke: var(--brand-coral-red); border-color: var(--brand-coral-red); }      /* PLACEHOLDER */
 .field-message { color: var(--brand-deep-plum); }                          /* PLACEHOLDER */
 .field-message.is-error { color: var(--brand-coral-red); }                 /* PLACEHOLDER */
 
