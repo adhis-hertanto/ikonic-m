@@ -274,8 +274,8 @@
   font-weight: var(--font-weight-regular);
 }
 /* Arrow morph on hover (buttons and text links with an arrow only). The right arrow
-   slides out to the right while a left arrow slides in from the left and the label
-   moves across to make room. Action cards have their own hover and are not affected. */
+   slides out to the right while a second arrow, still pointing right, slides in from the
+   left and the label moves across to make room. Action cards have their own hover and are not affected. */
 .btn:has(> .icon:not(.icon--up)),
 .link:has(> .icon) { position: relative; }
 .btn:has(> .icon:not(.icon--up))::before,
@@ -291,7 +291,7 @@
   -webkit-mask: url("../assets/svg/icon-arrow-right.svg") center / 100% 100% no-repeat;
   mask: url("../assets/svg/icon-arrow-right.svg") center / 100% 100% no-repeat;
   opacity: 0;
-  transform: rotate(180deg) translateX(calc(-1 * var(--space-16)));
+  transform: translateX(calc(-1 * var(--space-16)));
   transition:
     transform var(--x-dur) var(--x-ease),
     opacity var(--x-dur) var(--x-ease);
@@ -310,7 +310,7 @@
 .btn:has(> .icon:not(.icon--up)):focus-visible::before,
 .link:has(> .icon):focus-visible::before {
   opacity: 1;
-  transform: rotate(180deg) translateX(0);
+  transform: translateX(0);
 }
 .btn:has(> .icon:not(.icon--up)):hover > span:not(.icon),
 .link:has(> .icon):hover > span:not(.icon) {
