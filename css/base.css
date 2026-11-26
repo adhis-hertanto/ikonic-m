@@ -256,7 +256,7 @@ html::after {
   position: fixed;
   inset: 0;
   z-index: var(--x-z-consent);
-  background: var(--brand-coral-red);
+  background: var(--ecru-200);
   transform: translateY(100%);
   pointer-events: none;
 }
