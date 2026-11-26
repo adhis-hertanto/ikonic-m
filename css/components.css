@@ -20,6 +20,11 @@
   -webkit-mask-image: url("../assets/svg/icon-chevron.svg");
   mask-image: url("../assets/svg/icon-chevron.svg");
 }
+/* Thin 1.25px chevron used on top nav links (Figma: Icons / Material / Chevron Up Thin) */
+.icon--chevron-thin {
+  -webkit-mask-image: url("../assets/svg/icon-chevron-thin.svg");
+  mask-image: url("../assets/svg/icon-chevron-thin.svg");
+}
 .icon--search {
   -webkit-mask-image: url("../assets/svg/icon-search.svg");
   mask-image: url("../assets/svg/icon-search.svg");
