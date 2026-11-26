@@ -58,6 +58,7 @@ for (const [slug, title] of Object.entries(pages)) {
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/components.css">
   <script>document.documentElement.classList.add('js');</script>
+  <script>try{if(sessionStorage.getItem('pt-arrive')){sessionStorage.removeItem('pt-arrive');document.documentElement.classList.add('pt-arriving')}}catch(e){}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -75,6 +76,7 @@ for (const [slug, title] of Object.entries(pages)) {
   ${footer}
 
   <script src="../js/main.js" defer></script>
+  <script src="../js/page-transition.js" defer></script>
 </body>
 </html>
 `;

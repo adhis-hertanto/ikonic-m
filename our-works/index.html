@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/works.css">
   <script>document.documentElement.classList.add('js');</script>
+  <script>try{if(sessionStorage.getItem('pt-arrive')){sessionStorage.removeItem('pt-arrive');document.documentElement.classList.add('pt-arriving')}}catch(e){}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -341,6 +342,7 @@
   <!-- FOOTER:END -->
 
   <script src="../js/main.js" defer></script>
+  <script src="../js/page-transition.js" defer></script>
   <script src="../js/works.js" defer></script>
 </body>
 </html>

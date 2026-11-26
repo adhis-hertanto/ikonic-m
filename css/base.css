@@ -248,19 +248,31 @@ button {
 }
 .is-snapshot [data-reveal] { opacity: 1 !important; transform: none !important; }
 
-/* --- Page transitions: pages slide left or right with a soft fade ------------
-   Cross-document View Transitions (Chromium and Safari). Browsers without support
-   load the next page normally. */
-@view-transition { navigation: auto; }
-::view-transition-old(root) { animation: pt-out var(--x-dur) var(--x-ease) both; }
-::view-transition-new(root) { animation: pt-in var(--x-dur) var(--x-ease) both; }
-@keyframes pt-out {
-  to { transform: translateX(calc(-6 * var(--u))); opacity: 0; }
+/* --- Page transition: plum card slides up over the page, then away to reveal the next --- */
+html::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: var(--x-z-consent);
+  background: var(--brand-deep-plum);
+  transform: translateY(100%);
+  pointer-events: none;
 }
-@keyframes pt-in {
-  from { transform: translateX(calc(6 * var(--u))); opacity: 0; }
+html.pt-leaving::after {
+  animation: pt-card-up var(--x-dur) var(--x-ease) both;
+}
+html.pt-arriving::after {
+  transform: none;
+  animation: pt-card-away var(--x-dur) var(--x-ease) both;
+}
+@keyframes pt-card-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+@keyframes pt-card-away {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100%); }
 }
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) { animation: none; }
+  html::after { display: none; }
 }
