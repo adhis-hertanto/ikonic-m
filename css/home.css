@@ -8,10 +8,9 @@
   --span-4: calc(4 * var(--col) + 3 * var(--layout-gutter));
 }
 
-/* --- Hero (217:4158) -------------------------------------------------------- */
+/* --- Hero (slider states 279:159) ------------------------------------------- */
 .hero {
   position: relative;
-  display: flex;
   /* Fills the viewport below the sticky nav, so nav + hero are exactly one screen and the carousel
      progress bars are visible without scrolling. No minimum height: a floor would push them below the fold. */
   --hero-h: calc(100vh - var(--x-nav-height));
@@ -20,31 +19,21 @@
   background: var(--deep-plum-950);
   color: var(--color-white);
   overflow: hidden;
+  isolation: isolate;
+  container-type: size;            /* lets the mask use 100cqw / 100cqh, so its edge is 45 degrees at any hero height */
 }
-/* --wipe is animated from 0 to 1 to slide a 45 degree mask across the incoming image */
+/* --wipe is animated from 0 to 1 to slide a 45 degree mask across the incoming slide */
 @property --wipe {
   syntax: "<number>";
   inherits: false;
   initial-value: 0;
 }
-.hero__holder {
-  position: absolute;
-  top: var(--space-0);
-  right: var(--space-0);
-  width: var(--shape-hero-holder-w);
-  height: 100%;
-  overflow: hidden;
-  isolation: isolate;               /* keeps the slide z-indexes inside the holder, so the sand triangle stays above the images */
-  container-type: size;            /* lets the mask use 100cqw / 100cqh, so its edge is 45 degrees at any hero height */
-}
-.hero__img {
+.hero__slide {
   position: absolute;
   inset: var(--space-0);
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  overflow: hidden;
   /* Edge runs top-left to bottom-right at exactly 45 degrees, parallel to the tessellation shapes.
-     At --wipe 0 the image is fully masked out, at 1 it is fully shown. */
+     At --wipe 0 the slide is fully masked out, at 1 it is fully shown. */
   --wipe: 0;
   clip-path: polygon(
     0 0,
@@ -54,32 +43,66 @@
   );
 }
 /* The slide being replaced stays fully shown underneath until the new one has covered it */
-.hero__img.is-leaving { --wipe: 1; z-index: 1; }
-.hero__img.is-active {
+.hero__slide.is-leaving { --wipe: 1; z-index: 1; }
+.hero__slide.is-active {
   --wipe: 1;
   z-index: 2;
   transition: --wipe var(--x-slide-wipe) var(--x-ease-inout);
 }
-.is-static .hero__img.is-active { transition: none; }
+.is-static .hero__slide.is-active { transition: none; }
+.hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  padding: var(--space-64) var(--space-64) var(--space-64) var(--layout-margin);
+}
+/* Holds the actions 140 above the bottom edge (clear of the progress bars); gives way on short screens */
+.hero__content::after {
+  content: "";
+  flex: 0 1 var(--x-hero-actions-clear);
+  min-height: var(--space-24);
+}
+.hero__title { position: relative; width: 100%; }
+.hero__content .hero__title { margin-bottom: var(--space-24); }
+.hero__actions {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-32);
+  width: 100%;
+}
+.hero__content .hero__actions { margin-top: auto; }
+.hero__lede { width: var(--x-w-5col); max-width: 100%; }
+
+/* Slide 1: split plum panel */
+.hero__holder {
+  position: absolute;
+  top: var(--space-0);
+  right: var(--space-0);
+  width: var(--shape-hero-holder-w);
+  height: 100%;
+}
+.hero__slide--split .hero__content {
+  width: calc(100% - var(--shape-hero-holder-w));
+  background: var(--brand-deep-plum);
+}
 .hero__tess-sand {
   /* The coral point hangs from the top, the sand point rises from the bottom. They only touch on the
      image edge when sand = hero height - coral, so the size follows the hero height at every viewport.
      At the 720 design height this is exactly 336 (--shape-tess-hero-sand). */
   --shape-size: max(var(--space-0), calc(var(--hero-h) - var(--shape-tess-hero-coral)));
   --shape-color: var(--brand-sand);
+  z-index: 1;
   bottom: var(--space-0);
   right: calc(var(--shape-hero-holder-w) - var(--shape-size));
-}
-.hero__content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: calc(100% - var(--shape-hero-holder-w));
-  height: 100%;
-  padding: var(--space-64) var(--space-64) var(--space-64) var(--layout-margin);
-  background: var(--brand-deep-plum);
 }
 .hero__tess-coral {
   --shape-size: var(--shape-tess-hero-coral);
@@ -87,31 +110,103 @@
   top: var(--space-0);
   right: var(--space-0);
 }
-.hero__title,
-.hero__actions,
-.carousel__controls { position: relative; }
-.hero__title { width: 100%; }
-.hero__actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-32);
-  width: 100%;
+
+/* Slide 2: full bleed image, plum strip with sand above and coral below, meeting on the strip edge */
+.hero__bg { position: absolute; inset: var(--space-0); }
+.hero__slide--bleed::after {          /* darkens the image behind the copy */
+  content: "";
+  position: absolute;
+  inset: var(--space-0);
+  background: var(--x-hero-overlay);
+  pointer-events: none;
 }
-.hero__lede { width: var(--x-w-5col); max-width: 100%; }
+.hero__strip {
+  position: absolute;
+  top: var(--space-0);
+  bottom: var(--space-0);
+  right: var(--space-0);
+  width: var(--x-hero-strip-w);
+  background: var(--brand-deep-plum);
+}
+.hero__tess-top {
+  --shape-size: var(--shape-tess-hero-top);
+  --shape-color: var(--brand-sand);
+  top: var(--space-0);
+  right: calc(var(--x-hero-strip-w) - var(--shape-size));
+}
+.hero__tess-base {
+  --shape-size: max(var(--space-0), calc(var(--hero-h) - var(--shape-tess-hero-top)));
+  --shape-color: var(--coral-red-500);
+  bottom: var(--space-0);
+  right: var(--x-hero-strip-w);
+}
+.hero__slide--bleed > .hero__strip,
+.hero__slide--bleed > .shape { z-index: 1; }        /* above the overlay, so the brand colours stay true */
+.hero__slide--bleed .hero__content {
+  z-index: 1;
+  width: calc(var(--x-hero-copy-w) + var(--layout-margin) + var(--space-64));
+}
+
+/* Slide 3: title band across the top 40%, ecru below, wide image holder bottom right */
+.hero__slide--ecru { background: var(--brand-ecru); }
+.hero__band {
+  position: relative;
+  height: var(--x-hero-band-h);
+  background: var(--coral-red-500);
+}
+.hero__band-plum {
+  position: absolute;
+  inset: var(--space-0);
+  background: var(--brand-deep-plum);
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--x-hero-band-coral-w)) 0,
+    calc(100% - var(--x-hero-band-coral-w) - var(--x-hero-band-h)) 100%,
+    0 100%
+  );
+}
+.hero__slide--ecru .hero__title { padding: var(--space-64) var(--layout-margin) var(--space-0); }
+.hero__wide {
+  /* The chamfer ends where the band's diagonal ends, so the two edges read as one line */
+  --cut: max(var(--space-0), calc(var(--x-hero-wide-meet) - var(--x-hero-band-h)));
+  position: absolute;
+  top: var(--x-hero-band-h);
+  bottom: var(--space-0);
+  right: var(--space-0);
+  width: var(--x-hero-wide-w);
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+}
+.hero__wide .hero__img { object-position: left center; }
+.hero__slide--ecru .hero__actions {
+  position: absolute;
+  top: calc(var(--x-hero-band-h) + 2 * var(--space-24));
+  left: var(--layout-margin);
+  width: var(--x-hero-narrow-w);
+  color: var(--brand-deep-plum);
+}
+.hero__slide--ecru .btn { color: var(--color-white); }
 
 /* Carousel progress */
 .carousel__controls {
+  position: absolute;
+  z-index: 3;
+  left: var(--layout-margin);
+  bottom: var(--space-64);
   display: flex;
   align-items: center;
   gap: var(--space-8);
-  width: 100%;
+  width: var(--x-hero-copy-w);
 }
+.hero:has(.hero__slide--split.is-active) .carousel__controls {
+  width: calc(100% - var(--shape-hero-holder-w) - var(--layout-margin) - var(--space-64));
+}
+.hero:has(.hero__slide--ecru.is-active) .carousel__controls { width: var(--x-hero-narrow-w); }
+.hero:has(.hero__slide--ecru.is-active) .carousel__seg { background: var(--color-white); }
 .carousel__seg {
   position: relative;
   flex: 1 0 0;
   height: var(--x-progress-h);
-  background: var(--x-progress-track);
+  background: var(--ecru-300);
 }
 .carousel__seg::before {            /* larger hit area, no visual change */
   content: "";
@@ -130,7 +225,7 @@
 }
 .is-paused .carousel__seg.is-active .carousel__fill { animation-play-state: paused; }
 .is-static .carousel__seg.is-active .carousel__fill { animation: none; transform: scaleX(1); }
-.carousel__seg:hover { background: var(--x-progress-track-hover); }         /* PLACEHOLDER */
+.hero .carousel__seg:hover { background: var(--ecru-200); }                  /* PLACEHOLDER */
 @keyframes carousel-fill {
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }

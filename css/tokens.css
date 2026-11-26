@@ -31,6 +31,7 @@
   --deep-plum-950: #36162a;
   --deep-plum-900: #4a1e3a;
   --deep-plum-925: #401a32;                    /* PLACEHOLDER ramp step between 950 and 900: accordion hover */
+  --deep-plum-400: #8f6c83;                    /* PLACEHOLDER light plum: globe country hover */
   --deep-plum-975: #26101d;                    /* PLACEHOLDER ramp step darker than 950: plum button hover */
   --brand-sand: #b98e71;
   --brand-ecru: #e6e2dc;
@@ -144,7 +145,7 @@
   --x-nav-shadow: 0 calc(2 * var(--u)) calc(12 * var(--u)) rgb(0 0 0 / 0.08);   /* separates the nav from white sections */
   --x-nav-logo-w: calc(136 * var(--u));
   --x-nav-logo-h: calc(38 * var(--u));
-  --x-nav-divider-h: calc(14 * var(--u));
+  --x-nav-divider-h: calc(20 * var(--u));              /* 331:150 */
   --x-nav-tagline-w: calc(72 * var(--u));
   --x-button-h-l: calc(56 * var(--u));
   --x-button-h-m: calc(48 * var(--u));
@@ -153,8 +154,6 @@
   --x-eyebrow-dot: calc(8 * var(--u));
   --x-rule: calc(2 * var(--u));                        /* accordion + tab underline */
   --x-hairline: 1px;                                   /* input border, nav divider */
-  --x-progress-track: rgb(255 255 255 / 0.2);          /* carousel track: white at 20% */
-  --x-progress-track-hover: rgb(255 255 255 / 0.35);   /* PLACEHOLDER hover */
   --x-progress-h: calc(4.78 * var(--u));               /* 217:4171 */
   --x-gap-48: calc(48 * var(--u));                     /* 217:4245, hardcoded gap */
   --x-pin-radius: calc(100 * var(--u));
@@ -194,6 +193,16 @@
   --shape-hero-holder-w: calc(624 * var(--u));
   --shape-tess-hero-sand: calc(336 * var(--u));
   --shape-tess-hero-coral: calc(384 * var(--u));
+  --shape-tess-hero-top: calc(338 * var(--u));         /* 277:200, slide 2 sand */
+  --x-hero-strip-w: calc(194 * var(--u));              /* 290:564, slide 2 plum strip */
+  --x-hero-overlay: linear-gradient(to right, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0));
+  --x-hero-copy-w: calc(688 * var(--u));               /* slides 2 text measure and progress */
+  --x-hero-narrow-w: calc(384 * var(--u));             /* slide 3 copy and progress */
+  --x-hero-actions-clear: calc(76 * var(--u));         /* with the 64 padding: actions end 140 above the bottom */
+  --x-hero-band-h: 40cqh;                              /* slide 3: 288 of 720 */
+  --x-hero-band-coral-w: calc(384 * var(--u));         /* coral width along the top edge */
+  --x-hero-wide-w: calc(864 * var(--u));
+  --x-hero-wide-meet: calc(480 * var(--u));            /* wide-w minus band-coral-w */
   --shape-tess-who: calc(120 * var(--u));
   --shape-tess-updates: calc(512 * var(--u));
   --shape-tess-contact: calc(80 * var(--u));

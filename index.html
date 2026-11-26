@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>IKONIC-M | Shaping distinctive destinations</title>
   <meta name="description" content="IKONIC-M is the retail transformation arm of Keppel. Retail places crafted with intent, for their place, their community and their potential.">
-  <link rel="icon" href="data:,">
+  <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/favicon-180.png">
   <link rel="preload" href="fonts/MonaSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
@@ -58,31 +60,68 @@
 
   <main id="main">
 
-    <!-- Hero (217:4158) -->
+    <!-- Hero (slider states 279:159). Each slide is a complete layout; the 45 degree mask wipes across the whole section. -->
     <section class="hero" data-carousel aria-roledescription="carousel" aria-label="Featured destinations">
-      <div class="hero__holder" data-shape="Holder / Hero image / Cut TL">
-        <img class="hero__img is-active" data-slide src="assets/img/retail-atrium.jpg" alt="Glass-domed atrium of a multi-level retail destination" width="1440" height="1080">
-        <!-- PLACEHOLDER slides 2 and 3: Figma only defines slide 1. Images reused from the news cards. -->
-        <img class="hero__img" data-slide src="assets/img/news-1.jpg" alt="" width="672" height="1007" loading="lazy">
-        <img class="hero__img" data-slide src="assets/img/news-2.jpg" alt="" width="674" height="1007" loading="lazy">
-      </div>
-      <div class="shape tess tess--bl hero__tess-sand" data-shape="Tessellation / Join 336" aria-hidden="true"></div>
 
-      <div class="hero__content">
-        <div class="shape tess tess--tr hero__tess-coral" data-shape="Tessellation / Join 384" aria-hidden="true"></div>
-        <h1 class="hero__title t-display-xl" data-reveal>Shaping distinctive destinations.</h1>
-        <div class="hero__actions" data-reveal>
-          <p class="hero__lede t-subline-l">Retail places crafted with intent, for their place, their community and their potential.</p>
-          <a class="btn btn--l" href="contact/">
-            <span>How can we help</span>
-            <span class="icon" aria-hidden="true"></span>
-          </a>
+      <!-- Slide 1: split plum panel (403:273) -->
+      <div class="hero__slide hero__slide--split is-active" data-slide role="group" aria-roledescription="slide" aria-label="1 of 3">
+        <div class="hero__holder" data-shape="Holder / Hero image / Cut TL">
+          <img class="hero__img" src="assets/img/retail-atrium.jpg" alt="Glass-domed atrium of a multi-level retail destination" width="1440" height="1080">
         </div>
-        <div class="carousel__controls" role="group" aria-label="Choose slide" data-reveal>
-          <button class="carousel__seg is-active" type="button" aria-label="Slide 1 of 3" aria-current="true"><span class="carousel__fill"></span></button>
-          <button class="carousel__seg" type="button" aria-label="Slide 2 of 3"><span class="carousel__fill"></span></button>
-          <button class="carousel__seg" type="button" aria-label="Slide 3 of 3"><span class="carousel__fill"></span></button>
+        <div class="shape tess tess--bl hero__tess-sand" data-shape="Tessellation / Join 336" aria-hidden="true"></div>
+        <div class="hero__content">
+          <div class="shape tess tess--tr hero__tess-coral" data-shape="Tessellation / Join 384" aria-hidden="true"></div>
+          <h1 class="hero__title t-display-xl" data-reveal>Shaping distinctive destinations.</h1>
+          <div class="hero__actions" data-reveal>
+            <p class="hero__lede t-subline-l">Retail places crafted with intent, for their place, their community and their potential.</p>
+            <a class="btn btn--l" href="contact/">
+              <span>How can we help</span>
+              <span class="icon" aria-hidden="true"></span>
+            </a>
+          </div>
         </div>
+      </div>
+
+      <!-- Slide 2: full bleed image, cascade on the right (279:198) -->
+      <div class="hero__slide hero__slide--bleed" data-slide role="group" aria-roledescription="slide" aria-label="2 of 3" inert>
+        <img class="hero__img hero__bg" src="assets/img/hero-escalators.jpg" alt="Escalators and hanging mirror balls in a multi-level mall" width="2400" height="1600">
+        <div class="hero__strip" aria-hidden="true"></div>
+        <div class="shape tess tess--tl hero__tess-top" data-shape="Tessellation / Join 338" aria-hidden="true"></div>
+        <div class="shape tess tess--br hero__tess-base" data-shape="Tessellation / Join 380" aria-hidden="true"></div>
+        <div class="hero__content">
+          <h2 class="hero__title t-display-xl">Elevating asset<br>performance.</h2>
+          <div class="hero__actions">
+            <p class="hero__lede t-subline-l">Retail strategy, curation and management working as one to lift the value of every asset.</p>
+            <a class="btn btn--l" href="our-solutions/">
+              <span>What we deliver</span>
+              <span class="icon" aria-hidden="true"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: ecru with wide masked holder (279:242) -->
+      <div class="hero__slide hero__slide--ecru" data-slide role="group" aria-roledescription="slide" aria-label="3 of 3" inert>
+        <div class="hero__band">
+          <div class="hero__band-plum" aria-hidden="true"></div>
+          <h2 class="hero__title t-display-xl">Future proof retail.</h2>
+        </div>
+        <div class="hero__wide" data-shape="Holder / Hero image / Cut TL">
+          <img class="hero__img" src="assets/img/hero-banners.jpg" alt="Mall atrium with escalators, food banners and a glass roof" width="1920" height="864">
+        </div>
+        <div class="hero__actions">
+          <p class="hero__lede t-subline-l">Retail places ready for how people will shop, gather and connect in the years ahead.</p>
+          <a class="btn btn--l" href="our-works/">
+              <span>View our works</span>
+              <span class="icon" aria-hidden="true"></span>
+            </a>
+        </div>
+      </div>
+
+      <div class="carousel__controls" role="group" aria-label="Choose slide" data-reveal>
+        <button class="carousel__seg is-active" type="button" aria-label="Slide 1 of 3" aria-current="true"><span class="carousel__fill"></span></button>
+        <button class="carousel__seg" type="button" aria-label="Slide 2 of 3"><span class="carousel__fill"></span></button>
+        <button class="carousel__seg" type="button" aria-label="Slide 3 of 3"><span class="carousel__fill"></span></button>
       </div>
     </section>
 
@@ -212,13 +251,16 @@
               <h2 class="t-h1" id="footprints-title">Our retail footprints worldwide</h2>
               <p class="t-body-m">Our experience spans some of Asia's most recognised retail destinations across Singapore, Vietnam, China, Malaysia, the Philippines and Australia.</p>
             </div>
-            <div class="tabs" role="tablist" aria-label="Markets" data-tabs>
-              <button class="tab is-active" type="button" role="tab" id="tab-china" aria-selected="true" aria-controls="footprints-globe" data-country="china">China</button>
-              <button class="tab" type="button" role="tab" id="tab-singapore" aria-selected="false" aria-controls="footprints-globe" tabindex="-1" data-country="singapore">Singapore</button>
-              <button class="tab" type="button" role="tab" id="tab-vietnam" aria-selected="false" aria-controls="footprints-globe" tabindex="-1" data-country="vietnam">Vietnam</button>
-              <button class="tab" type="button" role="tab" id="tab-australia" aria-selected="false" aria-controls="footprints-globe" tabindex="-1" data-country="australia">Australia</button>
-              <button class="tab" type="button" role="tab" id="tab-malaysia" aria-selected="false" aria-controls="footprints-globe" tabindex="-1" data-country="malaysia">Malaysia</button>
-              <button class="tab" type="button" role="tab" id="tab-philippines" aria-selected="false" aria-controls="footprints-globe" tabindex="-1" data-country="philippines">Philippines</button>
+            <div class="fp-markets">
+              <p class="fp-markets__label" id="fp-markets-label">Click on a country to view locations</p>
+              <div class="fp-markets__list" role="group" aria-labelledby="fp-markets-label" data-fp-markets>
+                <button class="fp-pill" type="button" id="market-china" aria-pressed="false" aria-controls="footprints-globe" data-country="china"><span class="fp-pill__badge" data-fp-count></span><span>China</span></button>
+                <button class="fp-pill" type="button" id="market-singapore" aria-pressed="false" aria-controls="footprints-globe" data-country="singapore"><span class="fp-pill__badge" data-fp-count></span><span>Singapore</span></button>
+                <button class="fp-pill" type="button" id="market-vietnam" aria-pressed="false" aria-controls="footprints-globe" data-country="vietnam"><span class="fp-pill__badge" data-fp-count></span><span>Vietnam</span></button>
+                <button class="fp-pill" type="button" id="market-australia" aria-pressed="false" aria-controls="footprints-globe" data-country="australia"><span class="fp-pill__badge" data-fp-count></span><span>Australia</span></button>
+                <button class="fp-pill" type="button" id="market-malaysia" aria-pressed="false" aria-controls="footprints-globe" data-country="malaysia"><span class="fp-pill__badge" data-fp-count></span><span>Malaysia</span></button>
+                <button class="fp-pill" type="button" id="market-philippines" aria-pressed="false" aria-controls="footprints-globe" data-country="philippines"><span class="fp-pill__badge" data-fp-count></span><span>Philippines</span></button>
+              </div>
             </div>
             <!-- Projects for the selected country. Filled by js/footprints.js from data/projects.json -->
             <div class="fp-panel" data-fp-panel>
@@ -229,7 +271,7 @@
                       <img class="fp-panel__flag" alt="" width="24" height="16" data-fp-flag>
                       <h3 class="t-subline-s" data-fp-name></h3>
                     </div>
-                    <div class="fp-status" role="tablist" aria-label="Project status" data-fp-status></div>
+                    <div class="tabs fp-status" role="tablist" aria-label="Project status" data-fp-status></div>
                   </div>
                   <hr class="fp-panel__rule">
                   <ul class="fp-chips" role="tabpanel" aria-live="polite" data-fp-chips></ul>
@@ -243,10 +285,10 @@
           </a>
         </div>
       </div>
-      <div class="globe" id="footprints-globe" role="tabpanel" aria-labelledby="tab-china" data-globe data-country="china" data-shape="Globe / B / Ecru, halftone">
+      <div class="globe" id="footprints-globe" data-globe data-shape="Globe / B / Ecru, halftone">
         <canvas class="globe__canvas" role="img" aria-label="Dot-matrix globe of IKONIC-M retail locations in China, Singapore, Vietnam, Malaysia, the Philippines and Australia. Drag to rotate."></canvas>
         <div class="visually-hidden">
-          <h3>Locations in <span data-globe-locations-title>China</span></h3>
+          <h3 data-globe-locations-title>All locations</h3>
           <ul data-globe-locations></ul>
         </div>
       </div>

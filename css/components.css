@@ -78,7 +78,7 @@
   width: var(--x-hairline);
   height: var(--x-nav-divider-h);
   margin-right: calc(-1 * var(--x-hairline));
-  background: var(--brand-ecru);
+  background: var(--ecru-400);
 }
 .nav__tagline {
   width: var(--x-nav-tagline-w);

@@ -61,8 +61,8 @@
   --globe-disc: var(--color-white);
   --globe-ocean: var(--ecru-50);
   --globe-land: var(--ecru-200);
-  --globe-selected: var(--brand-sand);
-  --globe-hover: var(--ecru-400);           /* PLACEHOLDER hover tone */
+  --globe-selected: var(--brand-deep-plum); /* 217:4264 presence dots */
+  --globe-hover: var(--deep-plum-400);      /* PLACEHOLDER hover tone: a lighter step of the selected plum */
   --globe-location: var(--brand-coral-red);
   position: absolute;
   top: calc(var(--fp-h) * 49 / 716);
@@ -107,11 +107,63 @@
 /* Panel open: halve the space between the card and the CTA */
 .footprints.has-panel .footprints__top { gap: var(--x-fp-cta-gap); }
 
-/* Market tab colours: grey by default, plum when active, coral on hover */
+/* Status tab colours: grey by default, plum when active, coral on hover */
 .footprints .tab { color: var(--ecru-500); }
 .footprints .tab:hover { color: var(--brand-coral-red); }                       /* PLACEHOLDER, as before */
 .footprints .tab.is-active,
 .footprints .tab.is-active:hover { color: var(--deep-plum-900); }
+
+/* --- Country chips: label, then a pill toggle per market with its project count */
+.fp-markets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  width: 100%;
+}
+.fp-markets__label {
+  font-size: var(--x-text-fp-small-size);
+  line-height: var(--x-text-fp-small-lh);
+  color: var(--ecru-700);
+}
+.fp-markets__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+.fp-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  height: var(--x-fp-pill-h);
+  padding: var(--space-0) var(--space-12) var(--space-0) var(--space-8);
+  border: var(--x-hairline) solid var(--ecru-200);
+  border-radius: var(--x-pin-radius);
+  font-size: var(--x-text-fp-small-size);
+  line-height: var(--x-text-fp-small-lh);
+  color: var(--deep-plum-950);
+  white-space: nowrap;
+  transition:
+    background-color var(--x-dur-fast) var(--x-ease),
+    color var(--x-dur-fast) var(--x-ease),
+    border-color var(--x-dur-fast) var(--x-ease);
+}
+.fp-pill__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--x-fp-badge);
+  height: var(--x-fp-badge);
+  border-radius: var(--x-pin-radius);
+  background: var(--ecru-50);
+  color: var(--deep-plum-950);
+  line-height: var(--space-0);
+}
+.fp-pill:hover { background: var(--ecru-50); border-color: var(--brand-deep-plum); }
+.fp-pill.is-active {
+  background: var(--brand-deep-plum);
+  border-color: var(--brand-deep-plum);
+  color: var(--color-white);
+}
 
 /* --- Project panel: flag + country, status tabs, divider, project chips -----
    Sits between the market tabs and the "Explore our works" button. Height animates through grid
@@ -131,7 +183,7 @@
 }
 .fp-panel.is-open {
   grid-template-rows: 1fr;
-  margin-top: calc(var(--space-16) - var(--x-gap-48));   /* 16 below the market tabs instead of the full 48 */
+  margin-top: calc(var(--space-16) - var(--x-gap-48));   /* 16 below the country chips instead of the full 48 */
   opacity: 1;
   visibility: visible;
   transition:
@@ -180,48 +232,6 @@
   background: var(--ecru-200);
 }
 
-/* Status tabs: pill toggle with a count badge */
-.fp-status {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-8);
-}
-.fp-status__tab {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-8);
-  height: var(--x-fp-pill-h);
-  padding: var(--space-0) var(--space-12) var(--space-0) var(--space-8);
-  border: var(--x-hairline) solid var(--ecru-300);
-  border-radius: var(--x-pin-radius);
-  font-size: var(--x-text-fp-small-size);
-  line-height: var(--x-text-fp-small-lh);
-  color: var(--deep-plum-950);
-  white-space: nowrap;
-  transition:
-    background-color var(--x-dur-fast) var(--x-ease),
-    color var(--x-dur-fast) var(--x-ease),
-    border-color var(--x-dur-fast) var(--x-ease);
-}
-.fp-status__badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: var(--x-fp-badge);
-  height: var(--x-fp-badge);
-  border-radius: var(--x-pin-radius);
-  background: var(--color-white);
-  color: var(--deep-plum-950);
-  font-size: var(--x-text-fp-small-size);
-  line-height: var(--space-0);
-}
-.fp-status__tab:hover { border-color: var(--brand-coral-red); }                 /* PLACEHOLDER */
-.fp-status__tab.is-active {
-  background: var(--brand-deep-plum);
-  border-color: var(--brand-deep-plum);
-  color: var(--color-white);
-}
-
 /* Project chips: name and city. Not interactive. */
 .fp-chips {
   display: flex;
@@ -250,5 +260,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .globe-tooltip, .footprints__top { transition: none; }
-  .fp-panel, .fp-panel.is-open, .fp-status__tab { transition: none; }
+  .fp-panel, .fp-panel.is-open, .fp-pill { transition: none; }
 }

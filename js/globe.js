@@ -18,8 +18,10 @@
      of the selected country. Hovering another country moves it there until the pointer leaves.
      Touch has no hover: tap selects.
 
+   Nothing is selected on load: only the location diamonds are coloured.
+
    Events (on the [data-globe] element)
-     listens  footprints:select  { country }            -> select + ease to centre the country
+     listens  footprints:select  { country }            -> select + ease to centre the country (null clears)
      emits    globe:select       { country, source }    -> so the tabs can sync */
 (function () {
   'use strict';
@@ -158,7 +160,7 @@ var EDGE_MIN_SPEED = 0.12;        // fraction of full speed right at an end
     var velLon = 0, velLat = 0;                       // inertia, deg / s
     var view = poseMatrix(lon, lat);
     var transition = null;                         // { from, to, start, dur, target }
-    var selected = root.getAttribute('data-country') || countryKeys[0];
+    var selected = root.getAttribute('data-country') || null;   // none until the visitor picks one
     var selAlpha = {}, hoverAlpha = {};
     countryKeys.forEach(function (key) { selAlpha[key] = key === selected ? 1 : 0; hoverAlpha[key] = 0; });
     var hoverCountry = null, hoverLocation = null, focusLocation = null, shownCountry = null;
@@ -426,16 +428,16 @@ var EDGE_MIN_SPEED = 0.12;        // fraction of full speed right at an end
     /* --- Selection ---------------------------------------------------------------------- */
     function renderList() {
       if (!list) return;
-      if (listTitle) listTitle.textContent = countries[selected].label;
+      if (listTitle) listTitle.textContent = selected ? 'Locations in ' + countries[selected].label : 'All locations';
       list.innerHTML = '';
-      locations.filter(function (l) { return l.country === selected; }).forEach(function (loc) {
+      locations.filter(function (l) { return !selected || l.country === selected; }).forEach(function (loc) {
         var item = document.createElement('li');
         var button = document.createElement('button');
         button.type = 'button';
         button.textContent = loc.name;
         button.addEventListener('focus', function () {
           focusLocation = loc;
-          if (!loc.visible || loc.depth < 0.25) centre(selected);      // bring it to the front
+          if (!loc.visible || loc.depth < 0.25) centre(loc.country);   // bring it to the front
           invalidate();
         });
         button.addEventListener('blur', function () { if (focusLocation === loc) focusLocation = null; resumeSoon(300); invalidate(); });
@@ -451,13 +453,13 @@ var EDGE_MIN_SPEED = 0.12;        // fraction of full speed right at an end
       invalidate();
     }
     function select(key, options) {
-      if (!countries[key]) return;
+      if (key !== null && !countries[key]) return;
       options = options || {};
       var changed = key !== selected;
       selected = key;
-      root.setAttribute('data-country', key);
+      if (key) root.setAttribute('data-country', key); else root.removeAttribute('data-country');
       if (changed) { focusLocation = null; renderList(); }
-      if (options.centre) centre(key);
+      if (options.centre && key) centre(key);
       if (options.emit !== false) {
         root.dispatchEvent(new CustomEvent('globe:select', { bubbles: true, detail: { country: key, source: options.source || 'globe' } }));
       }

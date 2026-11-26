@@ -1,16 +1,17 @@
-/* Footprints section: market tabs and project panel, kept in sync with the globe.
-   Tabs  -> globe : dispatches "footprints:select" on the globe element
-   Globe -> tabs  : listens for "globe:select" (a country clicked on the canvas)
+/* Footprints section: country chips and project panel, kept in sync with the globe.
+   Nothing is selected on load. Clicking the selected chip again clears the selection.
+   Chips -> globe : dispatches "footprints:select" on the globe element (country null = none)
+   Globe -> chips : listens for "globe:select" (a country clicked on the canvas)
    Panel          : flag + country, a tab per project status that exists for that country, and a chip
                     per project. Everything is derived from data/projects.json. */
 (function () {
   'use strict';
 
   function init(section) {
-    var tablist = section.querySelector('[data-tabs]');
+    var markets = section.querySelector('[data-fp-markets]');
     var globe = section.querySelector('[data-globe]');
-    if (!tablist || !globe) return;
-    var tabs = Array.prototype.slice.call(tablist.querySelectorAll('[role="tab"]'));
+    if (!markets || !globe) return;
+    var pills = Array.prototype.slice.call(markets.querySelectorAll('[data-country]'));
 
     var panel = section.querySelector('[data-fp-panel]');
     var flag = section.querySelector('[data-fp-flag]');
@@ -22,37 +23,24 @@
     var country = null;              // selected country key, or null when nothing is selected
     var status = null;               // active status tab
 
-    /* --- Market tabs (unchanged behaviour) ---------------------------------------- */
-    function setActive(key, focus) {
-      tabs.forEach(function (tab) {
-        var active = tab.getAttribute('data-country') === key;
-        tab.classList.toggle('is-active', active);
-        tab.setAttribute('aria-selected', String(active));
-        tab.tabIndex = active ? 0 : -1;
-        if (active) {
-          globe.setAttribute('aria-labelledby', tab.id);
-          if (focus) tab.focus();
-        }
+    /* --- Country chips ------------------------------------------------------------ */
+    function setActive(key) {
+      pills.forEach(function (pill) {
+        var active = pill.getAttribute('data-country') === key;
+        pill.classList.toggle('is-active', active);
+        pill.setAttribute('aria-pressed', String(active));
       });
     }
 
-    function choose(key, focus) {
-      setActive(key, focus);
+    function choose(key) {
+      setActive(key);
       showCountry(key);
       globe.dispatchEvent(new CustomEvent('footprints:select', { detail: { country: key } }));
     }
 
-    tabs.forEach(function (tab, i) {
-      tab.addEventListener('click', function () { choose(tab.getAttribute('data-country')); });
-      tab.addEventListener('keydown', function (event) {
-        var target = -1;
-        if (event.key === 'ArrowRight') target = (i + 1) % tabs.length;
-        else if (event.key === 'ArrowLeft') target = (i - 1 + tabs.length) % tabs.length;
-        else if (event.key === 'Home') target = 0;
-        else if (event.key === 'End') target = tabs.length - 1;
-        if (target < 0) return;
-        event.preventDefault();
-        choose(tabs[target].getAttribute('data-country'), true);
+    pills.forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        choose(pill.classList.contains('is-active') ? null : pill.getAttribute('data-country'));
       });
     });
 
@@ -80,14 +68,13 @@
       statusList.innerHTML = '';
       available.forEach(function (name) {
         var count = list.filter(function (p) { return p.status === name; }).length;
-        var tab = el('button', 'fp-status__tab');
+        var tab = el('button', 'tab');
         tab.type = 'button';
         tab.setAttribute('role', 'tab');
         tab.setAttribute('data-status', name);
         tab.id = 'fp-status-' + name.toLowerCase();
         tab.setAttribute('aria-controls', chips.id);
-        tab.appendChild(el('span', 'fp-status__badge', String(count)));
-        tab.appendChild(el('span', '', name));
+        tab.appendChild(el('span', '', name + ' (' + count + ')'));
         tab.addEventListener('click', function () { setStatus(name); });
         tab.addEventListener('keydown', function (event) {
           var all = Array.prototype.slice.call(statusList.children), i = all.indexOf(tab), target = -1;
@@ -153,7 +140,10 @@
         .then(function (r) { return r.json(); })
         .then(function (json) {
           data = json;
-          var active = tablist.querySelector('[role="tab"].is-active');
+          pills.forEach(function (pill) {
+            pill.querySelector('[data-fp-count]').textContent = projectsOf(pill.getAttribute('data-country')).length;
+          });
+          var active = markets.querySelector('.is-active');      // a chip clicked before the data arrived
           showCountry(active ? active.getAttribute('data-country') : null);
         })
         .catch(function (error) { console.error('[footprints]', error); });
