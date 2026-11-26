@@ -18,7 +18,8 @@
   --x-cs-gallery-gap: calc(144 * var(--u));
   --x-cs-sticky-top: calc(var(--x-nav-height) + 40 * var(--u));  /* PLACEHOLDER: intro sticks below the nav */
   --x-cs-arrow: calc(48 * var(--u));                       /* 250:970 */
-  --x-cs-lightbox-scrim: rgb(54 22 42 / 0.94);             /* PLACEHOLDER: lightbox not in Figma */
+  --x-cs-lightbox-scrim: rgb(54 22 42 / 0.8);              /* PLACEHOLDER: lightbox not in Figma. Plum, slightly see-through */
+  --x-cs-lightbox-blur: blur(calc(12 * var(--u)));
   --x-cs-lightbox-img-h: calc(100dvh - 200 * var(--u));
 }
 
@@ -118,8 +119,8 @@
 .cs-gallery__grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-auto-rows: calc((100cqw - 3 * var(--layout-gutter)) / 4);
-  gap: var(--layout-gutter);
+  grid-auto-rows: calc((100cqw - 3 * var(--space-16)) / 4);
+  gap: var(--space-16);  /* 16px between images (Figma 334:167) */
 }
 .cs-gallery__cell { min-width: var(--space-0); min-height: var(--space-0); }
 .cs-gallery__cell--1 { grid-area: 1 / 1 / span 2 / span 2; }
@@ -161,13 +162,17 @@
   margin: var(--space-0);
   padding: var(--space-0);
   border: var(--space-0);
-  background: var(--x-cs-lightbox-scrim);
+  background: transparent;
   color: var(--color-white);
   --focus-color: var(--color-white);
 }
 .cs-lightbox:not([open]) { display: none; }
 .cs-lightbox[open] { display: flex; align-items: center; justify-content: center; }
-.cs-lightbox::backdrop { background: var(--x-cs-lightbox-scrim); }
+.cs-lightbox::backdrop {
+  background: var(--x-cs-lightbox-scrim);
+  backdrop-filter: var(--x-cs-lightbox-blur);
+  -webkit-backdrop-filter: var(--x-cs-lightbox-blur);
+}
 .cs-lightbox__figure {
   display: flex;
   flex-direction: column;
