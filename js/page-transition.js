@@ -24,10 +24,16 @@
     if (!isInternal(a, e) || reduced) return;
     e.preventDefault();
     var url = a.href;
+    root.classList.remove('pt-arriving');  // the arrival state must not override the next cover
     root.classList.add('pt-leaving');
     try { sessionStorage.setItem('pt-arrive', '1'); } catch (err) { /* private mode: navigate without the arrival slide */ }
     setTimeout(function () { location.href = url; }, LEAVE_MS + HOLD_MS);
   });
+
+  // Clear the arrival state once its slide has finished, so the next click starts from the bottom
+  if (root.classList.contains('pt-arriving')) {
+    setTimeout(function () { root.classList.remove('pt-arriving'); }, 1100);
+  }
 
   // Back and forward from the page cache: clear any leftover state
   window.addEventListener('pageshow', function (e) {
