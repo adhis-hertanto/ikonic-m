@@ -163,6 +163,8 @@
 }
 .nav__menu-link:hover,
 .nav__menu-link:focus-visible { background: var(--ecru-50); }
+.nav__menu-link:hover .nav__menu-icon,
+.nav__menu-link:focus-visible .nav__menu-icon { background: var(--color-white); }
 .nav__menu-icon {
   flex: none;
   display: grid;
