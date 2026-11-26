@@ -29,6 +29,11 @@
   -webkit-mask-image: url("../assets/svg/icon-search.svg");
   mask-image: url("../assets/svg/icon-search.svg");
 }
+/* Thin 1.25px search used in the top nav (Figma: Icons / Material / Search Thin) */
+.icon--search-thin {
+  -webkit-mask-image: url("../assets/svg/icon-search-thin.svg");
+  mask-image: url("../assets/svg/icon-search-thin.svg");
+}
 .icon--download {
   -webkit-mask-image: url("../assets/svg/icon-download.svg");
   mask-image: url("../assets/svg/icon-download.svg");

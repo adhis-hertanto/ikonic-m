@@ -17,16 +17,12 @@ const footer = down(between('<!-- FOOTER:START -->', '<!-- FOOTER:END -->'));
 const current = (html, slug) => html.replace(
   new RegExp(`(<a class="nav__link[^"]*" href="\\.\\./${slug}/")`), '$1 aria-current="page"');
 
-const pages = {
-  'news': 'News',
-  'contact': "Let's Connect",
-  'privacy-policy': 'Privacy Policy',
-  'terms': 'Terms & conditions',
-};
+const pages = {};
 
 // Built pages: only the shared chrome between the markers is replaced
 // Case Study sits under Our Works in the nav, so it marks that link as current
-const built = { 'our-solutions': 'our-solutions', 'about': 'about', 'our-works': 'our-works', 'case-study': 'our-works' };
+const built = { 'our-solutions': 'our-solutions', 'about': 'about', 'our-works': 'our-works', 'case-study': 'our-works',
+  'news': 'news', 'news-article': 'news', 'contact': 'contact', 'privacy-policy': 'privacy-policy', 'terms': 'terms' };
 for (const [slug, navSlug] of Object.entries(built)) {
   const file = join(root, slug, 'index.html');
   let html = readFileSync(file, 'utf8');
