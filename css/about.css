@@ -161,7 +161,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform var(--x-dur-slow) var(--x-ease);
 }
+.ab-feature:hover .ab-feature__img,
+.ab-feature:focus-within .ab-feature__img { transform: scale(1.04); }
 .ab-feature::before {                /* Overlay 217:4743 */
   content: "";
   position: absolute;
@@ -576,7 +579,7 @@ html.ab-drawer-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .ab-drawer__scrim,
   .ab-drawer__panel,
-  .ab-feature__more { transition: none; }
+  .ab-feature__more, .ab-feature__img { transition: none; }
 }
 .is-snapshot .ab-logos__track { transform: none; }
 
