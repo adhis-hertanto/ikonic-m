@@ -214,7 +214,7 @@
 /* Error state (PLACEHOLDER) */
 .ct-error { margin-top: var(--space-8); color: var(--brand-coral-red); }
 .ct-error[hidden] { display: none; }
-.ct-input { --field-stroke: var(--brand-sand); }               /* dark (plum) section */
+.ct-input { --field-stroke: var(--deep-plum-400); }           /* light plum: reads on the white fields inside the dark section */
 .ct-input[aria-invalid="true"] { --field-stroke: var(--brand-coral-red); border-color: var(--brand-coral-red); }
 .ct-group.is-invalid .ct-choice__mark { border-color: var(--brand-coral-red); }
 
