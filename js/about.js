@@ -43,3 +43,14 @@
     if (viewport) init(viewport);
   });
 })();
+
+/* Whole team card opens its profile. The "+" button stays the keyboard and screen reader control. */
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.ab-person').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (e.target.closest('button')) return;
+      var btn = card.querySelector('[data-drawer-open]');
+      if (btn) btn.click();
+    });
+  });
+});

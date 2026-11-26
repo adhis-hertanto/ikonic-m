@@ -574,3 +574,6 @@ html.ab-drawer-open { overflow: hidden; }
   .ab-feature__more { transition: none; }
 }
 .is-snapshot .ab-logos__track { transform: none; }
+
+/* Whole card is clickable */
+.ab-person { cursor: pointer; }

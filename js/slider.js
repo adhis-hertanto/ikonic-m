@@ -56,7 +56,7 @@
       st.top = y + 'px';
       st.width = w + 'px';
       st.height = h + 'px';
-      st.clipPath = 'polygon(' + cut + 'px 0, 100% 0, 100% 100%, 0 100%, 0 ' + cut + 'px)';
+      st.clipPath = 'none';  // square slides, no angled cut
       st.opacity = clamp(1 - s, 0, 1);
       st.zIndex = Math.round(100 - ad * 10);
       el.classList.toggle('is-near', ad < 2);
