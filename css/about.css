@@ -365,7 +365,8 @@
   clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
   transition: background-color var(--x-dur-fast) var(--x-ease);
 }
-.ab-person__open:hover { background: var(--ecru-200); }                                   /* PLACEHOLDER */
+.ab-person:hover .ab-person__open,
+.ab-person__open:hover { background: var(--brand-coral-red); color: var(--color-white); }
 .ab-person__open:active { transform: translateY(var(--x-hairline)); }                      /* PLACEHOLDER */
 .ab-person__open:focus-visible { outline-offset: calc(-2 * var(--x-focus-ring)); }
 .ab-person__text {
