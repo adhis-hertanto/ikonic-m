@@ -31,11 +31,16 @@
       <nav aria-label="Primary">
         <ul class="nav__main">
           <li><a class="nav__link" href="../about/">About</a></li>
-          <li>
+          <li class="nav__item nav__item--dropdown">
             <a class="nav__link nav__link--dropdown" href="../our-solutions/" aria-current="page">
               <span>Transformative Solutions</span>
               <span class="icon icon--chevron" aria-hidden="true"></span>
             </a>
+            <ul class="nav__menu">
+              <li><a class="nav__menu-link" href="../our-solutions/#retail-transformation">Retail Transformation</a></li>
+              <li><a class="nav__menu-link" href="../our-solutions/#retail-investments">Retail Investments</a></li>
+              <li><a class="nav__menu-link" href="../our-solutions/#retail-experiences">Retail Experiences</a></li>
+            </ul>
           </li>
           <li><a class="nav__link" href="../our-works/">Places that Ignite</a></li>
           <li><a class="nav__link" href="../news/">News</a></li>
@@ -70,7 +75,7 @@
     </section>
 
     <!-- Everything you need to transform retail (250:307): intro, then the capabilities slider (353:285) -->
-    <section class="section sx" aria-labelledby="sx-title">
+    <section class="section sx" id="retail-transformation" aria-labelledby="sx-title">
       <div class="sx__intro" data-reveal>
         <div class="sx__heading">
           <p class="eyebrow eyebrow--s">Retail transformation</p>
@@ -142,7 +147,7 @@
     </section>
 
     <!-- Unlocking robust investment solutions (250:349) -->
-    <section class="section split split--invest on-dark" aria-labelledby="invest-title">
+    <section class="section split split--invest on-dark" id="retail-investments" aria-labelledby="invest-title">
       <div class="shape tess tess--bl split__tess" data-shape="Tessellation / Join 371" aria-hidden="true"></div>
       <div class="split__intro" data-reveal>
         <div class="split__heading">
@@ -157,7 +162,7 @@
     </section>
 
     <!-- Creating experiences people want to be a part of (250:374) -->
-    <section class="ikonic" aria-labelledby="ikonic-title">
+    <section class="ikonic" id="retail-experiences" aria-labelledby="ikonic-title">
       <div class="ikonic__media">
         <img src="../assets/img/solutions-ikonic.jpg" alt="Shoppers on the open walkways of a multi-level retail destination" width="1280" height="853" loading="lazy">
         <div class="shape tess tess--tr ikonic__tess" data-shape="Tessellation / Join 220" aria-hidden="true"></div>

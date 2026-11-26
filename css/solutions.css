@@ -403,3 +403,6 @@
 .action-card:hover { background: var(--coral-red-600); }                              /* PLACEHOLDER */
 .action-card:hover .icon:not(.icon--download) { transform: translateX(var(--x-nudge)); } /* PLACEHOLDER */
 .action-card:hover .icon--download { transform: translateY(var(--x-nudge)); }            /* PLACEHOLDER */
+
+/* Dropdown anchors land below the sticky nav */
+.sx, .split--invest, .ikonic { scroll-margin-top: var(--x-nav-height); }

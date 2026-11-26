@@ -112,6 +112,44 @@
 .nav__link--dropdown .icon { transform: rotate(180deg); }
 .nav__link--dropdown:hover .icon,
 .nav__link--dropdown:focus-visible .icon { transform: rotate(0deg); }
+/* Solutions dropdown: opens on hover or keyboard focus within the item */
+.nav__item--dropdown { position: relative; }
+.nav__menu {
+  position: absolute;
+  top: 100%;
+  left: calc(var(--space-0) - var(--space-16));
+  z-index: var(--x-z-nav);
+  min-width: 280px;
+  margin: var(--space-0);
+  padding: var(--space-16) var(--space-24) var(--space-20);
+  list-style: none;
+  background: var(--color-white);
+  box-shadow: var(--x-nav-shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(var(--space-8));
+  transition:
+    opacity var(--x-dur-fast) var(--x-ease),
+    transform var(--x-dur-fast) var(--x-ease),
+    visibility 0s linear var(--x-dur-fast);
+}
+.nav__item--dropdown:hover .nav__menu,
+.nav__item--dropdown:focus-within .nav__menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(var(--space-0));
+  transition-delay: 0s;
+}
+.nav__menu-link {
+  display: block;
+  padding: var(--space-8) var(--space-0);
+  font-size: var(--text-link-nav-size);
+  line-height: var(--text-link-nav-lh);
+  color: var(--deep-plum-950);
+  white-space: nowrap;
+}
+.nav__menu-link:hover,
+.nav__menu-link:focus-visible { color: var(--brand-coral-red); }
 .nav__link:hover { color: var(--brand-coral-red); }              /* PLACEHOLDER */
 .nav__actions {
   display: flex;
