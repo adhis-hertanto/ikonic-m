@@ -1,0 +1,268 @@
+/* ==========================================================================
+   Case Study page (Figma frame 250:858)
+   Prefix: cs-. Loads after works.css (project card is shared).
+   ========================================================================== */
+
+/* --- page tokens (Figma V6) ------------------------------------------------- */
+:root {
+  --x-cs-hero-h: calc(480 * var(--u));                     /* 285:158 */
+  --x-cs-hero-content-w: calc(816 * var(--u));             /* 285:162 */
+  --x-cs-hero-img-w: calc(592 * var(--u));                 /* 285:159 */
+  --shape-cs-hero-cut: calc(273 * var(--u));               /* Cut TL, filled by 285:160 */
+  --shape-cs-tess-coral: calc(273 * var(--u));
+  --shape-cs-tess-coral-right: calc(319 * var(--u));       /* 1440 - 848 - 273 */
+  --shape-cs-tess-sand: calc(208 * var(--u));              /* 285:161, right angle bottom right */
+  --x-cs-text-h5-size: calc(22 * var(--u));                /* Desktop/Heading/H5 22/30 */
+  --x-cs-text-h5-lh: calc(30 * var(--u));
+  --x-cs-gallery-intro-w: calc(304 * var(--u));            /* 334:165 */
+  --x-cs-gallery-gap: calc(144 * var(--u));
+  --x-cs-sticky-top: calc(var(--x-nav-height) + 40 * var(--u));  /* PLACEHOLDER: intro sticks below the nav */
+  --x-cs-arrow: calc(48 * var(--u));                       /* 250:970 */
+  --x-cs-lightbox-scrim: rgb(54 22 42 / 0.94);             /* PLACEHOLDER: lightbox not in Figma */
+  --x-cs-lightbox-img-h: calc(100dvh - 200 * var(--u));
+}
+
+/* --- Inner hero (285:158) ---------------------------------------------------- */
+.cs-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: var(--x-cs-hero-h);
+  overflow: hidden;
+  background: var(--brand-deep-plum);
+  color: var(--color-white);
+}
+.cs-hero__img {
+  position: absolute;
+  top: var(--space-0);
+  right: var(--space-0);
+  width: var(--x-cs-hero-img-w);
+  height: 100%;
+  object-fit: cover;
+  --cut: var(--shape-cs-hero-cut);
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+}
+.cs-hero__tess-coral,
+.cs-hero__tess-sand { z-index: 1; }
+.cs-hero__tess-coral {
+  --shape-size: var(--shape-cs-tess-coral);
+  --shape-color: var(--brand-coral-red);
+  top: var(--space-0);
+  right: calc(var(--x-cs-hero-img-w) - var(--shape-cs-tess-coral));
+}
+.cs-hero__tess-sand {
+  --shape-size: var(--shape-cs-tess-sand);
+  --shape-color: var(--brand-sand);
+  bottom: var(--space-0);
+  right: var(--x-cs-hero-img-w);
+}
+.cs-hero__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-32);
+  width: var(--x-cs-hero-content-w);
+  max-width: 100%;
+  padding: var(--space-64) var(--space-64) var(--space-64) var(--layout-margin);
+}
+.cs-hero__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  width: 100%;
+}
+.cs-hero__meta { color: var(--brand-sand); }
+.cs-hero__lead { font-size: var(--text-subline-l-size); max-width: calc(752 * var(--u)); }
+.cs-hero__link {
+  font-size: var(--text-body-s-size);
+  line-height: var(--text-body-s-lh);
+}
+
+/* --- Gallery (250:949) ------------------------------------------------------- */
+.cs-gallery {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--x-cs-gallery-gap);
+  padding-block: var(--layout-section-py);
+  background: var(--color-white);
+  color: var(--brand-deep-plum);
+}
+.cs-gallery__intro {
+  position: sticky;
+  top: var(--x-cs-sticky-top);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-40);
+  flex: none;
+  width: var(--x-cs-gallery-intro-w);
+}
+.cs-gallery__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+.cs-gallery__heading {
+  font-size: var(--x-cs-text-h5-size);
+  line-height: var(--x-cs-text-h5-lh);
+  font-weight: var(--font-weight-regular);
+}
+.cs-gallery__masonry {
+  flex: 1 0 0;
+  min-width: var(--space-0);
+  container-type: inline-size;
+}
+/* 4 equal columns; a "square" spans 1 col x 1 row, so rows follow the column width */
+.cs-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: calc((100cqw - 3 * var(--layout-gutter)) / 4);
+  gap: var(--layout-gutter);
+}
+.cs-gallery__cell { min-width: var(--space-0); min-height: var(--space-0); }
+.cs-gallery__cell--1 { grid-area: 1 / 1 / span 2 / span 2; }
+.cs-gallery__cell--2 { grid-area: 1 / 3 / span 1 / span 2; }
+.cs-gallery__cell--3 { grid-area: 2 / 3; }
+.cs-gallery__cell--4 { grid-area: 2 / 4; }
+.cs-gallery__cell--5 { grid-area: 3 / 1 / span 2 / span 1; }
+.cs-gallery__cell--6 { grid-area: 3 / 2 / span 2 / span 3; }
+.cs-gallery__cell--7 { grid-area: 5 / 1 / span 2 / span 3; }
+.cs-gallery__cell--8 { grid-area: 5 / 4 / span 2 / span 1; }
+.cs-gallery__item {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+.cs-gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--x-dur-slow) var(--x-ease);
+}
+.cs-gallery__item:hover img { transform: scale(1.04); }                         /* PLACEHOLDER */
+.cs-gallery__item:focus-visible {
+  outline: var(--x-focus-ring) solid var(--focus-color);
+  outline-offset: var(--x-focus-ring);
+}
+
+/* Lightbox (PLACEHOLDER: not in Figma). Native <dialog>, created by gallery.js */
+.cs-lightbox {
+  position: fixed;
+  inset: var(--space-0);
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: var(--space-0);
+  padding: var(--space-0);
+  border: var(--space-0);
+  background: var(--x-cs-lightbox-scrim);
+  color: var(--color-white);
+  --focus-color: var(--color-white);
+}
+.cs-lightbox:not([open]) { display: none; }
+.cs-lightbox[open] { display: flex; align-items: center; justify-content: center; }
+.cs-lightbox::backdrop { background: var(--x-cs-lightbox-scrim); }
+.cs-lightbox__figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-16);
+  max-width: calc(100% - 2 * (var(--x-cs-arrow) + var(--space-32) + var(--space-16)));
+}
+.cs-lightbox__img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: var(--x-cs-lightbox-img-h);
+  object-fit: contain;
+}
+.cs-lightbox__count { color: var(--brand-ecru); }
+.cs-lightbox__btn {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--x-cs-arrow);
+  height: var(--x-cs-arrow);
+  background: var(--brand-coral-red);
+  color: var(--color-white);
+  transition: background-color var(--x-dur-fast) var(--x-ease);
+}
+.cs-lightbox__btn:hover { background: var(--coral-red-600); }                    /* PLACEHOLDER */
+.cs-lightbox__btn--prev { left: var(--space-32); top: 50%; margin-top: calc(var(--x-cs-arrow) / -2); }
+.cs-lightbox__btn--prev .icon { transform: rotate(180deg); }
+.cs-lightbox__btn--next { right: var(--space-32); top: 50%; margin-top: calc(var(--x-cs-arrow) / -2); }
+.cs-lightbox__btn--close { top: var(--space-32); right: var(--space-32); }
+.cs-lightbox__btn--close .icon {
+  -webkit-mask-image: url("../assets/svg/cs-icon-close.svg");
+  mask-image: url("../assets/svg/cs-icon-close.svg");
+}
+
+/* --- Related assets (250:966) ------------------------------------------------ */
+.cs-related {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-72);
+  padding-block: var(--layout-section-py);
+  background: var(--color-white);
+  color: var(--brand-deep-plum);
+}
+.cs-related__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-32);
+}
+.cs-related__arrows { display: flex; gap: var(--space-8); }
+.cs-related__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--x-cs-arrow);
+  height: var(--x-cs-arrow);
+  background: var(--brand-coral-red);
+  color: var(--color-white);
+  transition: background-color var(--x-dur-fast) var(--x-ease);
+}
+.cs-related__btn--prev .icon { transform: rotate(180deg); }
+.cs-related__btn:hover { background: var(--coral-red-600); }                      /* PLACEHOLDER */
+.cs-related__btn--next:hover .icon { transform: translateX(var(--x-nudge)); }     /* PLACEHOLDER */
+.cs-related__btn--prev:hover .icon { transform: rotate(180deg) translateX(var(--x-nudge)); }
+.cs-related__btn[aria-disabled="true"] {                                          /* PLACEHOLDER */
+  background: var(--brand-ecru);
+  color: var(--ecru-400);
+  cursor: default;
+}
+.cs-related__btn[aria-disabled="true"] .icon { transform: rotate(0); }
+.cs-related__btn--prev[aria-disabled="true"] .icon { transform: rotate(180deg); }
+.cs-related__viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.cs-related__viewport::-webkit-scrollbar { display: none; }
+.cs-related__track {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--layout-gutter);
+}
+.cs-related__slide {
+  flex: 0 0 calc((100% - 2 * var(--layout-gutter)) / 3);
+  scroll-snap-align: start;
+}
+.cs-related .works-card__link:focus-visible::after { outline-offset: calc(-1 * var(--x-focus-ring)); }
+.cs-related__actions { display: flex; justify-content: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-related__viewport { scroll-behavior: auto; }
+}
+.is-snapshot .cs-related__viewport { scroll-behavior: auto; }

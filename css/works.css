@@ -1,0 +1,339 @@
+/* ==========================================================================
+   Our Works (Figma frame 250:630) and styles shared with Case Study (250:858)
+   Prefix: works-. Values come from tokens.css, except the page tokens below.
+   ========================================================================== */
+
+/* --- page tokens (Figma V6) ------------------------------------------------- */
+:root {
+  --x-works-hero-h: calc(480 * var(--u));                  /* 340:288 */
+  --x-works-hero-content-w: calc(816 * var(--u));          /* 340:291 */
+  --x-works-hero-overlay: linear-gradient(251.565deg, rgb(0 0 0 / 0.2) 0%, rgb(0 0 0 / 0.2) 40%, rgb(0 0 0 / 0.4) 55.748%, rgb(0 0 0 / 0.6) 100%);
+  --shape-tess-works-sand: calc(226 * var(--u));           /* 340:289, right angle top left */
+  --shape-tess-works-sand-right: calc(70 * var(--u));
+  --shape-tess-works-coral: calc(254 * var(--u));          /* 340:290, right angle bottom right */
+  --shape-tess-works-coral-right: calc(296 * var(--u));
+  --x-works-intro-w: calc(752 * var(--u));                 /* 250:665 */
+  --x-works-type-h: calc(506 * var(--u));                  /* 348:289 */
+  --x-works-type-w: calc(208 * var(--u));                  /* collapsed card */
+  --x-works-type-gap: calc(16 * var(--u));
+  --shape-works-cut: calc(64 * var(--u));                  /* Holder / Image / Cut TL */
+  --x-works-index-size: calc(13 * var(--u));               /* Subline/S as used on 348:296: 13/16 */
+  --x-works-index-lh: calc(16 * var(--u));
+  --x-works-tagline-size: calc(18 * var(--u));             /* Mobile/Subline/M used on desktop, 348:298 */
+  --x-works-tagline-lh: calc(26 * var(--u));
+  --x-works-scrim-closed: linear-gradient(to bottom, rgb(0 0 0 / 0) 0%, rgb(0 0 0 / 0.15) 40%, rgb(0 0 0 / 0.65) 70%, rgb(0 0 0 / 0.97) 100%);
+  --x-works-scrim-open: linear-gradient(to bottom, rgb(0 0 0 / 0) 0%, rgb(0 0 0 / 0.25) 30%, rgb(0 0 0 / 0.8) 65%, rgb(0 0 0 / 0.97) 100%);
+  --x-works-dot: calc(8 * var(--u));
+  --x-works-filter-w: calc(304 * var(--u));                /* 250:704 */
+  --x-works-filter-h: calc(48 * var(--u));
+  --x-works-card-img-h: calc(312 * var(--u));              /* 4:3 at 416 wide */
+  --x-works-type-dur: 600ms;                               /* PLACEHOLDER: card expand time */
+}
+
+/* --- Hero (340:288) ----------------------------------------------------------- */
+.works-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: var(--x-works-hero-h);
+  overflow: hidden;
+  background: var(--brand-deep-plum);
+  color: var(--color-white);
+}
+.works-hero__img {
+  position: absolute;
+  inset: var(--space-0);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.works-hero::after {
+  content: "";
+  position: absolute;
+  inset: var(--space-0);
+  background-image: var(--x-works-hero-overlay);
+}
+.works-hero__tess-sand,
+.works-hero__tess-coral,
+.works-hero__content { z-index: 1; }
+.works-hero__tess-sand {
+  --shape-size: var(--shape-tess-works-sand);
+  --shape-color: var(--brand-sand);
+  top: var(--space-0);
+  right: var(--shape-tess-works-sand-right);
+}
+.works-hero__tess-coral {
+  --shape-size: var(--shape-tess-works-coral);
+  --shape-color: var(--brand-coral-red);
+  bottom: var(--space-0);
+  right: var(--shape-tess-works-coral-right);
+}
+.works-hero__content {
+  position: relative;
+  width: var(--x-works-hero-content-w);
+  max-width: 100%;
+  padding: var(--space-64) var(--space-64) var(--space-64) var(--layout-margin);
+}
+
+/* --- Our world of retail (250:664) -------------------------------------------- */
+.works-world {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-72);
+  padding-top: var(--layout-section-py);
+  padding-bottom: var(--space-160);
+  background: var(--brand-deep-plum);
+  color: var(--color-white);
+}
+.works-world__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--layout-gutter);
+  width: var(--x-works-intro-w);
+  max-width: 100%;
+}
+.works-world__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  padding-top: var(--space-8);
+}
+
+/* Expanding cards: one open at a time. Collapsed 208 wide, open fills the rest (640 at 1440). */
+.works-types {
+  --works-open-w: calc(100% - 3 * (var(--x-works-type-w) + var(--x-works-type-gap)));
+  display: flex;
+  gap: var(--x-works-type-gap);
+  height: var(--x-works-type-h);
+}
+.works-type {
+  position: relative;
+  flex: 0 0 var(--x-works-type-w);
+  min-width: var(--space-0);
+  overflow: hidden;
+  background: var(--brand-deep-plum);
+  --cut: var(--shape-works-cut);
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+  transition: flex-basis var(--x-works-type-dur) var(--x-ease-inout);
+}
+.works-type.is-open { flex-basis: var(--works-open-w); }
+.works-type__img {
+  position: absolute;
+  z-index: 0;
+  inset: var(--space-0);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.works-type::before,
+.works-type::after {
+  content: "";
+  position: absolute;
+  inset: var(--space-0);
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity var(--x-dur) var(--x-ease);
+}
+.works-type::before { background: var(--x-works-scrim-closed); }
+.works-type::after { background: var(--x-works-scrim-open); opacity: 0; }
+.works-type.is-open::after { opacity: 1; }
+.works-type__content {
+  position: absolute;
+  left: var(--space-0);
+  bottom: var(--space-0);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  width: 100%;
+  padding: var(--space-0) var(--space-32) var(--space-32);
+}
+.works-type__index {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-size: var(--x-works-index-size);
+  line-height: var(--x-works-index-lh);
+  font-weight: var(--font-weight-medium);
+}
+.works-type__index::before {
+  content: "";
+  flex: none;
+  width: var(--x-works-dot);
+  height: var(--x-works-dot);
+  border-radius: 50%;
+  background: var(--brand-coral-red);
+}
+.works-type__trigger {
+  display: block;
+  width: 100%;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+}
+/* the whole card is the hit area */
+.works-type__trigger::after {
+  content: "";
+  position: absolute;
+  inset: var(--space-0);
+}
+.works-type__trigger:focus-visible { outline: none; }
+.works-type__trigger:focus-visible::after {
+  outline: var(--x-focus-ring) solid var(--color-white);
+  outline-offset: calc(-3 * var(--x-focus-ring));
+}
+.works-type__more {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--x-works-type-dur) var(--x-ease-inout),
+    opacity var(--x-dur-fast) var(--x-ease);
+}
+.works-type.is-open .works-type__more {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition:
+    grid-template-rows var(--x-works-type-dur) var(--x-ease-inout),
+    opacity var(--x-dur) var(--x-ease) calc(var(--x-works-type-dur) / 3);
+}
+.works-type__more-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  min-height: var(--space-0);
+  overflow: hidden;
+}
+.works-type__tagline {
+  font-size: var(--x-works-tagline-size);
+  line-height: var(--x-works-tagline-lh);
+  font-weight: var(--font-weight-medium);
+  color: var(--brand-ecru);
+}
+/* Without JS every card shows its copy and stacks */
+html:not(.js) .works-types { flex-wrap: wrap; height: auto; }
+html:not(.js) .works-type { flex: 1 1 var(--x-works-type-w); min-height: var(--x-works-type-h); }
+html:not(.js) .works-type__more { grid-template-rows: 1fr; opacity: 1; }
+
+/* --- Our works listing (250:698) ---------------------------------------------- */
+.works-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-96);
+  padding-block: var(--layout-section-py);
+  background: var(--color-white);
+  color: var(--brand-deep-plum);
+}
+.works-list__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--x-gap-48);
+}
+.works-list__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+.works-list__intro { width: var(--x-works-intro-w); max-width: 100%; }
+.works-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-16);
+}
+.works-filter {
+  position: relative;
+  width: var(--x-works-filter-w);
+  max-width: 100%;
+  height: var(--x-works-filter-h);
+}
+.works-filter__select {
+  width: 100%;
+  height: 100%;
+  padding: var(--space-0) calc(var(--space-16) * 2 + var(--x-icon)) var(--space-0) var(--space-16);
+  border: var(--x-hairline) solid var(--ecru-300);
+  border-radius: var(--space-0);
+  background: var(--color-white);
+  color: var(--brand-deep-plum);
+  font-size: var(--text-body-m-size);
+  line-height: var(--text-body-m-lh);
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  text-overflow: ellipsis;
+}
+.works-filter__select:hover { border-color: var(--ecru-400); }                         /* PLACEHOLDER */
+.works-filter__select:focus-visible {
+  outline: var(--x-focus-ring) solid var(--focus-color);
+  outline-offset: var(--x-focus-ring);
+}
+.works-filter__select.is-filtered { border-color: var(--brand-deep-plum); }            /* PLACEHOLDER */
+.works-filter .icon {
+  position: absolute;
+  top: 50%;
+  right: var(--space-16);
+  margin-top: calc(var(--x-icon) / -2);
+  transform: rotate(180deg);
+  pointer-events: none;
+}
+.works-filter__select:focus-visible + .icon { transform: rotate(0deg); }
+.works-list__status { color: var(--ecru-700); }
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--layout-gutter);
+  row-gap: var(--space-64);
+  align-items: start;
+}
+.works-grid__empty { grid-column: 1 / -1; }
+.works-grid__empty[hidden] { display: none; }
+
+/* --- Project card (250:712). Also used by the Case Study related carousel ------- */
+.works-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  min-width: var(--space-0);
+}
+.works-card[hidden] { display: none; }
+.works-card__photo {
+  height: var(--x-works-card-img-h);
+  overflow: hidden;
+  --cut: var(--shape-works-cut);
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+}
+.works-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--x-dur-slow) var(--x-ease);
+}
+.works-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+}
+.works-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+.works-card__place { color: var(--brand-sand); }
+/* the whole card is the link */
+.works-card__link::after {
+  content: "";
+  position: absolute;
+  inset: var(--space-0);
+}
+.works-card__link:focus-visible { outline: none; }
+.works-card__link:focus-visible::after {
+  outline: var(--x-focus-ring) solid var(--focus-color);
+  outline-offset: var(--x-focus-ring);
+}
+.works-card:hover .works-card__photo img { transform: scale(1.04); }                   /* PLACEHOLDER */
+.works-card:hover .works-card__link .icon { transform: translateX(var(--x-nudge)); }   /* PLACEHOLDER */
+
+@media (prefers-reduced-motion: reduce) {
+  .works-type, .works-type__more { transition: none; }
+}
+.is-snapshot .works-type, .is-snapshot .works-type__more { transition: none !important; }
