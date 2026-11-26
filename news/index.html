@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../css/tokens.css">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/news.css">
   <script>document.documentElement.classList.add('js');</script>
   <script>try{if(sessionStorage.getItem('pt-arrive')){sessionStorage.removeItem('pt-arrive');document.documentElement.classList.add('pt-arriving')}}catch(e){}</script>
 </head>
@@ -75,11 +76,110 @@
   <!-- NAV:END -->
 
   <main id="main">
-    <section class="stub">
-      <p class="eyebrow">News</p>
-      <h1 class="t-h1">Page coming soon</h1>
-      <a class="link" href="../"><span>Back to home</span><span class="icon" aria-hidden="true"></span></a>
+
+    <!-- Inner Hero B3 Graphic led, Ecru (285:174) -->
+    <section class="news-hero" aria-labelledby="news-hero-title">
+      <div class="news-hero__art">
+        <img class="news-hero__img" src="../assets/img/news-hero.jpg" alt="" width="1408" height="960">
+        <div class="shape tess tess--tl news-hero__tess-sand" data-shape="Tessellation / Join 320" aria-hidden="true"></div>
+        <div class="shape tess tess--br news-hero__tess-coral" data-shape="Tessellation / Join 160" aria-hidden="true"></div>
+      </div>
+      <div class="news-hero__content">
+        <h1 class="t-display-l news-hero__title" id="news-hero-title">What’s next in retail, starts here.</h1>
+      </div>
     </section>
+
+    <!-- News listing (250:1118) -->
+    <section class="section news-list on-dark" aria-label="News and insights">
+      <ul class="news-list__grid" data-news-grid>
+        <li data-reveal>
+          <a class="card" href="../news-article/">
+            <span class="card__photo" data-shape="Card / Coral panel"><img src="../assets/img/news-1.jpg" alt="" width="672" height="1007" loading="lazy"></span>
+            <span class="card__content">
+              <span class="card__text" data-shape="Card / Text panel">
+                <span class="card__title t-subline-l" role="heading" aria-level="3">Why the next decade of retail belongs to places, not just stores</span>
+                <span class="card__meta t-body-s">Insights · 18 Sep 2026</span>
+              </span>
+              <span class="card__more" data-shape="Card / Read more"><span class="icon icon--l" aria-hidden="true"></span></span>
+            </span>
+          </a>
+        </li>
+        <li data-reveal>
+          <a class="card" href="../news-article/">
+            <span class="card__photo" data-shape="Card / Coral panel"><img src="../assets/img/news-2.jpg" alt="" width="674" height="1007" loading="lazy"></span>
+            <span class="card__content">
+              <span class="card__text" data-shape="Card / Text panel">
+                <span class="card__title t-subline-l" role="heading" aria-level="3">IKONIC-M appointed to reposition a mixed-use podium in Ho Chi Minh City</span>
+                <span class="card__meta t-body-s">News · 9 Sep 2026</span>
+              </span>
+              <span class="card__more" data-shape="Card / Read more"><span class="icon icon--l" aria-hidden="true"></span></span>
+            </span>
+          </a>
+        </li>
+        <li data-reveal>
+          <a class="card" href="../news-article/">
+            <span class="card__photo" data-shape="Card / Coral panel"><img src="../assets/img/news-3.jpg" alt="" width="672" height="1008" loading="lazy"></span>
+            <span class="card__content">
+              <span class="card__text" data-shape="Card / Text panel">
+                <span class="card__title t-subline-l" role="heading" aria-level="3">Join us at the Asia Retail Leaders Forum 2026</span>
+                <span class="card__meta t-body-s">Events · 2 Sep 2026</span>
+              </span>
+              <span class="card__more" data-shape="Card / Read more"><span class="icon icon--l" aria-hidden="true"></span></span>
+            </span>
+          </a>
+        </li>
+        <li data-reveal>
+          <a class="card" href="../news-article/">
+            <span class="card__photo" data-shape="Card / Coral panel"><img src="../assets/img/news-4.jpg" alt="" width="832" height="1008" loading="lazy"></span>
+            <span class="card__content">
+              <span class="card__text" data-shape="Card / Text panel">
+                <span class="card__title t-subline-l" role="heading" aria-level="3">Tenant curation in the age of the experience economy</span>
+                <span class="card__meta t-body-s">Insights · 21 Aug 2026</span>
+              </span>
+              <span class="card__more" data-shape="Card / Read more"><span class="icon icon--l" aria-hidden="true"></span></span>
+            </span>
+          </a>
+        </li>
+        <li data-reveal>
+          <a class="card" href="../news-article/">
+            <span class="card__photo" data-shape="Card / Coral panel"><img src="../assets/img/news-5.jpg" alt="" width="832" height="1008" loading="lazy"></span>
+            <span class="card__content">
+              <span class="card__text" data-shape="Card / Text panel">
+                <span class="card__title t-subline-l" role="heading" aria-level="3">Twelve new lifestyle brands join our Urban Connect destinations</span>
+                <span class="card__meta t-body-s">News · 12 Aug 2026</span>
+              </span>
+              <span class="card__more" data-shape="Card / Read more"><span class="icon icon--l" aria-hidden="true"></span></span>
+            </span>
+          </a>
+        </li>
+        <li data-reveal>
+          <a class="card" href="../news-article/">
+            <span class="card__photo" data-shape="Card / Coral panel"><img src="../assets/img/news-6.jpg" alt="" width="832" height="1008" loading="lazy"></span>
+            <span class="card__content">
+              <span class="card__text" data-shape="Card / Text panel">
+                <span class="card__title t-subline-l" role="heading" aria-level="3">Retail outlook briefing: Vietnam in 2027</span>
+                <span class="card__meta t-body-s">Events · 30 Jul 2026</span>
+              </span>
+              <span class="card__more" data-shape="Card / Read more"><span class="icon icon--l" aria-hidden="true"></span></span>
+            </span>
+          </a>
+        </li>
+      </ul>
+      <div class="news-list__actions">
+        <button class="btn btn--outline-light" type="button" data-news-more>Load more</button>
+      </div>
+      <p class="visually-hidden" role="status" aria-live="polite" data-news-status></p>
+    </section>
+
+    <!-- PLACEHOLDER: the Figma frame only shows the first six stories. These extra entries (copy not from Figma)
+         exist so "Load more" has something to load; replace with real stories. -->
+    <script type="application/json" id="news-more">
+    [
+      {"img":"news-2.jpg","w":674,"h":1007,"title":"Placeholder story: how destinations keep shoppers coming back","meta":"Insights · 15 Jul 2026"},
+      {"img":"news-3.jpg","w":672,"h":1008,"title":"Placeholder story: partners gather for the regional retail roundtable","meta":"Events · 1 Jul 2026"},
+      {"img":"news-1.jpg","w":672,"h":1007,"title":"Placeholder story: a new chapter for an established neighbourhood mall","meta":"News · 18 Jun 2026"}
+    ]
+    </script>
   </main>
 
   <!-- FOOTER:START -->
@@ -146,5 +246,6 @@
 
   <script src="../js/main.js" defer></script>
   <script src="../js/page-transition.js" defer></script>
+  <script src="../js/news.js" defer></script>
 </body>
 </html>

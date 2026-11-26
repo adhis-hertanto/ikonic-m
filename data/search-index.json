@@ -1,0 +1,311 @@
+[
+  {
+    "title": "Home",
+    "category": "Company",
+    "description": "IKONIC-M is the retail transformation arm of Keppel. Retail places crafted with intent, for their place, their community and their potential.",
+    "url": "./",
+    "keywords": "ikonic-m keppel retail transformation"
+  },
+  {
+    "title": "About",
+    "category": "Company",
+    "description": "IKONIC-M brings fresh creative thinking, a proven end-to-end ecosystem and unrivalled standards to retail destinations, backed by Keppel and a team of retail experts.",
+    "url": "about/",
+    "keywords": "team leadership keppel"
+  },
+  {
+    "title": "Transformative Solutions",
+    "category": "Transformative Solutions",
+    "description": "End-to-end retail expertise, from strategy and concept development to leasing, operations and asset enhancement, amplified by Keppel's wider ecosystem.",
+    "url": "our-solutions/"
+  },
+  {
+    "title": "Retail Transformation",
+    "category": "Transformative Solutions",
+    "description": "Everything you need to transform retail, from strategy and concept to leasing, operations and asset enhancement.",
+    "url": "our-solutions/#retail-transformation"
+  },
+  {
+    "title": "Retail Investments",
+    "category": "Transformative Solutions",
+    "description": "Partnerships that unlock greater possibilities, from strategic advisory to operating and investment partnerships.",
+    "url": "our-solutions/#retail-investments"
+  },
+  {
+    "title": "Retail Experiences",
+    "category": "Transformative Solutions",
+    "description": "Creating experiences people want to be a part of, with IKONIC rewards and curated experiences.",
+    "url": "our-solutions/#retail-experiences"
+  },
+  {
+    "title": "Retail Strategy & Positioning",
+    "category": "Transformative Solutions",
+    "description": "Defining a clear market proposition and strategic direction to strengthen relevance, differentiation and long-term asset value.",
+    "url": "our-solutions/#retail-transformation"
+  },
+  {
+    "title": "Concept Development & Placemaking",
+    "category": "Transformative Solutions",
+    "description": "Turning strategy into compelling retail concepts and places that connect with their communities and give people more reasons to visit, stay and return.",
+    "url": "our-solutions/#retail-transformation"
+  },
+  {
+    "title": "Leasing & Tenant Curation",
+    "category": "Transformative Solutions",
+    "description": "Creating the right tenant mix through strategic leasing and curation to strengthen the destination, respond to customer needs and optimise commercial performance.",
+    "url": "our-solutions/#retail-transformation"
+  },
+  {
+    "title": "Retail Operation & Customer Experience",
+    "category": "Transformative Solutions",
+    "description": "Bringing places to life through seamless operations and thoughtful experiences that enhance every interaction with the destination.",
+    "url": "our-solutions/#retail-transformation"
+  },
+  {
+    "title": "Asset Management & Enhancement",
+    "category": "Transformative Solutions",
+    "description": "Continuously optimising asset performance and identifying opportunities for enhancement to keep retail destinations competitive, relevant and future-ready.",
+    "url": "our-solutions/#retail-transformation"
+  },
+  {
+    "title": "Technology & Integrated Solutions",
+    "category": "Transformative Solutions",
+    "description": "Harnessing technology, data and the wider Keppel ecosystem to enhance customer experiences, streamline operations and drive smarter, more sustainable retail performance.",
+    "url": "our-solutions/#retail-transformation"
+  },
+  {
+    "title": "Places That Ignite",
+    "category": "Distinctive Destinations",
+    "description": "Curated destinations and meaningful strategic partnerships, designed for brands to thrive and unlock greater possibilities.",
+    "url": "our-works/",
+    "keywords": "projects destinations malls globe"
+  },
+  {
+    "title": "Saigon Centre",
+    "category": "Distinctive Destinations",
+    "description": "Saigon Centre, City Prime in Ho Chi Minh City, Vietnam: a strategic mix that makes the iconic destination.",
+    "url": "case-study/",
+    "keywords": "ho chi minh city vietnam case study"
+  },
+  {
+    "title": "News",
+    "category": "News",
+    "description": "Latest news, project milestones and market perspectives from IKONIC-M.",
+    "url": "news/",
+    "keywords": "insights press"
+  },
+  {
+    "title": "Let's Connect",
+    "category": "Company",
+    "description": "Get in touch with the IKONIC-M team and leave a request.",
+    "url": "contact/",
+    "keywords": "contact enquiry request office"
+  },
+  {
+    "title": "Privacy Policy",
+    "category": "Company",
+    "description": "How IKONIC-M collects, uses and protects your personal data.",
+    "url": "privacy-policy/",
+    "keywords": "legal data cookies"
+  },
+  {
+    "title": "Terms & Conditions",
+    "category": "Company",
+    "description": "The terms and conditions for using the IKONIC-M website.",
+    "url": "terms/",
+    "keywords": "legal terms of use"
+  },
+  {
+    "title": "Why the next decade of retail belongs to places, not just stores",
+    "category": "News",
+    "description": "Perspective on how destinations, not stand-alone stores, will define the next decade of retail.",
+    "url": "news-article/",
+    "date": "2026-09-18"
+  },
+  {
+    "title": "Bugis Junction",
+    "category": "Distinctive Destinations",
+    "description": "Singapore, Singapore. Exited project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "KSC",
+    "category": "Distinctive Destinations",
+    "description": "Singapore, Singapore. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Ocean Financial Centre",
+    "category": "Distinctive Destinations",
+    "description": "Singapore, Singapore. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Marina Bay Financial Centre",
+    "category": "Distinctive Destinations",
+    "description": "Singapore, Singapore. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "i12 katong",
+    "category": "Distinctive Destinations",
+    "description": "Singapore, Singapore. Exited project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Wilkie Edge",
+    "category": "Distinctive Destinations",
+    "description": "Singapore, Singapore. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Sutera Mall",
+    "category": "Distinctive Destinations",
+    "description": "Johor Bahru, Malaysia. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Estella Place",
+    "category": "Distinctive Destinations",
+    "description": "Ho Chi Minh City, Vietnam. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Empire City",
+    "category": "Distinctive Destinations",
+    "description": "Ho Chi Minh City, Vietnam. Exited project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Hanoi Centre",
+    "category": "Distinctive Destinations",
+    "description": "Hanoi, Vietnam. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Saigon Sports City",
+    "category": "Distinctive Destinations",
+    "description": "Ho Chi Minh City, Vietnam. Planned project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Palm City",
+    "category": "Distinctive Destinations",
+    "description": "Ho Chi Minh City, Vietnam. Exited project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Saigon Centre Phase 3",
+    "category": "Distinctive Destinations",
+    "description": "Ho Chi Minh City, Vietnam. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Riveria Point Phase 2",
+    "category": "Distinctive Destinations",
+    "description": "Ho Chi Minh City, Vietnam. Planned project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "TBS Land",
+    "category": "Distinctive Destinations",
+    "description": "Ho Chi Minh City, Vietnam. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "The Garden Mall",
+    "category": "Distinctive Destinations",
+    "description": "Hanoi, Vietnam. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "SMIFC",
+    "category": "Distinctive Destinations",
+    "description": "Ho Chi Minh City, Vietnam. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "T3 Mall",
+    "category": "Distinctive Destinations",
+    "description": "Ho Chi Minh City, Vietnam. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Aether Square",
+    "category": "Distinctive Destinations",
+    "description": "Beijing, China. Exited project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "V-city",
+    "category": "Distinctive Destinations",
+    "description": "Chengdu, China. Exited project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Lifehub @ Jingqiao",
+    "category": "Distinctive Destinations",
+    "description": "Shanghai, China. Exited project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Park Avenue Central",
+    "category": "Distinctive Destinations",
+    "description": "Shanghai, China. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Park Avenue Heights",
+    "category": "Distinctive Destinations",
+    "description": "Wuxi, China. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Seasons City",
+    "category": "Distinctive Destinations",
+    "description": "Tianjin, China. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Bei Ke Jian",
+    "category": "Distinctive Destinations",
+    "description": "Tianjin, China. Exited project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Westmin Plaza 西门口广场",
+    "category": "Distinctive Destinations",
+    "description": "Guangzhou, China. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Trinity Tower 吉汇大厦",
+    "category": "Distinctive Destinations",
+    "description": "Shanghai, China. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Keppel Greenland Being Fun 吉宝绿地缤纷城 (ex. K-plaza)",
+    "category": "Distinctive Destinations",
+    "description": "Shanghai, China. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "International Bund Gateway双狮汇",
+    "category": "Distinctive Destinations",
+    "description": "Shanghai, China. Current project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "SM-KL - The Podium",
+    "category": "Distinctive Destinations",
+    "description": "Manila, Philippines. Exited project.",
+    "url": "our-works/"
+  },
+  {
+    "title": "Top Ryde",
+    "category": "Distinctive Destinations",
+    "description": "Sydney, Australia. Current project.",
+    "url": "our-works/"
+  }
+]

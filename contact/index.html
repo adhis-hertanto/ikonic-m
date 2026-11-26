@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Let&#39;s Connect | IKONIC-M</title>
+  <meta name="description" content="Tell us a little about yourself and what you are looking for. Our team will be in touch to explore how IKONIC-M can support your ambitions.">
   <meta name="robots" content="noindex">
   <link rel="icon" href="../assets/svg/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
@@ -12,6 +13,7 @@
   <link rel="stylesheet" href="../css/tokens.css">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/contact.css">
   <script>document.documentElement.classList.add('js');</script>
   <script>try{if(sessionStorage.getItem('pt-arrive')){sessionStorage.removeItem('pt-arrive');document.documentElement.classList.add('pt-arriving')}}catch(e){}</script>
 </head>
@@ -75,11 +77,132 @@
   <!-- NAV:END -->
 
   <main id="main">
-    <section class="stub">
-      <p class="eyebrow">Let&#39;s Connect</p>
-      <h1 class="t-h1">Page coming soon</h1>
-      <a class="link" href="../"><span>Back to home</span><span class="icon" aria-hidden="true"></span></a>
+
+    <!-- Hero (250:526) -->
+    <section class="ct-hero on-dark" aria-labelledby="ct-hero-title">
+      <img class="ct-hero__img" src="../assets/img/contact-hero.jpg" alt="" width="1600" height="960">
+      <div class="shape tess tess--tl ct-hero__tess-sand" data-shape="Tessellation / Join 226" aria-hidden="true"></div>
+      <div class="shape tess tess--br ct-hero__tess-coral" data-shape="Tessellation / Join 254" aria-hidden="true"></div>
+      <div class="ct-hero__content">
+        <h1 class="t-display-l" id="ct-hero-title" data-reveal>Contact us</h1>
+        <p class="t-subline-l" data-reveal>Tell us a little about yourself and what you’re looking for. Our team will be in touch to explore how IKONIC-M can support your ambitions.</p>
+      </div>
     </section>
+
+    <!-- Tell us about your enquiry (250:531). Field states (hover/focus/error/checked) and dropdown options are not in Figma: PLACEHOLDER. -->
+    <section class="ct-enquiry on-dark" aria-label="Enquiry form">
+      <div class="shape tess tess--bl ct-enquiry__tess" data-shape="Tessellation / Join 354" aria-hidden="true"></div>
+      <div class="ct-enquiry__inner">
+        <form class="ct-form" data-contact-form novalidate>
+          <div class="ct-form__fields">
+            <fieldset class="ct-group" data-field="role" data-required-msg="Please select one option.">
+              <legend class="t-body-s">I am a… *</legend>
+              <div class="ct-options" role="radiogroup" aria-describedby="ct-role-error">
+                <label class="ct-choice t-body-m"><input class="ct-choice__input" type="radio" name="role" value="Asset owner"><span class="ct-choice__mark ct-choice__mark--radio" aria-hidden="true"></span><span>Asset owner</span></label>
+                <label class="ct-choice t-body-m"><input class="ct-choice__input" type="radio" name="role" value="Investor"><span class="ct-choice__mark ct-choice__mark--radio" aria-hidden="true"></span><span>Investor</span></label>
+                <label class="ct-choice t-body-m"><input class="ct-choice__input" type="radio" name="role" value="Other"><span class="ct-choice__mark ct-choice__mark--radio" aria-hidden="true"></span><span>Other</span></label>
+              </div>
+              <p class="ct-error t-body-s" id="ct-role-error" hidden></p>
+            </fieldset>
+
+            <div class="ct-field" data-field="name" data-required-msg="Please enter your full name.">
+              <label class="t-body-s" for="ct-name">Full name *</label>
+              <input class="field ct-input t-body-m" type="text" id="ct-name" name="name" placeholder="Enter your full name" autocomplete="name" required aria-describedby="ct-name-error">
+              <p class="ct-error t-body-s" id="ct-name-error" hidden></p>
+            </div>
+
+            <div class="ct-row">
+              <div class="ct-field" data-field="email" data-required-msg="Please enter your business email address." data-invalid-msg="Please enter a valid email address.">
+                <label class="t-body-s" for="ct-email">Business email *</label>
+                <input class="field ct-input t-body-m" type="email" id="ct-email" name="email" placeholder="Enter your email address" autocomplete="email" required aria-describedby="ct-email-error">
+                <p class="ct-error t-body-s" id="ct-email-error" hidden></p>
+              </div>
+              <div class="ct-field" data-field="phone" data-required-msg="Please enter your phone number." data-invalid-msg="Please enter a valid phone number.">
+                <label class="t-body-s" for="ct-phone">Phone number *</label>
+                <input class="field ct-input t-body-m" type="tel" id="ct-phone" name="phone" placeholder="Enter your phone number" autocomplete="tel" required aria-describedby="ct-phone-error">
+                <p class="ct-error t-body-s" id="ct-phone-error" hidden></p>
+              </div>
+            </div>
+
+            <div class="ct-field" data-field="source" data-required-msg="Please select an option.">
+              <label class="t-body-s" for="ct-source">How did you hear about IKONIC-M? *</label>
+              <div class="ct-select">
+                <select class="field ct-input t-body-m" id="ct-source" name="source" required aria-describedby="ct-source-error">
+                  <option value="" selected>[Select an option]</option>
+                  <!-- PLACEHOLDER options: not in Figma -->
+                  <option>Search engine</option>
+                  <option>Social media</option>
+                  <option>Referral</option>
+                  <option>Event</option>
+                  <option>News or media</option>
+                  <option>Other</option>
+                </select>
+                <span class="icon icon--chevron ct-select__icon" aria-hidden="true"></span>
+              </div>
+              <p class="ct-error t-body-s" id="ct-source-error" hidden></p>
+            </div>
+
+            <div class="ct-field" data-field="subject" data-required-msg="Please select an option.">
+              <label class="t-body-s" for="ct-subject">Subject *</label>
+              <div class="ct-select">
+                <select class="field ct-input t-body-m" id="ct-subject" name="subject" required aria-describedby="ct-subject-error">
+                  <option value="" selected>[Select an option]</option>
+                  <!-- PLACEHOLDER options: not in Figma -->
+                  <option>General enquiry</option>
+                  <option>Retail transformation</option>
+                  <option>Retail investments</option>
+                  <option>Retail experiences</option>
+                  <option>Partnerships</option>
+                  <option>Media</option>
+                </select>
+                <span class="icon icon--chevron ct-select__icon" aria-hidden="true"></span>
+              </div>
+              <p class="ct-error t-body-s" id="ct-subject-error" hidden></p>
+            </div>
+
+            <div class="ct-field" data-field="message" data-required-msg="Please tell us how we can help.">
+              <label class="t-body-s" for="ct-message">Your enquiry *</label>
+              <textarea class="field ct-input ct-textarea t-body-m" id="ct-message" name="message" placeholder="Tell us how we can help." required aria-describedby="ct-message-error"></textarea>
+              <p class="ct-error t-body-s" id="ct-message-error" hidden></p>
+            </div>
+
+            <fieldset class="ct-group" data-field="consent" data-required-msg="Please confirm your consent to continue.">
+              <legend class="t-body-s">Data consent *</legend>
+              <label class="ct-choice ct-choice--consent t-body-m"><input class="ct-choice__input" type="checkbox" name="consent" value="yes" aria-describedby="ct-consent-error"><span class="ct-choice__mark ct-choice__mark--check" aria-hidden="true"></span><span>I consent to IKONIC-M collecting and using my personal information to respond to my enquiry in accordance with its <a class="ct-inline-link" href="../privacy-policy/">Privacy Policy</a>.</span></label>
+              <p class="ct-error t-body-s" id="ct-consent-error" hidden></p>
+            </fieldset>
+
+            <div class="ct-actions">
+              <button class="btn" type="submit"><span>Submit enquiry</span></button>
+              <p class="t-body-s">All fields are required.</p>
+            </div>
+          </div>
+
+          <!-- Success state: PLACEHOLDER copy, not in Figma -->
+          <div class="ct-success" data-contact-success tabindex="-1" role="status" hidden>
+            <h2 class="t-h3">Thank you for getting in touch.</h2>
+            <p class="t-body-l">We have received your enquiry. Our team will be in touch shortly.</p>
+            <button class="link" type="button" data-contact-reset><span>Send another enquiry</span><span class="icon" aria-hidden="true"></span></button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Download brochure (263:139) -->
+    <section class="ct-brochure" aria-labelledby="ct-brochure-title">
+      <div class="ct-brochure__media">
+        <img class="ct-brochure__img" src="../assets/img/contact.jpg" alt="" width="736" height="552" loading="lazy">
+      </div>
+      <div class="ct-brochure__content">
+        <div class="ct-brochure__heading" data-reveal>
+          <h2 class="t-h1" id="ct-brochure-title">Take IKONIC-M with you.</h2>
+          <p class="t-body-l">Explore how we enrich places and build enduring value across Vietnam. Download our brochure for an overview of our solutions, assets and approach.</p>
+        </div>
+        <!-- PLACEHOLDER: brochure file not supplied. Set data-brochure-src (and href) when it exists. -->
+        <a class="btn" href="#" data-brochure data-brochure-src="" download><span>Download brochure</span><span class="icon icon--download" aria-hidden="true"></span></a>
+      </div>
+    </section>
+
   </main>
 
   <!-- FOOTER:START -->
@@ -146,5 +269,6 @@
 
   <script src="../js/main.js" defer></script>
   <script src="../js/page-transition.js" defer></script>
+  <script src="../js/contact.js" defer></script>
 </body>
 </html>

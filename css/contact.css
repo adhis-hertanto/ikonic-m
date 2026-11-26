@@ -1,0 +1,290 @@
+/* ==========================================================================
+   Contact page (Figma frame 250:496): hero, enquiry form, download brochure.
+   Values come from tokens.css; the few that are not there sit below.
+   Field hover / focus / error / checked states, dropdown options and the
+   success state are not in Figma: marked PLACEHOLDER.
+   ========================================================================== */
+
+:root {
+  --x-ct-form-w: calc(752 * var(--u));                 /* 250:533 */
+  --x-ct-choice: calc(19 * var(--u));                  /* Radio / Checkbox 250:539, 250:578 */
+  --x-ct-textarea-h: calc(144 * var(--u));             /* 250:573 */
+  --shape-ct-enquiry-tess: calc(354 * var(--u));       /* 295:975, right angle bottom left */
+  --x-ct-brochure-h: calc(504 * var(--u));             /* 263:139 */
+  --x-ct-brochure-media-w: calc(592 * var(--u));       /* 263:140 */
+  --x-ct-brochure-cut: calc(239 * var(--u));           /* white Tessellation / Join 263:141 on the photo */
+  --x-ct-brochure-cut-x: calc(353 * var(--u));
+  --x-ct-brochure-pad-l: calc(144 * var(--u));         /* 263:142 */
+}
+
+/* --- Hero (250:526): same geometry as the About / Solutions hero --------------- */
+.ct-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: var(--x-sol-hero-h);
+  overflow: hidden;
+  background: var(--brand-deep-plum);
+  color: var(--color-white);
+}
+.ct-hero__img {
+  position: absolute;
+  inset: var(--space-0);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ct-hero::after {                    /* darkening gradient over the photo */
+  content: "";
+  position: absolute;
+  inset: var(--space-0);
+  background-image: var(--x-sol-hero-overlay);
+}
+.ct-hero__tess-sand,
+.ct-hero__tess-coral,
+.ct-hero__content { z-index: 1; }
+.ct-hero__tess-sand {
+  --shape-size: var(--shape-tess-sol-sand);
+  --shape-color: var(--brand-sand);
+  top: var(--space-0);
+  right: var(--shape-tess-sol-sand-right);
+}
+.ct-hero__tess-coral {
+  --shape-size: var(--shape-tess-sol-coral);
+  --shape-color: var(--brand-coral-red);
+  bottom: var(--space-0);
+  right: var(--shape-tess-sol-coral-right);
+}
+.ct-hero__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+  width: var(--x-sol-hero-content-w);
+  max-width: 100%;
+  padding: var(--space-64) var(--space-64) var(--space-64) var(--layout-margin);
+}
+
+/* --- Tell us about your enquiry (250:531) ------------------------------------ */
+.ct-enquiry {
+  position: relative;
+  overflow: hidden;
+  padding: var(--layout-margin) var(--layout-margin) var(--layout-section-py);
+  background: var(--brand-deep-plum);
+  color: var(--color-white);
+}
+.ct-enquiry__tess {
+  --shape-size: var(--shape-ct-enquiry-tess);
+  --shape-color: var(--brand-sand);
+  bottom: var(--space-0);
+  left: var(--space-0);
+}
+.ct-enquiry__inner {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.ct-form {
+  width: var(--x-ct-form-w);
+  max-width: 100%;
+}
+.ct-form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+}
+.ct-form__fields[hidden] { display: none; }
+
+.ct-field,
+.ct-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  min-width: var(--space-0);
+  margin: var(--space-0);
+  padding: var(--space-0);
+  border: 0;
+}
+.ct-group { gap: var(--space-12); }
+.ct-group legend { padding: var(--space-0); margin-bottom: var(--space-12); float: left; width: 100%; }
+.ct-group legend + * { clear: both; }
+.ct-group { display: block; }
+.ct-group > :not(legend):not(.ct-error) { margin-top: var(--space-0); }
+.ct-row {
+  display: flex;
+  gap: var(--space-24);
+}
+.ct-row > .ct-field { flex: 1 0 0; }
+
+/* Inputs: Figma shows plum text (placeholder included) on white */
+.ct-input {
+  flex: none;
+  width: 100%;
+  height: var(--x-button-h-m);
+  font-family: inherit;
+  color: var(--brand-deep-plum);
+}
+.ct-input::placeholder { color: var(--brand-deep-plum); opacity: 1; }
+.ct-input:focus-visible { border-color: var(--color-white); outline: var(--x-hairline) solid var(--color-white); outline-offset: var(--x-hairline); }   /* PLACEHOLDER */
+.ct-textarea {
+  display: block;
+  height: var(--x-ct-textarea-h);
+  min-height: var(--x-ct-textarea-h);
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-12);
+  resize: vertical;
+}
+.ct-select { position: relative; }
+.ct-select select { padding-right: calc(var(--space-16) + var(--x-icon) + var(--space-8)); cursor: pointer; }
+.ct-select select:invalid { color: var(--brand-deep-plum); }
+.ct-select__icon {
+  position: absolute;
+  top: 50%;
+  right: var(--space-16);
+  transform: translateY(-50%) rotate(180deg);   /* chevron glyph points up; Figma flips it */
+  color: var(--brand-deep-plum);
+  pointer-events: none;
+}
+.ct-select select:focus-visible ~ .ct-select__icon { color: var(--brand-deep-plum); }
+
+/* Radio and checkbox: native input stays for semantics, the mark is drawn beside it */
+.ct-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-12) var(--space-32);
+}
+.ct-choice {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12);
+  cursor: pointer;
+}
+.ct-options .ct-choice { align-items: center; }
+.ct-choice__input {
+  position: absolute;
+  top: var(--space-0);
+  left: var(--space-0);
+  width: var(--x-ct-choice);
+  height: var(--x-ct-choice);
+  margin: var(--space-0);
+  opacity: 0;
+  cursor: pointer;
+}
+.ct-choice__mark {
+  position: relative;
+  flex: none;
+  box-sizing: border-box;
+  width: var(--x-ct-choice);
+  height: var(--x-ct-choice);
+  margin-top: calc((var(--text-body-m-lh) - var(--x-ct-choice)) / 2);
+  border: var(--x-hairline) solid var(--ecru-200);
+  background: var(--color-white);
+  transition: border-color var(--x-dur-fast) var(--x-ease);
+}
+.ct-options .ct-choice__mark { margin-top: var(--space-0); }
+.ct-choice__mark--radio { border-radius: 50%; }
+.ct-choice__mark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  opacity: 0;
+  transition: opacity var(--x-dur-fast) var(--x-ease);
+}
+.ct-choice__mark--radio::after {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--brand-deep-plum);
+}
+.ct-choice__mark--check::after {
+  width: 5px;
+  height: 10px;
+  margin-top: 2px;
+  border: solid var(--brand-deep-plum);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.ct-choice__input:checked + .ct-choice__mark::after { opacity: 1; }
+.ct-choice:hover .ct-choice__mark { border-color: var(--ecru-400); }                          /* PLACEHOLDER */
+.ct-choice__input:focus-visible + .ct-choice__mark { outline: 2px solid var(--color-white); outline-offset: 2px; }  /* PLACEHOLDER */
+.ct-inline-link { text-decoration: underline; text-underline-offset: 3px; }
+.ct-inline-link:hover { color: var(--ecru-200); }                                             /* PLACEHOLDER */
+
+/* Error state (PLACEHOLDER) */
+.ct-error { margin-top: var(--space-8); color: var(--brand-coral-red); }
+.ct-error[hidden] { display: none; }
+.ct-input[aria-invalid="true"] { border-color: var(--brand-coral-red); }
+.ct-group.is-invalid .ct-choice__mark { border-color: var(--brand-coral-red); }
+
+.ct-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-24);
+}
+
+/* Success state (PLACEHOLDER) */
+.ct-success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-24);
+  padding-block: var(--space-32);
+}
+.ct-success[hidden] { display: none; }
+.ct-success:focus { outline: none; }
+.ct-success .link { color: var(--color-white); }
+
+/* --- Download brochure (263:139) ---------------------------------------------- */
+.ct-brochure {
+  display: flex;
+  min-height: var(--x-ct-brochure-h);
+  background: var(--color-white);
+  color: var(--brand-deep-plum);
+}
+.ct-brochure__media {
+  position: relative;
+  flex: none;
+  width: var(--x-ct-brochure-media-w);
+}
+.ct-brochure__img {
+  position: absolute;
+  inset: var(--space-0);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* white 45 degree cut at the top right (Tessellation / Join 263:141) */
+  clip-path: polygon(0 0, var(--x-ct-brochure-cut-x) 0, 100% var(--x-ct-brochure-cut), 100% 100%, 0 100%);
+}
+.ct-brochure__content {
+  flex: 1 0 0;
+  min-width: var(--space-0);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-40);
+  padding: var(--space-120) var(--space-64) var(--space-120) var(--x-ct-brochure-pad-l);
+}
+.ct-brochure__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+/* --- Narrow screens (no mobile frames in Figma; same 760 breakpoint as About) --- */
+@media (max-width: 1100px) {
+  .ct-brochure__content { padding-left: var(--space-64); }
+}
+@media (max-width: 760px) {
+  .ct-hero { height: auto; min-height: var(--x-sol-hero-h); }
+  .ct-hero__content { padding-inline: var(--layout-margin); }
+  .ct-hero__tess-sand,
+  .ct-hero__tess-coral { display: none; }
+  .ct-enquiry { padding-inline: var(--space-24); }
+  .ct-row { flex-direction: column; gap: var(--space-32); }
+  .ct-actions { flex-direction: column; align-items: flex-start; gap: var(--space-16); }
+  .ct-brochure { flex-direction: column; }
+  .ct-brochure__media { width: 100%; height: var(--x-ct-brochure-h); }
+  .ct-brochure__content { padding: var(--space-64) var(--layout-margin); }
+}
