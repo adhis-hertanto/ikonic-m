@@ -18,8 +18,6 @@ const current = (html, slug) => html.replace(
   new RegExp(`(<a class="nav__link[^"]*" href="\\.\\./${slug}/")`), '$1 aria-current="page"');
 
 const pages = {
-  'about': 'About',
-  'our-works': 'Places That Ignite',
   'news': 'News',
   'contact': "Let's Connect",
   'privacy-policy': 'Privacy Policy',
@@ -27,15 +25,17 @@ const pages = {
 };
 
 // Built pages: only the shared chrome between the markers is replaced
-const built = ['our-solutions'];
-for (const slug of built) {
+// Case Study sits under Our Works in the nav, so it marks that link as current
+const built = { 'our-solutions': 'our-solutions', 'about': 'about', 'our-works': 'our-works', 'case-study': 'our-works' };
+for (const [slug, navSlug] of Object.entries(built)) {
   const file = join(root, slug, 'index.html');
   let html = readFileSync(file, 'utf8');
   const swap = (a, b, chrome) => {
     const start = html.indexOf(a), end = html.indexOf(b) + b.length;
+    if (start < 0 || end < b.length) throw new Error(`${slug}/index.html is missing ${a} or ${b}`);
     html = html.slice(0, start) + chrome + html.slice(end);
   };
-  swap('<!-- NAV:START -->', '<!-- NAV:END -->', current(nav, slug));
+  swap('<!-- NAV:START -->', '<!-- NAV:END -->', current(nav, navSlug));
   swap('<!-- FOOTER:START -->', '<!-- FOOTER:END -->', footer);
   writeFileSync(file, html);
   console.log('synced', `${slug}/index.html`);
