@@ -1,0 +1,60 @@
+/* ==========================================================================
+   Privacy Policy (Figma 250:1723) and Terms & Conditions (250:1828).
+   Same layout on both pages: plum title hero + a single 752px article.
+   ========================================================================== */
+
+/* --- Title hero (250:1753 / 250:1858) ------------------------------------------ */
+.legal-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-28);
+  padding: var(--layout-section-py) var(--layout-margin) var(--space-96);
+  overflow: hidden;
+  background: var(--brand-deep-plum);
+  color: var(--color-white);
+}
+.legal-hero > h1,
+.legal-hero > p { position: relative; z-index: 1; }
+/* Cascade L, sand, cut at the bottom left (258:182) */
+.legal-hero__cascade {
+  --cut: var(--shape-cascade-platform-cut);
+  top: var(--space-0);
+  right: var(--space-0);
+  width: var(--shape-about-cascade-w, calc(284 * var(--u)));
+  height: calc(346 * var(--u));
+  background: var(--brand-sand);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+}
+
+/* --- Legal content (250:1756 / 250:1861) --------------------------------------- */
+.legal {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: var(--space-96) var(--layout-margin) var(--layout-section-py);
+  background: var(--color-white);
+  color: var(--brand-deep-plum);
+  border-bottom: 1px solid var(--brand-ecru);
+}
+/* Tessellation / Join, plum, right angle top right (258:183) */
+.legal__tess {
+  --shape-size: var(--shape-tess-who);
+  --shape-color: var(--brand-deep-plum);
+  top: var(--space-0);
+  right: var(--space-0);
+}
+.legal__article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-40);
+  width: var(--x-w-7col);
+  max-width: 100%;
+}
+.legal__clause {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+.legal__h { margin: 0; }
+.legal__article p { margin: 0; }
