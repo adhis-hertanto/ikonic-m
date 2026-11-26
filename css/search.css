@@ -91,6 +91,14 @@ html.is-snapshot .srch__scrim, html.is-snapshot .srch__dialog { transition: none
   color: var(--brand-deep-plum);
   transition: background-color var(--x-dur-fast) var(--x-ease);
 }
+/* Filled states (a query is in the bar): close moves down beside the bar, centred on it */
+.srch:is([data-state="loading"], [data-state="results"], [data-state="none"], [data-state="error"]) .srch__close {
+  top: var(--srch-close-top, var(--space-24));
+  right: var(--srch-pad);
+}
+.srch:is([data-state="loading"], [data-state="results"], [data-state="none"], [data-state="error"]) .srch__field {
+  margin-right: calc(var(--x-button-h-m) + var(--space-16));
+}
 .srch__close:hover { background: var(--ecru-200); }                  /* PLACEHOLDER */
 
 .srch__title {

@@ -170,9 +170,18 @@
     return h + '</div>';
   }
 
+  // Filled states: the close button sits beside the search bar, centred on it.
+  // Measured because the title above the bar can wrap at narrow widths.
+  function alignClose() {
+    var close = root && root.querySelector('.srch__close');
+    if (!close || !form) return;
+    root.style.setProperty('--srch-close-top', (form.offsetTop + (form.offsetHeight - close.offsetHeight) / 2) + 'px');
+  }
+
   function render() {
     var m = model;
     root.setAttribute('data-state', m.state);
+    requestAnimationFrame(alignClose);
     submitBtn.classList.toggle('is-empty', !m.query.trim() && m.state !== 'loading');
     submitBtn.setAttribute('aria-label', m.state === 'loading' ? 'Stop searching' : 'Search');
     clearBtn.classList.toggle('has-value', !!input.value);
@@ -388,6 +397,7 @@
     submitBtn = root.querySelector('.srch__submit');
     bodyEl = root.querySelector('.srch__body');
     statusEl = root.querySelector('[role="status"]');
+    window.addEventListener('resize', alignClose);
 
     root.addEventListener('click', function (e) {
       if (e.target.closest('[data-srch-close]')) close();
