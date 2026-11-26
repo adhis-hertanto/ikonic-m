@@ -2,7 +2,8 @@
    the next page to reveal it. The arriving slide is driven by the `pt-arriving` class,
    which the inline head script adds before first paint, so there is no flash. */
 (function () {
-  var DUR = 320;
+  var LEAVE_MS = 700;  // card slides up (matches html.pt-leaving)
+  var HOLD_MS = 150;   // brief pause while the page is covered
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var root = document.documentElement;
 
@@ -25,7 +26,7 @@
     var url = a.href;
     root.classList.add('pt-leaving');
     try { sessionStorage.setItem('pt-arrive', '1'); } catch (err) { /* private mode: navigate without the arrival slide */ }
-    setTimeout(function () { location.href = url; }, DUR);
+    setTimeout(function () { location.href = url; }, LEAVE_MS + HOLD_MS);
   });
 
   // Back and forward from the page cache: clear any leftover state

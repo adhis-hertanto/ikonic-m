@@ -248,22 +248,24 @@ button {
 }
 .is-snapshot [data-reveal] { opacity: 1 !important; transform: none !important; }
 
-/* --- Page transition: plum card slides up over the page, then away to reveal the next --- */
+/* --- Page transition: a blank page slides up over the current one, pauses,
+   then keeps moving off the top to reveal the next page. Timings are in
+   js/page-transition.js (LEAVE_MS, HOLD_MS) and must stay in step with these. */
 html::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: var(--x-z-consent);
-  background: var(--brand-deep-plum);
+  background: var(--color-white);
   transform: translateY(100%);
   pointer-events: none;
 }
 html.pt-leaving::after {
-  animation: pt-card-up var(--x-dur) var(--x-ease) both;
+  animation: pt-card-up 700ms var(--x-ease-inout) both;
 }
 html.pt-arriving::after {
   transform: none;
-  animation: pt-card-away var(--x-dur) var(--x-ease) both;
+  animation: pt-card-away 900ms var(--x-ease-inout) 150ms both;
 }
 @keyframes pt-card-up {
   from { transform: translateY(100%); }
