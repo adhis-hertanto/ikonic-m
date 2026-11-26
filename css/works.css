@@ -328,7 +328,10 @@ html:not(.js) .works-type__more { grid-template-rows: 1fr; opacity: 1; }
   outline-offset: var(--x-focus-ring);
 }
 .works-card:hover .works-card__photo img { transform: scale(1.04); }                   /* PLACEHOLDER */
-.works-card:hover .works-card__link .icon { transform: translateX(var(--x-nudge)); }   /* PLACEHOLDER */
+/* Hovering anywhere on the card plays the link's arrow morph, same as hovering the link */
+.works-card:hover .works-card__link:not([aria-disabled="true"])::before { opacity: 1; transform: translateX(0); }
+.works-card:hover .works-card__link:not([aria-disabled="true"]) > span:not(.icon) { transform: translateX(calc(var(--x-icon) + var(--space-8))); }
+.works-card:hover .works-card__link:not([aria-disabled="true"]) > .icon { transform: translateX(calc(var(--x-icon) + var(--space-8))); opacity: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   .works-type, .works-type__more { transition: none; }

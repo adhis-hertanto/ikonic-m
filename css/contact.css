@@ -125,7 +125,6 @@
   color: var(--brand-deep-plum);
 }
 .ct-input::placeholder { color: var(--brand-deep-plum); opacity: 1; }
-.ct-input:focus-visible { border-color: var(--color-white); outline: var(--x-hairline) solid var(--color-white); outline-offset: var(--x-hairline); }   /* PLACEHOLDER */
 .ct-textarea {
   display: block;
   height: var(--x-ct-textarea-h);

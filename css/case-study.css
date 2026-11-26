@@ -18,8 +18,7 @@
   --x-cs-gallery-gap: calc(144 * var(--u));
   --x-cs-sticky-top: calc(var(--x-nav-height) + 40 * var(--u));  /* PLACEHOLDER: intro sticks below the nav */
   --x-cs-arrow: calc(48 * var(--u));                       /* 250:970 */
-  --x-cs-lightbox-scrim: rgb(54 22 42 / 0.8);              /* PLACEHOLDER: lightbox not in Figma. Plum, slightly see-through */
-  --x-cs-lightbox-blur: blur(calc(12 * var(--u)));
+  --x-cs-lightbox-scrim: rgb(24 22 24 / 0.6);              /* Same as the search scrim: neutral-900 at 60% (339:698) */
   --x-cs-lightbox-img-h: calc(100dvh - 200 * var(--u));
 }
 
@@ -170,8 +169,6 @@
 .cs-lightbox[open] { display: flex; align-items: center; justify-content: center; }
 .cs-lightbox::backdrop {
   background: var(--x-cs-lightbox-scrim);
-  backdrop-filter: var(--x-cs-lightbox-blur);
-  -webkit-backdrop-filter: var(--x-cs-lightbox-blur);
 }
 .cs-lightbox__figure {
   display: flex;
