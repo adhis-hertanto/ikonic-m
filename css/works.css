@@ -319,14 +319,11 @@ html:not(.js) .works-type__more { grid-template-rows: 1fr; opacity: 1; }
   gap: var(--space-8);
 }
 .works-card__place { color: var(--brand-sand); }
-/* the whole card is the link */
-.works-card__link::after {
-  content: "";
-  position: absolute;
-  inset: var(--space-0);
-}
+/* The whole card is clickable (main.js forwards clicks to the link). The arrow
+   morph makes .link position: relative, so a stretched ::after can't be used here. */
+.works-card:has(.works-card__link:not([aria-disabled="true"])) { cursor: pointer; }
 .works-card__link:focus-visible { outline: none; }
-.works-card__link:focus-visible::after {
+.works-card:has(.works-card__link:focus-visible) {
   outline: var(--x-focus-ring) solid var(--focus-color);
   outline-offset: var(--x-focus-ring);
 }

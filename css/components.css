@@ -617,6 +617,7 @@
   align-items: flex-start;
   gap: var(--space-32);
 }
+.footer__logo-link { display: block; line-height: 0; }
 .footer__logo {
   width: var(--x-footer-logo-w);
   height: var(--x-footer-logo-h);

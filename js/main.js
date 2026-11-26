@@ -154,7 +154,22 @@
     nav.addEventListener('focusin', function () { nav.classList.remove('is-hidden'); });
   }
 
+  // Project cards: a click anywhere on the card follows its "Read more" link.
+  // Clicks on the link itself, disabled links and text selections are left alone.
+  function initCardLinks() {
+    document.addEventListener('click', function (e) {
+      var card = e.target.closest && e.target.closest('.works-card');
+      if (!card || e.target.closest('a, button')) return;
+      var link = card.querySelector('.works-card__link');
+      if (!link || link.getAttribute('aria-disabled') === 'true') return;
+      if (String(window.getSelection ? window.getSelection() : '').length) return;
+      if (e.metaKey || e.ctrlKey || e.button === 1) window.open(link.href, '_blank', 'noopener');
+      else link.click();
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
+    initCardLinks();
     initNavHide();
     initSnap();
     initReveal();

@@ -264,7 +264,7 @@
   flex: 0 0 calc((100% - 2 * var(--layout-gutter)) / 3);
   scroll-snap-align: start;
 }
-.cs-related .works-card__link:focus-visible::after { outline-offset: calc(-1 * var(--x-focus-ring)); }
+.cs-related .works-card:has(.works-card__link:focus-visible) { outline-offset: calc(-1 * var(--x-focus-ring)); }
 .cs-related__actions { display: flex; justify-content: center; }
 
 @media (prefers-reduced-motion: reduce) {
