@@ -1,0 +1,576 @@
+/* ==========================================================================
+   About page (Figma frame 217:4692) and its team profile drawer (217:4948)
+   Values come from tokens.css; the few that are not there yet sit in the
+   "page tokens" block below.
+   ========================================================================== */
+
+/* --- page tokens (Figma V6) -------------------------------------------------- */
+:root {
+  --shape-about-cascade-w: calc(284 * var(--u));       /* 217:4735, flipped vertically */
+  --shape-about-cut-feature: calc(100 * var(--u));     /* Holder / Image / Cut TL on the 416 x 520 cards, measured from the export */
+  --shape-about-cut-team: calc(78 * var(--u));         /* Cut TL on the 304 x 408 portraits, measured from the export */
+  --x-about-feature-h: calc(520 * var(--u));
+  --x-about-feature-pad: calc(24 * var(--u));
+  --x-about-feature-overlay: linear-gradient(180deg, rgb(0 0 0 / 0) 0%, rgb(0 0 0 / 0) 25.962%, rgb(0 0 0 / 0.6) 64.741%, rgb(0 0 0 / 0.8) 100%);
+  --x-about-logo-w: calc(192 * var(--u));              /* 217:4773 */
+  --x-about-logo-h: calc(96 * var(--u));
+  --x-about-logo-bleed: calc(224 * var(--u));          /* first logo starts one slot left of the margin */
+  --x-about-logo-loop: calc(1792 * var(--u));          /* 8 slots of 224 */
+  --x-about-logo-dur: 48s;                             /* PLACEHOLDER marquee speed, not in Figma */
+  --x-about-person-img-h: calc(408 * var(--u));        /* 217:4806 */
+  --x-about-plus: calc(64 * var(--u));                 /* 217:4808 */
+  --x-about-plus-inset: calc(16 * var(--u));
+  --x-about-action-gap: calc(144 * var(--u));          /* 217:4857 */
+  --x-about-neutral-900: #181618;                      /* Scrim 217:5208 */
+  --x-about-neutral-300: #d6d3d5;                      /* Divider 217:5223 */
+  --x-about-scrim-opacity: 0.6;
+  --x-about-drawer-w: calc(976 * var(--u));            /* 217:5209 */
+  --x-about-drawer-photo-w: calc(304 * var(--u));
+  --x-about-drawer-photo-h: calc(408 * var(--u));
+  --x-about-band-h: calc(75 * var(--u));               /* 217:5225 */
+  --x-about-band-lead: calc(93 * var(--u));            /* 217:5227 */
+  --x-about-drawer-z: calc(var(--x-z-nav) + 10);
+}
+
+/* --- Icons used on this page (masked, colour follows currentColor) ------------ */
+.ab-icon {
+  display: block;
+  flex: none;
+  width: var(--x-icon-l);
+  height: var(--x-icon-l);
+  background-color: currentColor;
+  -webkit-mask: var(--ab-icon) center / 100% 100% no-repeat;
+  mask: var(--ab-icon) center / 100% 100% no-repeat;
+}
+.ab-icon--plus { --ab-icon: url("../assets/svg/about-icon-plus.svg"); }
+.ab-icon--close { --ab-icon: url("../assets/svg/about-icon-close.svg"); width: var(--x-icon); height: var(--x-icon); }
+
+/* --- Hero (217:4720): same geometry as the Our Solutions hero ------------------- */
+.ab-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: var(--x-sol-hero-h);
+  overflow: hidden;
+  background: var(--brand-deep-plum);
+  color: var(--color-white);
+}
+.ab-hero__img {
+  position: absolute;
+  inset: var(--space-0);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ab-hero::after {                    /* darkening gradient over the photo */
+  content: "";
+  position: absolute;
+  inset: var(--space-0);
+  background-image: var(--x-sol-hero-overlay);
+}
+.ab-hero__tess-sand,
+.ab-hero__tess-coral,
+.ab-hero__content { z-index: 1; }
+.ab-hero__tess-sand {
+  --shape-size: var(--shape-tess-sol-sand);
+  --shape-color: var(--brand-sand);
+  top: var(--space-0);
+  right: var(--shape-tess-sol-sand-right);
+}
+.ab-hero__tess-coral {
+  --shape-size: var(--shape-tess-sol-coral);
+  --shape-color: var(--brand-coral-red);
+  bottom: var(--space-0);
+  right: var(--shape-tess-sol-coral-right);
+}
+.ab-hero__content {
+  position: relative;
+  width: var(--x-sol-hero-content-w);
+  max-width: 100%;
+  padding: var(--space-64) var(--space-64) var(--space-64) var(--layout-margin);
+}
+
+/* --- Together, we reimagine retail destinations (217:4725) ---------------------- */
+.ab-intro {
+  display: grid;
+  grid-template-columns: repeat(var(--layout-columns), minmax(0, 1fr));
+  column-gap: var(--layout-gutter);
+  align-items: start;
+  padding-top: var(--space-96);
+  padding-bottom: var(--space-160);
+  background: var(--color-white);
+  color: var(--deep-plum-950);
+}
+.ab-intro__heading { grid-column: 1 / span 6; }
+.ab-intro__body { grid-column: 7 / span 6; }
+
+/* --- Why IKONIC-M (217:4734) -------------------------------------------------- */
+.ab-why {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-72);
+  padding-top: var(--layout-section-py);
+  padding-bottom: var(--layout-section-py);
+  background: var(--brand-ecru);
+  color: var(--brand-deep-plum);
+}
+/* Coral cascade, cut at the bottom left (Figma flips it vertically) */
+.ab-why__cascade {
+  --shape-color: var(--brand-coral-red);
+  --cut: var(--shape-cascade-platform-cut);
+  top: var(--space-0);
+  bottom: var(--space-0);
+  right: var(--space-0);
+  width: var(--shape-about-cascade-w);
+  background: var(--shape-color);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+}
+.ab-why__heading,
+.ab-why__features { position: relative; }
+.ab-why__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  width: var(--x-w-7col);
+  max-width: 100%;
+}
+.ab-why__features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--layout-gutter);
+}
+
+/* Feature card. Default: label + title at the bottom. Hover or keyboard focus
+   (217:5229): the description opens under the title and the stack grows upward. */
+.ab-feature {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: var(--x-about-feature-h);
+  padding: var(--x-about-feature-pad);
+  overflow: hidden;
+  color: var(--color-white);
+  background: var(--brand-deep-plum);
+  --cut: var(--shape-about-cut-feature);
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+}
+.ab-feature__img {
+  position: absolute;
+  inset: var(--space-0);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ab-feature::before {                /* Overlay 217:4743 */
+  content: "";
+  position: absolute;
+  inset: var(--space-0);
+  background-image: var(--x-about-feature-overlay);
+  z-index: 1;
+}
+.ab-feature__body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+.ab-feature__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+.ab-feature__heading h3 { color: var(--ecru-50); }
+.ab-feature__more {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition:
+    grid-template-rows var(--x-dur) var(--x-ease),
+    opacity var(--x-dur) var(--x-ease);
+}
+.ab-feature__more > p {
+  min-height: var(--space-0);
+  overflow: hidden;
+  padding-top: var(--space-16);
+}
+/* Collapsed by default wherever hover exists; touch screens keep it open */
+@media (hover: hover) {
+  .ab-feature__more { grid-template-rows: 0fr; opacity: 0; }
+  .ab-feature:hover .ab-feature__more,
+  .ab-feature:focus-within .ab-feature__more,
+  .ab-feature:focus .ab-feature__more { grid-template-rows: 1fr; opacity: 1; }
+}
+.ab-feature:focus-visible { outline-offset: calc(-1 * var(--x-focus-ring)); --focus-color: var(--color-white); }
+
+/* --- Trusted partners and clients (217:4767) ---------------------------------- */
+.ab-trust {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-72);
+  padding-top: var(--layout-section-py);
+  padding-bottom: var(--layout-section-py);
+  overflow: hidden;
+  background: var(--brand-deep-plum);
+  color: var(--color-white);
+}
+.ab-trust__tess {
+  --shape-size: var(--shape-tess-who);
+  --shape-color: var(--brand-ecru);
+  top: var(--space-0);
+  right: var(--space-0);
+}
+.ab-trust__heading {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  width: var(--x-w-7col);
+  max-width: 100%;
+}
+/* Full-bleed strip. The first logo starts one slot left of the margin, so the
+   row reads as a slice of a longer strip. Two copies of the list scroll by one
+   list length to loop. */
+.ab-logos {
+  position: relative;
+  margin-inline: calc(-1 * var(--layout-margin));
+  overflow: hidden;
+}
+.ab-logos__track {
+  display: flex;
+  gap: var(--layout-gutter);
+  width: max-content;
+  margin-left: calc(var(--layout-margin) - var(--x-about-logo-bleed));
+  animation: ab-logos var(--x-about-logo-dur) linear infinite;
+}
+.ab-logos:hover .ab-logos__track { animation-play-state: paused; }
+.ab-logos__list {
+  display: flex;
+  gap: var(--layout-gutter);
+}
+.ab-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--x-about-logo-w);
+  height: var(--x-about-logo-h);
+  background: var(--brand-ecru);
+  color: var(--deep-plum-950);
+  text-align: center;
+}
+@keyframes ab-logos {
+  to { transform: translateX(calc(-1 * var(--x-about-logo-loop))); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ab-logos__track { animation: none; }
+}
+
+/* --- Experts that transform retail (217:4790) ----------------------------------- */
+.ab-team {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-72);
+  padding-top: var(--layout-section-py);
+  padding-bottom: var(--space-120);
+  background: var(--color-white);
+  color: var(--brand-deep-plum);
+}
+.ab-team__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--layout-gutter);
+}
+.ab-team__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  width: var(--x-w-7col);
+  max-width: 100%;
+}
+.ab-team__heading > p { color: var(--ecru-700); }
+.ab-team__arrows {
+  display: flex;
+  gap: var(--space-16);
+}
+.ab-team__arrows[hidden] { display: none; }
+/* Coral panel with a 45 degree cut at the bottom right (same as the slider buttons) */
+.ab-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--shape-card-button);
+  aspect-ratio: 1;
+  background: var(--brand-coral-red);
+  color: var(--ecru-50);
+  --cut: var(--shape-card-cut);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
+  transition: background-color var(--x-dur-fast) var(--x-ease), opacity var(--x-dur-fast) var(--x-ease);
+}
+.ab-arrow--prev .icon { transform: rotate(180deg); }
+.ab-arrow:hover { background: var(--coral-red-600); }                                      /* PLACEHOLDER */
+.ab-arrow--next:hover .icon { transform: translateX(var(--x-nudge)); }                     /* PLACEHOLDER */
+.ab-arrow--prev:hover .icon { transform: rotate(180deg) translateX(var(--x-nudge)); }      /* PLACEHOLDER */
+.ab-arrow:disabled { opacity: 0.4; cursor: default; }                                      /* PLACEHOLDER */
+.ab-arrow:disabled:hover { background: var(--brand-coral-red); }
+.ab-arrow:disabled:hover .icon { transform: none; }
+.ab-arrow--prev:disabled:hover .icon { transform: rotate(180deg); }
+
+.ab-team__viewport {
+  /* room for the focus ring, which the scroller would otherwise clip */
+  margin: calc(-1 * var(--x-focus-ring));
+  padding: var(--x-focus-ring);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.ab-team__viewport::-webkit-scrollbar { display: none; }
+.ab-team__cards {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max(calc(224 * var(--u)), calc((100% - 3 * var(--layout-gutter)) / 4));
+  gap: var(--layout-gutter);
+  align-items: start;
+}
+.ab-person {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  scroll-snap-align: start;
+}
+.ab-person__media {
+  position: relative;
+  height: var(--x-about-person-img-h);
+  --cut: var(--shape-about-cut-team);
+}
+.ab-person__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+}
+/* "+" panel, ecru with a 45 degree cut at the top left (217:4808) */
+.ab-person__open {
+  position: absolute;
+  right: var(--x-about-plus-inset);
+  bottom: var(--x-about-plus-inset);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--x-about-plus);
+  aspect-ratio: 1;
+  background: var(--brand-ecru);
+  color: var(--brand-deep-plum);
+  --cut: var(--shape-card-cut);
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+  transition: background-color var(--x-dur-fast) var(--x-ease);
+}
+.ab-person__open:hover { background: var(--ecru-200); }                                   /* PLACEHOLDER */
+.ab-person__open:active { transform: translateY(var(--x-hairline)); }                      /* PLACEHOLDER */
+.ab-person__open:focus-visible { outline-offset: calc(-2 * var(--x-focus-ring)); }
+.ab-person__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.ab-person__text > p { color: var(--ecru-700); }
+
+/* --- See how we can elevate your asset (217:4857) ------------------------------ */
+.ab-action {
+  display: grid;
+  grid-template-columns: repeat(var(--layout-columns), minmax(0, 1fr));
+  column-gap: var(--layout-gutter);
+  align-items: start;
+  overflow: hidden;
+  padding-top: var(--space-160);
+  padding-bottom: var(--space-160);
+  background: var(--color-white);
+  color: var(--brand-deep-plum);
+}
+.ab-action__tess {
+  --shape-size: var(--shape-tess-action);
+  --shape-color: var(--brand-ecru);
+  left: var(--space-0);
+  bottom: var(--space-0);
+}
+.ab-action__heading {
+  position: relative;
+  grid-column: 1 / span 5;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+.ab-action__cards {
+  position: relative;
+  grid-column: 7 / span 6;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+.ab-action-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  padding: var(--space-32);
+  background: var(--brand-coral-red);
+  color: var(--color-white);
+  transition: background-color var(--x-dur-fast) var(--x-ease);
+}
+.ab-action-card:hover { background: var(--coral-red-600); }                                        /* PLACEHOLDER */
+.ab-action-card:hover .icon:not(.icon--download) { transform: translateX(var(--x-nudge)); }        /* PLACEHOLDER */
+.ab-action-card:hover .icon--download { transform: translateY(var(--x-nudge)); }                   /* PLACEHOLDER */
+.ab-action-card:focus-visible { --focus-color: var(--brand-deep-plum); outline-offset: var(--x-focus-ring); }
+
+/* --- Team profile drawer (217:4948) -------------------------------------------- */
+html.ab-drawer-open { overflow: hidden; }
+.ab-drawer {
+  position: fixed;
+  inset: var(--space-0);
+  z-index: var(--x-about-drawer-z);
+}
+.ab-drawer[hidden] { display: none; }
+.ab-drawer__scrim {
+  position: absolute;
+  inset: var(--space-0);
+  background: var(--x-about-neutral-900);
+  opacity: 0;
+  transition: opacity var(--x-dur) var(--x-ease);
+}
+.ab-drawer__panel {
+  position: absolute;
+  top: var(--space-0);
+  right: var(--space-0);
+  bottom: var(--space-0);
+  width: min(var(--x-about-drawer-w), 100%);
+  overflow: hidden;
+  background: var(--color-white);
+  color: var(--brand-deep-plum);
+  transform: translateX(100%);
+  transition: transform var(--x-dur) var(--x-ease);
+}
+.ab-drawer.is-open .ab-drawer__scrim { opacity: var(--x-about-scrim-opacity); }
+.ab-drawer.is-open .ab-drawer__panel { transform: none; }
+.ab-drawer__panel:focus { outline: none; }
+.ab-drawer__scroll {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+  height: 100%;
+  overflow-y: auto;
+  padding: var(--space-32) var(--layout-margin) calc(var(--space-64) + var(--x-about-band-h));
+}
+.ab-drawer__header {
+  display: flex;
+  justify-content: flex-end;
+}
+.ab-drawer__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--x-button-h-m);
+  height: var(--x-button-h-m);
+  background: var(--brand-ecru);
+  color: var(--brand-deep-plum);
+  transition: background-color var(--x-dur-fast) var(--x-ease);
+}
+.ab-drawer__close:hover { background: var(--ecru-200); }                                   /* PLACEHOLDER */
+.ab-drawer__profile {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--x-gap-48);
+}
+.ab-drawer__photo {
+  flex: none;
+  width: var(--x-about-drawer-photo-w);
+  height: var(--x-about-drawer-photo-h);
+  --cut: var(--shape-about-cut-team);
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+}
+.ab-drawer__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ab-drawer__content {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: var(--space-24);
+  min-width: var(--space-0);
+}
+.ab-drawer__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+.ab-drawer__role {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-8);
+  color: var(--ecru-500);
+}
+.ab-drawer__role::before {
+  content: "";
+  flex: none;
+  width: var(--x-eyebrow-dot);
+  height: var(--x-eyebrow-dot);
+  margin-top: calc((var(--text-subline-m-lh) - var(--x-eyebrow-dot)) / 2);
+  border-radius: 50%;
+  background: var(--brand-coral-red);
+}
+.ab-drawer__divider {
+  width: 100%;
+  height: var(--x-hairline);
+  margin: var(--space-0);
+  border: var(--space-0);
+  background: var(--x-about-neutral-300);
+}
+/* Bottom band: ecru and coral tiles lead into a sand strip (217:5225 to 217:5227) */
+.ab-drawer__band {
+  position: absolute;
+  left: var(--space-0);
+  right: var(--space-0);
+  bottom: var(--space-0);
+  height: var(--x-about-band-h);
+  pointer-events: none;
+}
+.ab-drawer__band > span { position: absolute; }
+.ab-drawer__band-ecru {
+  left: var(--space-0);
+  bottom: var(--x-about-band-h);
+  width: var(--x-about-band-lead);
+  height: var(--x-about-band-lead);
+  background: var(--brand-ecru);
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+.ab-drawer__band-coral {
+  left: var(--space-0);
+  bottom: var(--space-0);
+  width: calc(var(--x-about-band-lead) + var(--x-about-band-h));
+  height: var(--x-about-band-h);
+  background: var(--brand-coral-red);
+  clip-path: polygon(0 0, var(--x-about-band-lead) 0, 100% 100%, 0 100%);
+}
+.ab-drawer__band-sand {
+  left: var(--x-about-band-lead);
+  right: var(--space-0);
+  bottom: var(--space-0);
+  height: var(--x-about-band-h);
+  background: var(--brand-sand);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, var(--x-about-band-h) 100%);
+}
+
+@media (max-width: 760px) {
+  .ab-drawer__profile { flex-direction: column; }
+  .ab-drawer__scroll { padding-inline: var(--space-24); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ab-drawer__scrim,
+  .ab-drawer__panel,
+  .ab-feature__more { transition: none; }
+}
+.is-snapshot .ab-logos__track { transform: none; }
