@@ -167,13 +167,18 @@
 }
 .hero__slide--ecru .hero__title { padding: var(--space-64) var(--layout-margin) var(--space-0); }
 .hero__wide {
-  /* The chamfer ends where the band's diagonal ends, so the two edges read as one line */
-  --cut: max(var(--space-0), calc(var(--x-hero-wide-meet) - var(--x-hero-band-h)));
+  /* The chamfer starts where the band's diagonal ends (100% - coral-w - band-h), so
+     the two edges read as one line at any hero height. Both values are derived from
+     that one point: the holder keeps its 864 width and gets the chamfer that reaches
+     it; on a very tall hero (band taller than 480) the holder widens to reach it
+     instead, with no chamfer, so the diagonal still lands on its corner. */
+  --w: max(var(--x-hero-wide-w), calc(var(--x-hero-band-coral-w) + var(--x-hero-band-h)));
+  --cut: calc(var(--w) - var(--x-hero-band-coral-w) - var(--x-hero-band-h));
   position: absolute;
   top: var(--x-hero-band-h);
   bottom: var(--space-0);
   right: var(--space-0);
-  width: var(--x-hero-wide-w);
+  width: var(--w);
   clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
 }
 .hero__wide .hero__img { object-position: left center; }
@@ -354,18 +359,37 @@
   min-width: var(--space-0);
 }
 
-/* --- Contact CTA (217:4316) -------------------------------------------------- */
+/* --- Contact CTA (217:4316) --------------------------------------------------
+   The coral is the section background, and the Join 80 corner is a 45 degree cut
+   on the image holder, so the coral corner and the coral panel are one surface
+   (no seam between two coral pieces at fractional widths). The image ends on the
+   shared footer join line, so its chamfer starts at join - 80: exactly where the
+   Join 512 triangle of Our updates ends, at every width. */
 .contact {
   position: relative;
   display: flex;
   align-items: stretch;
   min-height: var(--x-contact-h);
+  background: var(--brand-coral-red);
 }
 .contact__media {
+  --cut: var(--shape-tess-contact);
   position: relative;
-  flex: 1 0 0;
-  min-width: var(--space-0);
+  flex: none;
+  width: var(--shape-footer-join);
   overflow: hidden;
+  background: var(--color-white);      /* page colour behind the photo while it loads */
+  /* Only the 45 degree edge is cut. The polygon runs a hairline outside the other
+     edges (the diagonal extended along itself), so they stay the pixel-snapped box
+     edges and never antialias into a coral line at fractional positions. */
+  --bleed: var(--x-hairline);
+  clip-path: polygon(
+    calc(-1 * var(--bleed)) calc(-1 * var(--bleed)),
+    calc(100% - var(--cut) - var(--bleed)) calc(-1 * var(--bleed)),
+    calc(100% + var(--bleed)) calc(var(--cut) + var(--bleed)),
+    calc(100% + var(--bleed)) calc(100% + var(--bleed)),
+    calc(-1 * var(--bleed)) calc(100% + var(--bleed))
+  );
 }
 .contact__media img {
   position: absolute;
@@ -374,20 +398,13 @@
   height: 100%;
   object-fit: cover;
 }
-.contact__tess {
-  --shape-size: var(--shape-tess-contact);
-  --shape-color: var(--brand-coral-red);
-  top: var(--space-0);
-  right: var(--space-0);
-}
 .contact__content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--space-40);
-  flex: none;
-  width: var(--x-contact-content-w);
-  max-width: 100%;
+  flex: 1 0 0;
+  min-width: var(--space-0);
   padding: var(--space-120) var(--layout-margin) var(--space-120) var(--x-contact-content-pl);
   background: var(--brand-coral-red);
   color: var(--ecru-50);

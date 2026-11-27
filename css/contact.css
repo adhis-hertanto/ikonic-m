@@ -11,9 +11,8 @@
   --x-ct-textarea-h: calc(144 * var(--u));             /* 250:573 */
   --shape-ct-enquiry-tess: calc(354 * var(--u));       /* 295:975, right angle bottom left */
   --x-ct-brochure-h: calc(504 * var(--u));             /* 263:139 */
-  --x-ct-brochure-media-w: calc(592 * var(--u));       /* 263:140 */
+  --x-ct-brochure-media-w: var(--shape-footer-join);  /* 263:140, 592 at 1440: ends on the footer join line */
   --x-ct-brochure-cut: calc(239 * var(--u));           /* white Tessellation / Join 263:141 on the photo */
-  --x-ct-brochure-cut-x: calc(353 * var(--u));
   --x-ct-brochure-pad-l: calc(144 * var(--u));         /* 263:142 */
 }
 
@@ -254,8 +253,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* white 45 degree cut at the top right (Tessellation / Join 263:141) */
-  clip-path: polygon(0 0, var(--x-ct-brochure-cut-x) 0, 100% var(--x-ct-brochure-cut), 100% 100%, 0 100%);
+  /* white 45 degree cut at the top right (Tessellation / Join 263:141), measured
+     from the image's right edge (353 + 239 = 592 at 1440) */
+  clip-path: polygon(0 0, calc(100% - var(--x-ct-brochure-cut)) 0, 100% var(--x-ct-brochure-cut), 100% 100%, 0 100%);
 }
 .ct-brochure__content {
   flex: 1 0 0;

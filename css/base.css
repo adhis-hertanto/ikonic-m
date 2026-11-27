@@ -214,7 +214,10 @@ button {
   top: var(--space-0);
   bottom: var(--space-0);
   right: var(--space-0);
-  width: var(--shape-cascade-footer-w);
+  /* Left edge on the shared footer join line (848 wide at 1440), so the shape above
+     the footer meets it at every width. min() keeps the chamfer whole on very
+     narrow screens. */
+  left: min(var(--shape-footer-join), calc(100% - var(--cut)));
   clip-path: polygon(0 0, 100% 0, 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
 }
 

@@ -204,7 +204,6 @@
   --x-hero-band-h: 40cqh;                              /* slide 3: 288 of 720 */
   --x-hero-band-coral-w: calc(384 * var(--u));         /* coral width along the top edge */
   --x-hero-wide-w: calc(864 * var(--u));
-  --x-hero-wide-meet: calc(480 * var(--u));            /* wide-w minus band-coral-w */
   --shape-tess-who: calc(120 * var(--u));
   --shape-tess-updates: calc(512 * var(--u));
   --shape-tess-contact: calc(80 * var(--u));
@@ -212,6 +211,12 @@
   --shape-cascade-platform-cut: calc(164.2 * var(--u));
   --shape-cascade-footer-w: calc(848 * var(--u));
   --shape-cascade-footer-cut: calc(142.6 * var(--u));
+  /* Derived, not a Figma variable: the footer join line, measured from the LEFT
+     page edge (592 at the 1440 reference = 1440 - footer cascade 848). The footer
+     cascade starts here, and every shape above the footer that meets it ends here
+     (Join 592 action triangles, Join 512 + Join 80 on Home, brochure image), so the
+     join holds at any page width, not only when width = 1440 x scale. */
+  --shape-footer-join: calc(1440 * var(--u) - var(--shape-cascade-footer-w));
   --shape-holder-platform-ratio: 640 / 372;
   --shape-card-cut: calc(21.1 * var(--u));
   --shape-card-text-cut: calc(64.2 * var(--u));
