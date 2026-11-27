@@ -3,52 +3,6 @@
    Values come from tokens.css only.
    ========================================================================== */
 
-/* --- Hero (250:303) --------------------------------------------------------- */
-.sol-hero {
-  position: relative;
-  display: flex;
-  align-items: center;
-  height: var(--x-sol-hero-h);
-  overflow: hidden;
-  background: var(--brand-deep-plum);
-  color: var(--color-white);
-}
-.sol-hero__img {
-  position: absolute;
-  inset: var(--space-0);
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.sol-hero::after {                   /* darkening gradient over the photo */
-  content: "";
-  position: absolute;
-  inset: var(--space-0);
-  background-image: var(--x-sol-hero-overlay);
-}
-.sol-hero__tess-sand,
-.sol-hero__tess-coral,
-.sol-hero__content { z-index: 1; }
-/* The two triangles meet on one point: sand bottom-left corner = coral top-right corner */
-.sol-hero__tess-sand {
-  --shape-size: var(--shape-tess-sol-sand);
-  --shape-color: var(--brand-sand);
-  top: var(--space-0);
-  right: var(--shape-tess-sol-sand-right);
-}
-.sol-hero__tess-coral {
-  --shape-size: var(--shape-tess-sol-coral);
-  --shape-color: var(--brand-coral-red);
-  bottom: var(--space-0);
-  right: var(--shape-tess-sol-coral-right);
-}
-.sol-hero__content {
-  position: relative;
-  width: var(--x-sol-hero-content-w);
-  max-width: 100%;
-  padding: var(--space-64) var(--space-64) var(--space-64) var(--layout-margin);
-}
-
 /* --- Everything you need to transform retail (250:307) ------------------------ */
 .sx {
   display: flex;

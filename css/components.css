@@ -811,6 +811,73 @@
   outline: var(--x-focus-ring) solid var(--color-white);
   outline-offset: var(--x-focus-ring);
 }
+/* --- Inner hero (285:158). Shared: Case Study, Our Solutions --------------- */
+:root {
+  --x-cs-hero-h: calc(480 * var(--u));                     /* 285:158 */
+  --x-cs-hero-content-w: calc(816 * var(--u));             /* 285:162 */
+  --x-cs-hero-img-w: calc(592 * var(--u));                 /* 285:159 */
+  --shape-cs-hero-cut: calc(273 * var(--u));               /* Cut TL, filled by 285:160 */
+  --shape-cs-tess-coral: calc(273 * var(--u));
+  --shape-cs-tess-coral-right: calc(319 * var(--u));       /* 1440 - 848 - 273 */
+  --shape-cs-tess-sand: calc(208 * var(--u));              /* 285:161, right angle bottom right */
+}
+.cs-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: var(--x-cs-hero-h);
+  overflow: hidden;
+  background: var(--brand-deep-plum);
+  color: var(--color-white);
+}
+.cs-hero__img {
+  position: absolute;
+  top: var(--space-0);
+  right: var(--space-0);
+  width: var(--x-cs-hero-img-w);
+  height: 100%;
+  object-fit: cover;
+  --cut: var(--shape-cs-hero-cut);
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+}
+.cs-hero__tess-coral,
+.cs-hero__tess-sand { z-index: 1; }
+.cs-hero__tess-coral {
+  --shape-size: var(--shape-cs-tess-coral);
+  --shape-color: var(--brand-coral-red);
+  top: var(--space-0);
+  right: calc(var(--x-cs-hero-img-w) - var(--shape-cs-tess-coral));
+}
+.cs-hero__tess-sand {
+  --shape-size: var(--shape-cs-tess-sand);
+  --shape-color: var(--brand-sand);
+  bottom: var(--space-0);
+  right: var(--x-cs-hero-img-w);
+}
+.cs-hero__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-32);
+  width: var(--x-cs-hero-content-w);
+  max-width: 100%;
+  padding: var(--space-64) var(--space-64) var(--space-64) var(--layout-margin);
+}
+.cs-hero__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  width: 100%;
+}
+.cs-hero__meta { color: var(--brand-sand); }
+.cs-hero__lead { font-size: var(--text-subline-l-size); max-width: calc(752 * var(--u)); }
+.cs-hero__link {
+  font-size: var(--text-body-s-size);
+  line-height: var(--text-body-s-lh);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .consent, .consent.is-closed { transition: none; }
 }
