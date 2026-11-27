@@ -150,9 +150,10 @@
   flex-direction: column;
   gap: var(--space-72);
   padding-block: var(--layout-section-py);
-  background: var(--color-white);
-  color: var(--brand-deep-plum);
+  background: var(--brand-deep-plum);   /* Plum palette (250:966) */
+  color: var(--color-white);
 }
+.cs-related .works-card__place { color: var(--color-white); }
 .cs-related__header {
   display: flex;
   align-items: flex-end;
@@ -175,8 +176,7 @@
 .cs-related__btn--next:hover .icon { transform: translateX(var(--x-nudge)); }     /* PLACEHOLDER */
 .cs-related__btn--prev:hover .icon { transform: rotate(180deg) translateX(var(--x-nudge)); }
 .cs-related__btn[aria-disabled="true"] {                                          /* PLACEHOLDER */
-  background: var(--brand-ecru);
-  color: var(--ecru-400);
+  opacity: 0.4;   /* dimmed coral on plum */
   cursor: default;
 }
 .cs-related__btn[aria-disabled="true"] .icon { transform: rotate(0); }

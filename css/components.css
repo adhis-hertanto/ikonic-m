@@ -875,10 +875,6 @@
 }
 .cs-hero__meta { color: var(--brand-sand); }
 .cs-hero__lead { font-size: var(--text-subline-l-size); max-width: calc(752 * var(--u)); }
-.cs-hero__link {
-  font-size: var(--text-body-s-size);
-  line-height: var(--text-body-s-lh);
-}
 
 @media (prefers-reduced-motion: reduce) {
   .consent, .consent.is-closed { transition: none; }
