@@ -255,7 +255,7 @@
   object-fit: cover;
   /* white 45 degree cut at the top right (Tessellation / Join 263:141), measured
      from the image's right edge (353 + 239 = 592 at 1440) */
-  clip-path: polygon(0 0, calc(100% - var(--x-ct-brochure-cut)) 0, 100% var(--x-ct-brochure-cut), 100% 100%, 0 100%);
+  clip-path: polygon(calc(-1 * var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(calc(100% - var(--x-ct-brochure-cut)) - var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(var(--x-ct-brochure-cut) + var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)));
 }
 .ct-brochure__content {
   flex: 1 0 0;

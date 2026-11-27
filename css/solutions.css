@@ -138,11 +138,11 @@
 }
 .js .slider__btn--next {
   left: calc(50% + var(--x-slider-active-w) / 2 + var(--x-slider-btn-offset));
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
+  clip-path: polygon(calc(-1 * var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(calc(100% - var(--cut)) - var(--x-mask-bleed)), calc(calc(100% - var(--cut)) - var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)));
 }
 .js .slider__btn--prev {
   left: calc(50% - var(--x-slider-active-w) / 2 - var(--x-slider-btn-offset) - var(--shape-card-button));
-  clip-path: polygon(0 0, 100% 0, 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+  clip-path: polygon(calc(-1 * var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(var(--cut) + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(calc(100% - var(--cut)) - var(--x-mask-bleed)));
 }
 .slider__btn--prev .icon { transform: rotate(180deg); }
 .slider__btn:hover { background: var(--coral-red-600); }                                         /* PLACEHOLDER */

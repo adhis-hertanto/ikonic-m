@@ -113,7 +113,7 @@
   overflow: hidden;
   background: var(--brand-deep-plum);
   --cut: var(--shape-works-cut);
-  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+  clip-path: polygon(calc(var(--cut) + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(var(--cut) + var(--x-mask-bleed)));
   transition: flex-basis var(--x-works-type-dur) var(--x-ease-inout);
 }
 .works-type.is-open { flex-basis: var(--works-open-w); }
@@ -300,7 +300,7 @@ html:not(.js) .works-type__more { grid-template-rows: 1fr; opacity: 1; }
   height: var(--x-works-card-img-h);
   overflow: hidden;
   --cut: var(--shape-works-cut);
-  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+  clip-path: polygon(calc(var(--cut) + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(var(--cut) + var(--x-mask-bleed)));
 }
 .works-card__photo img {
   width: 100%;

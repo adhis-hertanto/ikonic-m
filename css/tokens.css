@@ -155,6 +155,7 @@
   --x-icon-l: calc(32 * var(--u));
   --x-eyebrow-dot: calc(8 * var(--u));
   --x-rule: calc(2 * var(--u));                        /* accordion + tab underline */
+  --x-mask-bleed: 1px;                                 /* clip-path edges that sit on a box edge go 1px outside it, so they never antialias into a thin line */
   --x-hairline: 1px;                                   /* input border, nav divider */
   --x-progress-h: calc(4.78 * var(--u));               /* 217:4171 */
   --x-gap-48: calc(48 * var(--u));                     /* 217:4245, hardcoded gap */

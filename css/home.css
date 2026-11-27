@@ -36,10 +36,10 @@
      At --wipe 0 the slide is fully masked out, at 1 it is fully shown. */
   --wipe: 0;
   clip-path: polygon(
-    0 0,
-    calc(var(--wipe) * (100cqw + 100cqh) - 100cqh) 0,
-    calc(var(--wipe) * (100cqw + 100cqh)) 100%,
-    0 100%
+    calc(-1 * var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)),
+    calc(var(--wipe) * (100cqw + 100cqh) - 100cqh - var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)),
+    calc(var(--wipe) * (100cqw + 100cqh) + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)),
+    calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed))
   );
 }
 /* The slide being replaced stays fully shown underneath until the new one has covered it */
@@ -159,10 +159,10 @@
   inset: var(--space-0);
   background: var(--brand-deep-plum);
   clip-path: polygon(
-    0 0,
-    calc(100% - var(--x-hero-band-coral-w)) 0,
-    calc(100% - var(--x-hero-band-coral-w) - var(--x-hero-band-h)) 100%,
-    0 100%
+    calc(-1 * var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)),
+    calc(100% - var(--x-hero-band-coral-w) + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)),
+    calc(100% - var(--x-hero-band-coral-w) - var(--x-hero-band-h) - var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)),
+    calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed))
   );
 }
 .hero__slide--ecru .hero__title { padding: var(--space-64) var(--layout-margin) var(--space-0); }
@@ -179,7 +179,7 @@
   bottom: var(--space-0);
   right: var(--space-0);
   width: var(--w);
-  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+  clip-path: polygon(calc(var(--cut) + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(var(--cut) + var(--x-mask-bleed)));
 }
 .hero__wide .hero__img { object-position: left center; }
 .hero__slide--ecru .hero__actions {

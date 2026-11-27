@@ -24,7 +24,7 @@
   width: var(--shape-about-cascade-w, calc(284 * var(--u)));
   height: calc(346 * var(--u));
   background: var(--brand-sand);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+  clip-path: polygon(calc(-1 * var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(var(--cut) + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(calc(100% - var(--cut)) - var(--x-mask-bleed)));
 }
 
 /* --- Legal content (250:1756 / 250:1861) --------------------------------------- */

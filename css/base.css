@@ -192,10 +192,10 @@ button {
   aspect-ratio: 1;
   background: var(--shape-color);
 }
-.tess--tl { clip-path: polygon(0 0, 100% 0, 0 100%); }
-.tess--tr { clip-path: polygon(0 0, 100% 0, 100% 100%); }
-.tess--bl { clip-path: polygon(0 0, 100% 100%, 0 100%); }
-.tess--br { clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.tess--tl { clip-path: polygon(calc(-1 * var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed))); }
+.tess--tr { clip-path: polygon(calc(-1 * var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed))); }
+.tess--bl { clip-path: polygon(calc(-1 * var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed))); }
+.tess--br { clip-path: polygon(calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed))); }
 
 /* Cascade L: rectangle with one 45 degree chamfer */
 .cascade { background: var(--shape-color); }
@@ -206,7 +206,7 @@ button {
   bottom: var(--space-0);
   right: var(--space-0);
   width: var(--shape-cascade-platform-w);
-  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+  clip-path: polygon(calc(var(--cut) + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(var(--cut) + var(--x-mask-bleed)));
 }
 .cascade--footer {
   --shape-color: var(--brand-ecru);
@@ -218,7 +218,7 @@ button {
      the footer meets it at every width. min() keeps the chamfer whole on very
      narrow screens. */
   left: min(var(--shape-footer-join), calc(100% - var(--cut)));
-  clip-path: polygon(0 0, 100% 0, 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+  clip-path: polygon(calc(-1 * var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(var(--cut) + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(calc(100% - var(--cut)) - var(--x-mask-bleed)));
 }
 
 /* --- Scroll reveal (prototype motion, not in Figma) ------------------------ */

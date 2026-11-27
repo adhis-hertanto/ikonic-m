@@ -123,7 +123,7 @@
   right: var(--space-0);
   width: var(--shape-about-cascade-w);
   background: var(--shape-color);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+  clip-path: polygon(calc(-1 * var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(var(--cut) + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(calc(100% - var(--cut)) - var(--x-mask-bleed)));
 }
 .ab-why__heading,
 .ab-why__features { position: relative; }
@@ -153,7 +153,7 @@
   color: var(--color-white);
   background: var(--brand-deep-plum);
   --cut: var(--shape-about-cut-feature);
-  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+  clip-path: polygon(calc(var(--cut) + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(var(--cut) + var(--x-mask-bleed)));
 }
 .ab-feature__img {
   position: absolute;
@@ -307,7 +307,7 @@
   background: var(--brand-coral-red);
   color: var(--ecru-50);
   --cut: var(--shape-card-cut);
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
+  clip-path: polygon(calc(-1 * var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(calc(100% - var(--cut)) - var(--x-mask-bleed)), calc(calc(100% - var(--cut)) - var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)));
   transition: background-color var(--x-dur-fast) var(--x-ease), opacity var(--x-dur-fast) var(--x-ease);
 }
 .ab-arrow--prev .icon { transform: rotate(180deg); }
@@ -346,7 +346,7 @@
   height: var(--x-about-person-img-h);
   overflow: hidden;
   --cut: var(--shape-about-cut-team);
-  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+  clip-path: polygon(calc(var(--cut) + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(var(--cut) + var(--x-mask-bleed)));
 }
 .ab-person__media img {
   width: 100%;
@@ -369,7 +369,7 @@
   background: var(--brand-ecru);
   color: var(--brand-deep-plum);
   --cut: var(--shape-card-cut);
-  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+  clip-path: polygon(calc(var(--cut) + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(var(--cut) + var(--x-mask-bleed)));
   transition: background-color var(--x-dur-fast) var(--x-ease);
 }
 .ab-person:hover .ab-person__open,
@@ -495,7 +495,7 @@ html.ab-drawer-open { overflow: hidden; }
   width: var(--x-about-drawer-photo-w);
   height: var(--x-about-drawer-photo-h);
   --cut: var(--shape-about-cut-team);
-  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+  clip-path: polygon(calc(var(--cut) + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(var(--cut) + var(--x-mask-bleed)));
 }
 .ab-drawer__photo img {
   width: 100%;
@@ -552,7 +552,7 @@ html.ab-drawer-open { overflow: hidden; }
   width: var(--x-about-band-lead);
   height: var(--x-about-band-lead);
   background: var(--brand-ecru);
-  clip-path: polygon(0 0, 100% 100%, 0 100%);
+  clip-path: polygon(calc(-1 * var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)));
 }
 .ab-drawer__band-coral {
   left: var(--space-0);
@@ -560,7 +560,7 @@ html.ab-drawer-open { overflow: hidden; }
   width: calc(var(--x-about-band-lead) + var(--x-about-band-h));
   height: var(--x-about-band-h);
   background: var(--brand-coral-red);
-  clip-path: polygon(0 0, var(--x-about-band-lead) 0, 100% 100%, 0 100%);
+  clip-path: polygon(calc(-1 * var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(var(--x-about-band-lead) - var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)));
 }
 .ab-drawer__band-sand {
   left: var(--x-about-band-lead);
@@ -568,7 +568,7 @@ html.ab-drawer-open { overflow: hidden; }
   bottom: var(--space-0);
   height: var(--x-about-band-h);
   background: var(--brand-sand);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, var(--x-about-band-h) 100%);
+  clip-path: polygon(calc(-1 * var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(var(--x-about-band-h) + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)));
 }
 
 @media (max-width: 760px) {

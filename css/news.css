@@ -36,7 +36,7 @@
   height: 100%;
   object-fit: cover;
   /* Holder / Hero image / Cut TL: same 45 degree cut as the sand triangle sitting on it */
-  clip-path: polygon(var(--shape-news-tess-sand) 0, 100% 0, 100% 100%, 0 100%, 0 var(--shape-news-tess-sand));
+  clip-path: polygon(calc(var(--shape-news-tess-sand) + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(-1 * var(--x-mask-bleed)), calc(100% + var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(100% + var(--x-mask-bleed)), calc(-1 * var(--x-mask-bleed)) calc(var(--shape-news-tess-sand) + var(--x-mask-bleed)));
 }
 .news-hero__tess-sand {
   --shape-size: var(--shape-news-tess-sand);
