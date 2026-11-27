@@ -376,6 +376,8 @@
   color: var(--deep-plum-950);
   white-space: nowrap;
 }
+/* Counter: JS reserves the final width (min-width) so the unit beside the number never shifts while counting */
+.stat__num { display: inline-block; }
 .stat__gap {
   font-size: var(--text-h3-size);
   line-height: var(--text-h3-lh);
