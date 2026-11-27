@@ -389,7 +389,7 @@
   grid-template-columns: repeat(var(--layout-columns), minmax(0, 1fr));
   column-gap: var(--layout-gutter);
   align-items: start;
-  overflow: hidden;
+  /* No overflow clip: the CTA triangle keeps its apex (it reaches into the white padding of the team section above). */
   padding-top: var(--space-160);
   padding-bottom: var(--space-160);
   background: var(--color-white);
