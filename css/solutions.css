@@ -285,11 +285,18 @@
   height: 100%;
   object-fit: cover;
 }
+/* The Ecru chamfer continues the diagonal of the plum split__tess above, so
+   its top vertex is anchored to the same value (--shape-tess-invest from the
+   left page edge, the media starts at x 0) and it runs to the media's right
+   edge. Width comes from the two insets and height follows via aspect-ratio,
+   so the 45 degree line stays continuous at any page width. At 1440 this
+   gives 221 against the 220 of 255:168 (the Figma pair was 1px apart). */
 .ikonic__tess {
-  --shape-size: var(--shape-tess-ikonic);
   --shape-color: var(--brand-ecru);
   top: var(--space-0);
+  left: var(--shape-tess-invest);
   right: var(--space-0);
+  width: auto;
 }
 .ikonic__content {
   display: flex;
